@@ -47,6 +47,8 @@
     - {/* 주석 */}
     - 시작 태그를 여러 줄로 작성하면 거기에 // 로 주석을 작성할 수 있다.
 
+
+
 ### 2. 엘리먼트 렌더링
 
 - 엘리먼트 : React앱의 가장 작은 단위로 화면에 표시할 내용 기술
@@ -61,6 +63,8 @@
   ```
 
 - React DOM은 해당 엘리먼트와 그 자식 엘리먼트를 이전의 엘리먼트와 비교하고 DOM을 원하는 상태로 만드는데 필요한 경우에만 DOM을 업데이트
+
+
 
 ### 3. Components와 Props
 
@@ -123,6 +127,61 @@
   type 쓸 때 **isRequired**로 필수로 입력받아야 하는 값 설정 가능 => 안 그러면 콘솔에 경고
 
   defaultProps와 propsType은 필수가 아님 => 하지만 협업을 한다면 해당 컴포넌트에 어떤 props가 필요한지 알기 편함
+
+
+
+### 4. State와 생명주기
+
+- state는 컴포넌트 내부에서 바뀔 수 있는 값으로 비공개이며 컴포넌트에 의해 제어
+
+- 함수 컴포넌트에서는 state를 사용할 수 없음
+
+- 컴포넌트에 state를 설정할 때는 **constructor** 메서드를 작성하여 설정
+
+  ```jsx
+  constructor(props) {
+      super(props);
+      this.state = {date: new Date()};
+    }
+  ```
+
+  - 클래스형 컴포넌트에서 constructor 작성할 때는 super(props)를 호출해주어야 함 => 호출되면 현재 클래스형 컴포넌트가 상속받고 있는 리액트의 컴포넌트 글래스가 지닌 생성자 함수를 호출 (안 써주면 this.props가 undefined)
+  - this.state로 초기값 설정 => 객체 형식이어야 함
+
+- **componentDidMount()** => 컴포넌트 출력물이 DOM에 렌더링 된 후 실행
+
+- **componentWillUnmount()** => 컴포넌트를 DOM에서 제거하는 것
+
+- **this.setState()** => 컴포넌트 로컬 state 업데이트 할 때 사용 => state 값을 업데이트 할 때 상태가 **비동기적**으로 업데이트 => **동기적**으로 하고 싶으면 this.setState 내에 객체 대신 **함수를 인자**로 사용
+
+
+
+### 5. 이벤트 처리하기
+
+- camelCase 사용
+
+- JSX를 사용하여 문자열이 아닌 함수로 이벤트 핸들러 전달
+
+  ```jsx
+  <button onClick={this.handleClick}></button>
+  ```
+
+- 기본 동작을 방지하려면 preventDefault 명시적으로 호출해야 함
+
+- DOM 요소에만 이벤트를 설정할 수 있음(div, button과 같은 곳에만 설정 가능, 컴포넌트에 자체적으로 이벤트 설정할 수 없음)
+
+- this가 작동하게 하기 위해서는 constructor에 바인딩 해줘야 함 ex) ```this.handleClick = this.handleClick.bind(this);```
+
+- 이벤트 핸들러에 인자 전달을 하는 방법은 ```화살표 함수```와 ```Function.prototype.bind```를 사용
+
+  ```jsx
+  <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+  <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+  ```
+
+  
+
+
 
 ***
 
