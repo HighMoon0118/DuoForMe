@@ -1,3 +1,5 @@
+
+
 ## 1. 프로젝트 환경설정
 
 - [여기서 진행!](https://start.spring.io/)
@@ -194,19 +196,67 @@ thymeleaf에서는 html을 그대로 쓰고 파일을 서버없이 열어도 볼
 :star: 크게 두 가지 방식이 있음(다른 분류의 이야기라 이런식으로 나눈게 맞는진 모르겟지만...)
 
  	1. MVC : View브라우저 요청에 HTML응답을 반환
-     - static contents 방식을 제외하면 잘 안쓰는 방식
+ 	 - static contents 방식을 제외하면 잘 안쓰는 방식
  	2. API : 데이터를 반환(Front-end에서 처리하냐)
 
 
 
-![image-20210901234324320](README.assets/image-20210901234324320.png)
+- 이번 목차에서 알아야할 점은 `@ResponseBody`의 사용원리
 
+  1. `@ResponseBody`를 사용 : `viewResolver`대신에 `HttpMessageConverter`가 동작
 
+     1. HTTP의 BODY에 문자를 반환한 경우 : `StringHttpMessageConverter`
+        - HelloController에 작성
 
-![image-20210901234312214](README.assets/image-20210901234312214.png)
+     ```java
+         @GetMapping("hello-string")
+         @ResponseBody
+         // ResponseBody는 http에서 header와 body가 있는데 body에 이 데이터를 직접 넣어주겠다는 뜻
+         public String helloString(@RequestParam("name") String name) {
+             return "hello" + name;
+         }
+     ```
 
+     
 
+     - 문자가 그대로 반환된다
 
+     ![image-20210901234324320](README.assets/image-20210901234324320.png)
 
+     - 페이지 소스를 확인해도 코드가 보이지 않고 BODY에 들어간 문자만 보임
+
+     ![image-20210901234312214](README.assets/image-20210901234312214.png)
+
+     2. HTTP의 BODY에 객체를 반환 :`MappingJackson2HttpMessageConverter`
+
+        - 객체를 Json으로 바꿔주는 라이브러리
+
+        - HelloController에 작성
+
+     ```java
+         @GetMapping("hello-api")
+         @ResponseBody
+         public Hello helloApi(@RequestParam("name") String name) {
+             Hello hello = new Hello();
+             // ctrl + shift + enter하면 자동으로 줄 마무리 해줌
+             hello.setName(name);
+             return hello;
+         }
+     
+         static class Hello {
+             private String name;
+             // getter setter란걸 썼는데 alt + insert
+             public String getName() {
+                 return name;
+             }
+     
+             public void setName(String name) {
+                 this.name = name;
+             }
+         }
+     ```
+
+     - 이번에는 객체가 반환된 것을 확인할 수 있다.
 
 ![image-20210901235334360](README.assets/image-20210901235334360.png)
+
