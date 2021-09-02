@@ -181,6 +181,69 @@
 
   
 
+### 6. 조건부 렌더링
+
+- 원하는 동작을 캡슐화하는 컴포넌트를 만들 수 있음 => 상태에 따라 렌더링하는 컴포넌트가 달라지게
+
+- if문
+
+  ```jsx
+  render() {
+      const isLoggedIn = this.state.isLoggedIn;
+      let button;
+      if (isLoggedIn) {
+        button = <LogoutButton onClick={this.handleLogoutClick} />;
+      } else {
+        button = <LoginButton onClick={this.handleLoginClick} />;
+      }
+  
+      return (
+        <div>
+          <Greeting isLoggedIn={isLoggedIn} />
+          {button}
+        </div>
+      );
+    }
+  ```
+
+- 논리 연산자(&&)
+
+  ```jsx
+  function Mailbox(props) {
+    const unreadMessages = props.unreadMessages;
+    return (
+      <div>
+        <h1>Hello!</h1>
+        {unreadMessages.length > 0 &&
+          <h2>
+            You have {unreadMessages.length} unread messages.
+          </h2>
+        }
+      </div>
+    );
+  }
+  ```
+
+  ``` <h2>You have {unreadMessages.length} unread messages.</h2>```가 항상 true이므로 unreadMessage.length값에 따라 렌더링 됨
+
+  false로 평가될 수 있는 표현식을 반환하는 것 주의해야 함! 밑에 예시에서 ```<div>0</div>``` 가 반환
+
+  ```jsx
+  render() {
+    const count = 0;  return (
+      <div>
+        { count && <h1>Messages: {count}</h1>}    
+      </div>
+    );
+  }
+  ```
+
+- 조건부 연산자
+
+  ```condition ? true : false```  사용 가능
+
+- 조건에 따라 컴포넌트를 랜더링 하고 싶지 않을 때는 ```return null``` 사용
+
 
 
 ***
@@ -190,3 +253,4 @@
 - [시작하기 – React (reactjs.org)](https://ko.reactjs.org/docs/getting-started.html)
 
 - 리액트를 다루는 기술
+
