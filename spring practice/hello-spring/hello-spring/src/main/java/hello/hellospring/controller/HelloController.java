@@ -48,6 +48,7 @@ public class HelloController {
     static class Hello {
         private String name;
         // getter setter란걸 썼는데 alt + insert
+        // java bean 표준방식
         public String getName() {
             return name;
         }

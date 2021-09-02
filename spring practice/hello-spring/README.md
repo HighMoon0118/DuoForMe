@@ -193,20 +193,80 @@ thymeleaf에서는 html을 그대로 쓰고 파일을 서버없이 열어도 볼
 
 :star: 크게 두 가지 방식이 있음(다른 분류의 이야기라 이런식으로 나눈게 맞는진 모르겟지만...)
 
- 	1. MVC : View브라우저 요청에 HTML응답을 반환
-     - static contents 방식을 제외하면 잘 안쓰는 방식
- 	2. API : 데이터를 반환(Front-end에서 처리하냐)
+1. MVC : View브라우저 요청에 HTML응답을 반환
+   - static contents 방식을 제외하면 잘 안쓰는 방식
+2. API : 데이터를 반환(Front-end에서 처리하냐)
 
 
 
-![image-20210901234324320](README.assets/image-20210901234324320.png)
+#### API가 작동하는 과정
+
+1. localhost:8080/hello-api로 요청을 보냄
+
+2. 내장된 톰켓 서버에서 `@ResponseBody`가 있다면 http 응답에 데이터를 그대로 넘겨줌
+
+   - 데이터가 문자라면?
+
+   ```java
+   @GetMapping("hello-string")
+   @ResponseBody
+   // ResponseBody는 http에서 header와 body가 있는데 body에 이 데이터를 직접 넣어주겠다는 뜻
+   public String helloString(@RequestParam("name") String name) {
+       return "hello" + name;
+   }
+   ```
+
+   ![image-20210901234324320](README.assets/image-20210901234324320.png)
+
+   - 데이터게 객체라면? => 이때 default가 Json방식으로 데이터를 만들어서 반환함
+
+   ```java
+       @GetMapping("hello-api")
+       @ResponseBody
+       public Hello helloApi(@RequestParam("name") String name) {
+           Hello hello = new Hello();
+           // ctrl + shift + enter하면 자동으로 줄 마무리 해줌
+           hello.setName(name);
+           return hello;
+       }
+   
+       static class Hello {
+           private String name;
+           // getter setter란걸 썼는데 alt + insert
+           // java bean 표준방식
+           public String getName() {
+               return name;
+           }
+   
+           public void setName(String name) {
+               this.name = name;
+           }
+       }
+   ```
+
+   ![image-20210901235334360](README.assets/image-20210901235334360.png)
 
 
 
-![image-20210901234312214](README.assets/image-20210901234312214.png)
+- 참고 : `@ResponseBody`를 사용
+  - HTTP의 BODY에 문자 내용을 직접 반환
+  - `viewResolver`대신에 `HttpMessageConverter`가 동작
+    - 기본 문자처리 : `StringHttpMessageConverter`
+    - 기본 객체처리 : `MappingJackson2HttpMessageConverter`
+      - 객체를 Json으로 바꿔주는 라이브러리
+    - 추가적으로 byte 처리 등등 기타 여러 `HttpMessageConverter`가 기본으로 등록되어 있음
 
 
 
 
 
-![image-20210901235334360](README.assets/image-20210901235334360.png)
+
+
+
+
+
+
+
+
+
+
