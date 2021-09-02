@@ -16,6 +16,8 @@ public class Driver {
 			
 			pgd.addClass("matmulti", MatrixMulti.class, "1-Phase Matrix MultiPlication Preparation");
 			pgd.addClass("allpair", AllPairPartition.class, "A map/reduce program that partitions all pairs of tuples from both tables");
+			pgd.addClass("allpairself", AllPairPartitionSelf.class, "A map/reduce program that partitions all pairs of tuples from a table");
+			
       			pgd.driver(args);
 			exitCode = 0;
 		}
