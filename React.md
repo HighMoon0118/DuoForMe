@@ -246,6 +246,45 @@
 
 
 
+### 7. 리스트와 Key
+
+- map() 함수를 이용해서 여러 개의 컴포넌트 렌더링 가능
+
+- props로 보내준 리스트를 map으로 사용하려고 하면 key 넣어야 한다고 나옴
+
+- key는 엘리먼트에 안정적인 고유성을 부여하기 위해 배열 내부의 엘리먼트에 지정해야 함 => 고유한 값이 제일 좋지만 없다면 인덱스를 key로 사용 가능(권장하지 않음) 
+
+  [재조정 (Reconciliation) – React (reactjs.org)](https://ko.reactjs.org/docs/reconciliation.html#recursing-on-children)
+  
+  보통 map() 함수 내부에 있는 엘리먼트에 key를 넣는게 좋음
+  
+  ```jsx
+  function ListItem(props) {
+   return <li>{props.value}</li>;
+  }
+  
+  function NumberList(props) {
+    const numbers = props.numbers;
+    // 여기에 key 설정!
+    const listItems = numbers.map((number) =>
+      <ListItem key={number.toString()} value={number} />  
+    );
+    return (
+      <ul>
+        {listItems}
+      </ul>
+    );
+  }
+  
+  const numbers = [1, 2, 3, 4, 5];
+  ReactDOM.render(
+    <NumberList numbers={numbers} />,
+    document.getElementById('root')
+  );
+  ```
+
+- key는 배열 안에서만 고유하면 된다! => 두 개의 다른 배열을 만들었을 때는 동일한 key 사용 가능
+
 ***
 
 참고자료
