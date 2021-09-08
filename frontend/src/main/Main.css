@@ -1,0 +1,28 @@
+body {
+    background-color: #202947;
+    color: white;
+    padding: 0px 50px;
+  }
+  .main-font {
+    text-align: center;
+    font-size: 42px;
+  }
+  .text-left {
+    text-align: right;
+  }
+  .nav-padding {
+    padding-top: 30px;
+  }
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+  .large-input {
+    width: 800px;
+    height: 35px;
+    border-radius: 90px;
+    outline: none;
+  }
+  .line-image {
+    display: block;
+  }
