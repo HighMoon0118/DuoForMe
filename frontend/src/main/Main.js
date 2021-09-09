@@ -1,6 +1,7 @@
 import React from "react"
 import "./Main.css"
 import MainSearch from "./MainSearch"
+import MainMatching from "./MainMatching"
 function Main() {
   return (
     <div>
@@ -13,6 +14,7 @@ function Main() {
         Duofor.me
       </h1>
       <MainSearch />
+      <MainMatching />
     </div>
   )
 }
