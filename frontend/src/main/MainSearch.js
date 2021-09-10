@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-
 function MainSearch() {
   const [ inputText, setInputText ] = useState("")
   function onChangeInput(e) {
