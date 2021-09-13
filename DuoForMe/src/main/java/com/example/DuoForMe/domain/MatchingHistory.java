@@ -21,6 +21,4 @@ public class MatchingHistory {
             @JoinColumn(name = "owner_user_id", referencedColumnName = "user_id")
     })
     private User user;
-
-
 }
