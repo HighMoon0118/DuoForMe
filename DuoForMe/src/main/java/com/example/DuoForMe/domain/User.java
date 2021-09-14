@@ -20,17 +20,14 @@ public class User {
     @JoinColumn(name = "lol_nickname")
     private NicknameCount nicknameCount;
 
-    @NotNull
     private String password;
 
-    @NotNull
     private String email;
 
     private int profile_icon_id;
 
     private float user_credit;
 
-    @NotNull
     private String service_nickname;
 
     @Builder
