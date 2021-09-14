@@ -4,17 +4,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Perks {
+public class Perks{
 
     @Id
+    private Long matches_users_id;
+
+    @MapsId
     @OneToOne
     @JoinColumn(name = "matches_users_id")
     private MatchesUsers matchesUsers;
