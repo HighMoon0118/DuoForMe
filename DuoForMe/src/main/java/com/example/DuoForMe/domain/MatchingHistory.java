@@ -3,10 +3,7 @@ package com.example.DuoForMe.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -14,11 +11,22 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class MatchingHistory {
 
-    @NotNull
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long matchinghistory_id;
+
+//    @ManyToOne
+//    @JoinColumns({
+//            @JoinColumn(name = "matched_user_id", referencedColumnName = "user_id"),
+//            @JoinColumn(name = "owner_user_id", referencedColumnName = "user_id")
+//    })
+//    private User user;
+
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "matched_user_id", referencedColumnName = "user_id"),
-            @JoinColumn(name = "owner_user_id", referencedColumnName = "user_id")
-    })
-    private User user;
+    @JoinColumn(name = "owner_user_id")
+    private User ownerUser;
+
+    @ManyToOne
+    @JoinColumn(name = "matched_user_id")
+    private User matchedUser;
 }

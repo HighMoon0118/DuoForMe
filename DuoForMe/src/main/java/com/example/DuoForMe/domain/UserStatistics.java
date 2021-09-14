@@ -4,10 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -16,14 +13,15 @@ import javax.validation.constraints.NotNull;
 public class UserStatistics {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long user_statistics_id;
+
     @ManyToOne
-    @JoinColumn(name = "puuid")
+    @JoinColumn(name = "puu_id")
     private RiotUser riotUser;
 
-    @NotNull
     private String individual_position;
 
-    @NotNull
     private String champion_name;
 
     private int total_game_count;
