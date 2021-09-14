@@ -15,16 +15,12 @@ public class Matches {
     @Id
     private String match_id;
 
-    @NotNull
     private int game_creation;
 
-    @NotNull
     private int game_duration;
 
-    @NotNull
     private String game_mode;
 
-    @NotNull
     private int game_start_timestamp;
 
     @Builder
