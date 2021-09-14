@@ -1,0 +1,12 @@
+.recommend-first-box {
+  margin-top: 20px;
+  border: 5px solid #FFF08B;
+}
+.recommend-user-info {
+  display: inline-block;
+  width: 300px;
+}
+.recommend-users {
+  display: flex;
+  justify-content: space-between;
+}
