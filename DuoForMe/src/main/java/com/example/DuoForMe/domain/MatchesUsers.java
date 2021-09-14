@@ -12,32 +12,28 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 public class MatchesUsers extends BaseTimeEntity{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int matches_users_id;
+    private Long matches_users_id;
 
     @ManyToOne
     @JoinColumn(name = "match_id")
     private Matches matches;
 
-    @NotNull
     @ManyToOne
-    @JoinColumn(name = "puuid")
+    @JoinColumn(name = "puu_id")
     private MatchesUsers matchesUsers;
 
     private int assists;
 
-    @NotNull
     private int champ_level;
 
-    @NotNull
     private int champion_id;
 
-    @NotNull
     private String champion_name;
 
     private int deaths;
+
     private int total_damages_dealt_to_champions;
 
     private int detector_wards_placed;
@@ -54,7 +50,6 @@ public class MatchesUsers extends BaseTimeEntity{
 
     private int kills;
 
-    @NotNull
     private String individual_position;
 
     private int item0;
@@ -65,20 +60,17 @@ public class MatchesUsers extends BaseTimeEntity{
     private int item5;
     private int item6;
 
-    @NotNull
     private String team_position;
 
     private int summoner1_id;
     private int summoner2_id;
 
-    @NotNull
     private boolean win;
 
-    @NotNull
     private LocalDateTime updated_time;
 
     @Builder
-    public MatchesUsers(int matches_users_id, Matches matches, MatchesUsers matchesUsers, int assists, int champ_level, int champion_id, String champion_name, int deaths, int total_damages_dealt_to_champions, int detector_wards_placed, int vision_score, int total_damage_taken, int total_heal, int total_minions_killed, int vision_wards_bought_in_games, int kills, String individual_position, int item0, int item1, int item2, int item3, int item4, int item5, int item6, String team_position, int summoner1_id, int summoner2_id, boolean win, LocalDateTime updated_time) {
+    public MatchesUsers(Long matches_users_id, Matches matches, MatchesUsers matchesUsers, int assists, int champ_level, int champion_id, String champion_name, int deaths, int total_damages_dealt_to_champions, int detector_wards_placed, int vision_score, int total_damage_taken, int total_heal, int total_minions_killed, int vision_wards_bought_in_games, int kills, String individual_position, int item0, int item1, int item2, int item3, int item4, int item5, int item6, String team_position, int summoner1_id, int summoner2_id, boolean win, LocalDateTime updated_time) {
         this.matches_users_id = matches_users_id;
         this.matches = matches;
         this.matchesUsers = matchesUsers;
