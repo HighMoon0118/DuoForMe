@@ -2,6 +2,7 @@ import React from "react"
 import "./Main.css"
 import MainSearch from "./MainSearch"
 import MainMatching from "./MainMatching"
+import { Link } from "react-router-dom"
 function Main() {
   return (
     <div>
@@ -15,6 +16,7 @@ function Main() {
       </h1>
       <MainSearch />
       <MainMatching />
+      <Link to="/detail">디테일 확인</Link>
     </div>
   )
 }
