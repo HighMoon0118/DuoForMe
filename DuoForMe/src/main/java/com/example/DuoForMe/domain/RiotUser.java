@@ -14,13 +14,13 @@ import javax.validation.constraints.NotNull;
 public class RiotUser {
 
     @Id
-    private String puu_id;
+    private String puuId;
 
-    private String lol_nickname;
+    private String lolNickname;
 
     @Builder
-    public RiotUser(String puu_id, String lol_nickname) {
-        this.puu_id = puu_id;
-        this.lol_nickname = lol_nickname;
+    public RiotUser(String puuId, String lolNickname) {
+        this.puuId = puuId;
+        this.lolNickname = lolNickname;
     }
 }

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Blacklist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long blacklist_id;
+    private long blacklistId;
 
     @ManyToOne
     @JoinColumn(name = "owner_user_id")

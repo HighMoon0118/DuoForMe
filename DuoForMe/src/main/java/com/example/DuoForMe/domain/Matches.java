@@ -13,22 +13,22 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Matches {
     @Id
-    private String match_id;
+    private String matchId;
 
-    private int game_creation;
+    private int gameCreation;
 
-    private int game_duration;
+    private int gameDuration;
 
-    private String game_mode;
+    private String gameMode;
 
-    private int game_start_timestamp;
+    private int gameStartTimestamp;
 
     @Builder
-    public Matches(String match_id, int game_creation, int game_duration, String game_mode, int game_start_timestamp) {
-        this.match_id = match_id;
-        this.game_creation = game_creation;
-        this.game_duration = game_duration;
-        this.game_mode = game_mode;
-        this.game_start_timestamp = game_start_timestamp;
+    public Matches(String matchId, int gameCreation, int gameDuration, String gameMode, int gameStartTimestamp) {
+        this.matchId = matchId;
+        this.gameCreation = gameCreation;
+        this.gameDuration = gameDuration;
+        this.gameMode = gameMode;
+        this.gameStartTimestamp = gameStartTimestamp;
     }
 }

@@ -9,18 +9,12 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "matchinghistory")
 public class MatchingHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long matchinghistory_id;
-
-//    @ManyToOne
-//    @JoinColumns({
-//            @JoinColumn(name = "matched_user_id", referencedColumnName = "user_id"),
-//            @JoinColumn(name = "owner_user_id", referencedColumnName = "user_id")
-//    })
-//    private User user;
+    private Long matchinghistoryId;
 
     @ManyToOne
     @JoinColumn(name = "owner_user_id")
