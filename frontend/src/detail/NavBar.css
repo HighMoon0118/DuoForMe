@@ -1,0 +1,23 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.log-out {
+  display: inline;
+  cursor: pointer;
+}
+
+.logo {
+  display: inline;
+}
+
+.m-30 {
+  padding: 30px;
+}
+
+.mw-10 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
