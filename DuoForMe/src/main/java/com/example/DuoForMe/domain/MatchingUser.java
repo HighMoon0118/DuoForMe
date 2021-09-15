@@ -10,24 +10,26 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "matchinguser")
 public class MatchingUser {
 
     @Id
-    private Long user_id;
+    private Long userId;
 
     @MapsId
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String my_position;
+    private String myPosition;
 
-    private String duo_position;
+    private String duoPosition;
 
     @Builder
-    public MatchingUser(User user, String my_position, String duo_position) {
+    public MatchingUser(Long userId, User user, String myPosition, String duoPosition) {
+        this.userId = userId;
         this.user = user;
-        this.my_position = my_position;
-        this.duo_position = duo_position;
+        this.myPosition = myPosition;
+        this.duoPosition = duoPosition;
     }
 }
