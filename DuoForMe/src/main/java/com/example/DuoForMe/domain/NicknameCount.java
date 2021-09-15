@@ -13,13 +13,13 @@ import javax.persistence.Id;
 public class NicknameCount {
 
     @Id
-    private String lol_nickname;
+    private String lolNickname;
 
     private int count;
 
     @Builder
-    public NicknameCount(String lol_nickname, int count) {
-        this.lol_nickname = lol_nickname;
+    public NicknameCount(String lolNickname, int count) {
+        this.lolNickname = lolNickname;
         this.count = count;
     }
 }
