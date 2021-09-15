@@ -9,10 +9,11 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name = "perks")
 public class Perks{
 
     @Id
-    private Long matches_users_id;
+    private Long matchesUsersId;
 
     @MapsId
     @OneToOne
@@ -23,29 +24,30 @@ public class Perks{
     private int flex;
     private int offense;
 
-    private int primary_style;
-    private int primary_style_perk1;
-    private int primary_style_perk2;
-    private int primary_style_perk3;
-    private int primary_style_perk4;
+    private int primaryStyle;
+    private int primaryStylePerk1;
+    private int primaryStylePerk2;
+    private int primaryStylePerk3;
+    private int primaryStylePerk4;
 
-    private int sub_style;
-    private int sub_style_perk1;
-    private int sub_style_perk2;
+    private int subStyle;
+    private int subStylePerk1;
+    private int subStylePerk2;
 
     @Builder
-    public Perks(MatchesUsers matchesUsers, int defense, int flex, int offense, int primary_style, int primary_style_perk1, int primary_style_perk2, int primary_style_perk3, int primary_style_perk4, int sub_style, int sub_style_perk1, int sub_style_perk2) {
+    public Perks(Long matchesUsersId, MatchesUsers matchesUsers, int defense, int flex, int offense, int primaryStyle, int primaryStylePerk1, int primaryStylePerk2, int primaryStylePerk3, int primaryStylePerk4, int subStyle, int subStylePerk1, int subStylePerk2) {
+        this.matchesUsersId = matchesUsersId;
         this.matchesUsers = matchesUsers;
         this.defense = defense;
         this.flex = flex;
         this.offense = offense;
-        this.primary_style = primary_style;
-        this.primary_style_perk1 = primary_style_perk1;
-        this.primary_style_perk2 = primary_style_perk2;
-        this.primary_style_perk3 = primary_style_perk3;
-        this.primary_style_perk4 = primary_style_perk4;
-        this.sub_style = sub_style;
-        this.sub_style_perk1 = sub_style_perk1;
-        this.sub_style_perk2 = sub_style_perk2;
+        this.primaryStyle = primaryStyle;
+        this.primaryStylePerk1 = primaryStylePerk1;
+        this.primaryStylePerk2 = primaryStylePerk2;
+        this.primaryStylePerk3 = primaryStylePerk3;
+        this.primaryStylePerk4 = primaryStylePerk4;
+        this.subStyle = subStyle;
+        this.subStylePerk1 = subStylePerk1;
+        this.subStylePerk2 = subStylePerk2;
     }
 }

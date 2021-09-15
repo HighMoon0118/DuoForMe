@@ -14,56 +14,57 @@ public class UserStatistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_statistics_id;
+    private Long userStatisticsId;
 
     @ManyToOne
     @JoinColumn(name = "puu_id")
     private RiotUser riotUser;
 
-    private String individual_position;
+    private String individualPosition;
 
-    private String champion_name;
+    private String championName;
 
-    private int total_game_count;
+    private int totalGameCount;
 
-    private int total_kills;
+    private int totalKills;
 
-    private int total_assists;
+    private int totalAssists;
 
-    private int total_death;
+    private int totalDeath;
 
-    private int total_damage_taken;
+    private int totalDamageTaken;
 
-    private int total_damages_dealt_to_champions;
+    private int totalDamagesDealtToChampions;
 
-    private int total_heal;
+    private int totalHeal;
 
-    private int total_vision_score;
+    private int totalVisionScore;
 
-    private int total_minions_killed;
+    private int totalMinionsKilled;
 
-    private int total_win;
+    private int totalWin;
 
-    private int champion_level;
+    private int championLevel;
 
-    private int champion_point;
+    private int championPoint;
 
     @Builder
-    public UserStatistics(RiotUser riotUser, String individual_position, String champion_name, int total_game_count, int total_kills, int total_assists, int total_death, int total_damage_taken, int total_damages_dealt_to_champions, int total_heal, int total_vision_score, int total_minions_killed, int total_win, int champion_level, int champion_point) {
+    public UserStatistics(Long userStatisticsId, RiotUser riotUser, String individualPosition, String championName, int totalGameCount, int totalKills, int totalAssists, int totalDeath, int totalDamageTaken, int totalDamagesDealtToChampions, int totalHeal, int totalVisionScore, int totalMinionsKilled, int totalWin, int championLevel, int championPoint) {
+        this.userStatisticsId = userStatisticsId;
         this.riotUser = riotUser;
-        this.individual_position = individual_position;
-        this.champion_name = champion_name;
-        this.total_game_count = total_game_count;
-        this.total_kills = total_kills;
-        this.total_assists = total_assists;
-        this.total_death = total_death;
-        this.total_damage_taken = total_damage_taken;
-        this.total_damages_dealt_to_champions = total_damages_dealt_to_champions;
-        this.total_heal = total_heal;
-        this.total_vision_score = total_vision_score;
-        this.total_minions_killed = total_minions_killed;
-        this.total_win = total_win;
-        this.champion_level = champion_level;
-        this.champion_point = champion_point;
+        this.individualPosition = individualPosition;
+        this.championName = championName;
+        this.totalGameCount = totalGameCount;
+        this.totalKills = totalKills;
+        this.totalAssists = totalAssists;
+        this.totalDeath = totalDeath;
+        this.totalDamageTaken = totalDamageTaken;
+        this.totalDamagesDealtToChampions = totalDamagesDealtToChampions;
+        this.totalHeal = totalHeal;
+        this.totalVisionScore = totalVisionScore;
+        this.totalMinionsKilled = totalMinionsKilled;
+        this.totalWin = totalWin;
+        this.championLevel = championLevel;
+        this.championPoint = championPoint;
     }
 }
