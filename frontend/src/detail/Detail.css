@@ -8,10 +8,3 @@
   display: inline;
   width: 100%;
 }
-
-#sidebar {
-  display: inline;
-  width: 400px;
-  height: 700px;
-  background-color: gray;
-}
