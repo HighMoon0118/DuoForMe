@@ -16,10 +16,12 @@ function SynergySearch() {
   }
   const synergy = {rate: "40%"}
   return (
-    <div className="input-position">
-      <input onChange={onChangeInput} value={inputText} placeholder="시너지 검색" className="middle-input" />
-      <button onClick={onSearch}>검색</button>
-      { isSearch ? <SynergyInfo info={synergy} /> : <div></div>}
+    <div id="synergy-search">
+      <div className="input-position">
+        <input onChange={onChangeInput} value={inputText} placeholder="시너지 검색" className="middle-input" />
+        <button onClick={onSearch}>검색</button>
+        { isSearch ? <SynergyInfo info={synergy} /> : <div></div>}
+      </div>
     </div>
   )
 }
