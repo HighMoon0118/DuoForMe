@@ -14,7 +14,7 @@ function NavBar () {
     }
 
     return (
-      <div className="navbar">
+      <div id="navbar">
         <div className="logo"><h1>Duofor.me</h1></div>
         <div className="m-30">
           <input className="input-search mw-10" type="text" />

@@ -41,7 +41,7 @@ function Login () {
   }
 
   return (
-    <div className="login-body">
+    <div id="login">
       <div className="mt-30"><h1>Login</h1></div>
       <div className="ta-left">
         <div className="mt-30">

@@ -9,7 +9,7 @@
   border-radius: 50px;
 }
 
-.userInfo {
+#season-info > .userInfo {
   display: inline;
   height: 200px;
   width: 200px;

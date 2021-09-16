@@ -1,4 +1,4 @@
-.login-body {
+#login {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,11 +9,11 @@
   border-radius: 60px;
 }
 
-.ta-left {
+#login > .ta-left {
   text-align: left;
 }
 
-input {
+#login > input {
   font-size: 16px;
   padding-left: 4px;
   height: 30px;
@@ -21,15 +21,15 @@ input {
   border-radius: 8px;
 }
 
-.mt-30 {
+#login > .mt-30 {
   margin-top: 30px;
 }
 
-.mt-10 {
+#login > .mt-10 {
   margin-top: 10px;
 }
 
-.login-btn {
+#login > .login-btn {
   margin-top: 70px;
   height: 50px;
   width: 300px;
@@ -38,7 +38,7 @@ input {
   border-radius: 10px;
 }
 
-.input-msg {
+#login > .input-msg {
   position: absolute;
   color: rgb(231, 96, 96);
 }
