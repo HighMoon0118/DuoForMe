@@ -1,9 +1,9 @@
 import React, {useState} from "react"
 
-function Timer() {
-  let [ time, setTime ] = useState(0)
+function Timer(props) {
+  let [ time, setTime ] = useState(props.time)
   setTimeout(()=>{
-    time += 1;
+    time = Math.floor((new Date().getTime() - new Date(props.time))/ 1000);
     setTime(time)
   }, 1000)
   let hour = "00"
@@ -15,7 +15,7 @@ function Timer() {
   let second = (time % 60).toString().length < 2 ? "0" + (time % 60).toString() : (time % 60).toString()
   return (
     <div>
-     {hour} : { min } : {second}
+      {Math.floor((new Date().getTime() - new Date(props.time))/ 1000) ? <div>{hour} : { min } : {second}</div> : <div></div>}
     </div>
   )
 }

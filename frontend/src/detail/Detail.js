@@ -5,6 +5,7 @@ import Recommend from "./recommend/Recommend.js"
 import PlayList from "./playlist/PlayList.js"
 import SeasonInfo from "./seasonInfo/SeasonInfo.js"
 import NavBar from "./NavBar.js"
+import SidebarContainer from "../container/SidebarContainer";
 
 function Detail() {
 
@@ -34,9 +35,7 @@ const toggleRecommend = () => {
             : <PlayList/>
           }
         </div>
-        <div id="sidebar">
-          <div><h1>SideBar</h1></div>
-        </div>
+        <SidebarContainer />
       </div>
     </div>
   )
