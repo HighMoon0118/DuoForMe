@@ -50,7 +50,7 @@ function SignUp () {
   }
 
   return (
-    <div className="signup-body">
+    <div id="signup">
       <div className="mt-30"><h1>SignUp</h1></div>
       <div className="ta-left">
         <div className="mt-30">
