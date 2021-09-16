@@ -1,8 +1,8 @@
 import React from "react"
 import "./Main.css"
 import MainSearch from "./MainSearch"
-import MainMatching from "./MainMatching"
 import { Link } from "react-router-dom"
+import MainMatchingContainer from "../container/MainMatchingContainer"
 function Main() {
   return (
     <div id="main">
@@ -15,7 +15,7 @@ function Main() {
         Duofor.me
       </h1>
       <MainSearch />
-      <MainMatching />
+      <MainMatchingContainer />
       <Link to="/detail">디테일 확인</Link>
     </div>
   )
