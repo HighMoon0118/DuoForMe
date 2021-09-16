@@ -1,19 +1,19 @@
-#login {
+#signup {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 500px;
-  height: 500px;
-  margin: 150px auto;
+  height: 600px;
+  margin: 100px auto;
   background-color: #4e5363;
   border-radius: 60px;
 }
 
-#login > .ta-left {
+#signup > .ta-left {
   text-align: left;
 }
 
-#login > input {
+#signup > input {
   font-size: 16px;
   padding-left: 4px;
   height: 30px;
@@ -21,16 +21,16 @@
   border-radius: 8px;
 }
 
-#login > .mt-30 {
-  margin-top: 30px;
+#signup > .mt-20 {
+  margin-top: 20px;
 }
 
-#login > .mt-10 {
-  margin-top: 10px;
+#signup > .mt-5 {
+  margin-top: 5px;
 }
 
-#login > .login-btn {
-  margin-top: 70px;
+#signup > .signup-btn {
+  margin-top: 40px;
   height: 50px;
   width: 300px;
   font-size: 20px;
@@ -38,7 +38,7 @@
   border-radius: 10px;
 }
 
-#login > .input-msg {
+#signup > .input-msg {
   position: absolute;
   color: rgb(231, 96, 96);
 }
