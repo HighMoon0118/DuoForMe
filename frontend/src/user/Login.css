@@ -9,11 +9,11 @@
   border-radius: 60px;
 }
 
-#login > .ta-left {
+#login .ta-left {
   text-align: left;
 }
 
-#login > input {
+#login input {
   font-size: 16px;
   padding-left: 4px;
   height: 30px;
@@ -21,15 +21,15 @@
   border-radius: 8px;
 }
 
-#login > .mt-30 {
+#login .mt-30 {
   margin-top: 30px;
 }
 
-#login > .mt-10 {
+#login .mt-10 {
   margin-top: 10px;
 }
 
-#login > .login-btn {
+#login .login-btn {
   margin-top: 70px;
   height: 50px;
   width: 300px;
@@ -38,7 +38,7 @@
   border-radius: 10px;
 }
 
-#login > .input-msg {
+#login .input-msg {
   position: absolute;
   color: rgb(231, 96, 96);
 }
