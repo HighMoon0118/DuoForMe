@@ -1,0 +1,52 @@
+#play-list {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+#play-list .play-table {
+  display: table;
+  height: 100px;
+  width: 800px;
+  background-color: rgb(233, 113, 113);
+}
+
+#play-list .play-table-item {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#play-list .champion-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 30px;
+}
+
+#play-list .rune-spell {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100px;
+  height: 100px;
+}
+
+#play-list .rs-item {
+  width: 40px;
+  height: 40px;
+}
+
+#play-list .item-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+  width: 180px;
+}
+
+#play-list .item-item {
+  height: 40px;
+  width: 40px;
+}

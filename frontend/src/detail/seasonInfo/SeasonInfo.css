@@ -9,9 +9,41 @@
   border-radius: 50px;
 }
 
-#season-info .userInfo {
-  display: inline;
+
+#season-info .user-table {
+  display: table;
   height: 200px;
-  width: 200px;
-  background-color: aquamarine;
+  width: 560px;
 }
+
+#season-info .user-table-info {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100px;
+  color: black;
+}
+
+
+#season-info .user-season-info {
+  height: 250px;
+  width: 400px;
+}
+
+#season-info .champion-table {
+  display: table;
+  height: 50px;
+  width: 400px;
+}
+
+#season-info .champion-info {
+  display: table-cell;
+  vertical-align: middle;
+  color: black;
+}
+
+#season-info .champion-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 30px;
+}
+
