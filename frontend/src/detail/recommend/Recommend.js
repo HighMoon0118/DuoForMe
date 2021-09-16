@@ -26,11 +26,13 @@ function Recommend() {
     </div>
   )
   return(
-    <div className="recommend-first-box">
-      <div className="recommend-users">
-        { RecommendUsers }
+    <div id="recommend">
+      <div className="recommend-first-box">
+        <div className="recommend-users">
+          { RecommendUsers }
+        </div>
+        <SynergySearch />
       </div>
-      <SynergySearch />
     </div>
   )
 }
