@@ -19,37 +19,39 @@ function Matching() {
     setIsMatching(!isMatching)
   }
   return (
-    <div className="center">
-      <div className="matching-box">
-        <div className="center-group"> 
-          <div className="select-box">
-            <img className="line-image" alt="라인 이미지" src={"img/" + me + ".png"} />
-            <select value={ me } onChange={ selectChange } name="me" className="drop-down">
-              <option value="">내 라인 선택</option>
-              <option value="top">Top</option>
-              <option value="middle">Middle</option>
-              <option value="bottom">Bottom</option>
-              <option value="jungle">Jungle</option>
-              <option value="support">Support</option>
-            </select>
+    <div id="main-matching">
+      <div className="center">
+        <div className="matching-box">
+          <div className="center-group"> 
+            <div className="select-box">
+              <img className="line-image" alt="라인 이미지" src={"img/" + me + ".png"} />
+              <select value={ me } onChange={ selectChange } name="me" className="drop-down">
+                <option value="">내 라인 선택</option>
+                <option value="top">Top</option>
+                <option value="middle">Middle</option>
+                <option value="bottom">Bottom</option>
+                <option value="jungle">Jungle</option>
+                <option value="support">Support</option>
+              </select>
+            </div>
+            <div className="timer">
+              {/* 지금 그냥 숫자 올라가는 걸로 해뒀는데 다른곳에서도 같은 시간 보이게 redux로 고쳐야하지 않을까 */}
+              { isMatching ? <Timer /> : <div></div>}
+            </div>
+            <div className="select-box">
+              <img className="line-image" alt="라인 이미지" src={"img/" + you + ".png"} />
+              <select value={ you } onChange={ selectChange } name="you" className="drop-down">
+                <option>상대방 라인 선택</option>
+                <option value="top">Top</option>
+                <option value="middle">Middle</option>
+                <option value="bottom">Bottom</option>
+                <option value="jungle">Jungle</option>
+                <option value="support">Support</option>
+              </select>
+            </div>
           </div>
-          <div className="timer">
-            {/* 지금 그냥 숫자 올라가는 걸로 해뒀는데 다른곳에서도 같은 시간 보이게 redux로 고쳐야하지 않을까 */}
-            { isMatching ? <Timer /> : <div></div>}
-          </div>
-          <div className="select-box">
-            <img className="line-image" alt="라인 이미지" src={"img/" + you + ".png"} />
-            <select value={ you } onChange={ selectChange } name="you" className="drop-down">
-              <option>상대방 라인 선택</option>
-              <option value="top">Top</option>
-              <option value="middle">Middle</option>
-              <option value="bottom">Bottom</option>
-              <option value="jungle">Jungle</option>
-              <option value="support">Support</option>
-            </select>
-          </div>
+          <button className="matching-btn" onClick={ toggleMatching }>{ isMatching ? "매칭 중" : "매칭하기" }</button>
         </div>
-        <button className="matching-btn" onClick={ toggleMatching }>{ isMatching ? "매칭 중" : "매칭하기" }</button>
       </div>
     </div>
   )
