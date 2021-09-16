@@ -5,7 +5,7 @@ import MainMatching from "./MainMatching"
 import { Link } from "react-router-dom"
 function Main() {
   return (
-    <div>
+    <div id="main">
       <div className="text-left nav-padding">
         {/* 로그인, 회원가입 페이지 만들면 링크로 바뀌게 */}
         <span>회원가입</span>
