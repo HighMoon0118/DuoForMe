@@ -1,16 +1,18 @@
 import MaingMatching from "../main/MainMatching"
 import { connect } from "react-redux"
 import { changeMatching } from "../modules/matching"
-
-function MainMatchingContainer ({isMatching, changeMatching, time}) {
+import { myLine, yourLine } from "../modules/selectLine"
+function MainMatchingContainer ({isMatching, changeMatching, time, me, you, myLine, yourLine}) {
   return (
-    <MaingMatching isMatching={ isMatching } changeMatching={ changeMatching } time={ time }/>
+    <MaingMatching isMatching={isMatching} changeMatching={changeMatching} time={time} me={me} you={you} myLine={myLine} yourLine={yourLine}/>
   )
 }
 function mapStateToProps(state) {
   return {
     isMatching: state.matching.isMatching,
-    time: state.matching.time
+    time: state.matching.time,
+    me: state.selectLine.me,
+    you: state.selectLine.you
   }
 }
 function mapDispatchToProps(dispatch) {
@@ -18,6 +20,12 @@ function mapDispatchToProps(dispatch) {
     changeMatching: (isMatching, time) => {
       dispatch(changeMatching(isMatching, time))
     },
+    myLine: (me) => {
+      dispatch(myLine(me))
+    },
+    yourLine: (you) => {
+      dispatch(yourLine(you))
+    }
   }
 }
 
