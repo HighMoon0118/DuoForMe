@@ -1,9 +1,18 @@
-import React from "react"
+import React, {useState} from "react"
 import "./Main.css"
 import MainSearch from "./MainSearch"
 import { Link } from "react-router-dom"
 import MainMatchingContainer from "../container/MainMatchingContainer"
+import Modal from "./Modal"
 function Main() {
+  const [ modalOpen, setModalOpen ] = useState(false);
+
+  const openModal = () => {
+      setModalOpen(true);
+  }
+  const closeModal = () => {
+      setModalOpen(false);
+  }
   return (
     <div id="main">
       <div className="text-left nav-padding">
@@ -17,6 +26,8 @@ function Main() {
       <MainSearch />
       <MainMatchingContainer />
       <Link to="/detail">디테일 확인</Link>
+      <button onClick={ openModal }>모달팝업</button>
+      <Modal open={ modalOpen } close={ closeModal } header="Modal heading">모달 내용 아아아</Modal>
     </div>
   )
 }
