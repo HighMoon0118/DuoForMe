@@ -1,20 +1,20 @@
-import React, { useState } from "react"
+import React from "react"
 import Timer from "./Timer"
 
-function MainMatching({isMatching, changeMatching, time}) {
-  const [ selectLine, setLine ] = useState({
-    me: "",
-    you: "",
-  })
+function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLine}) {
+  // const [ selectLine, setLine ] = useState({
+  //   me: "",
+  //   you: "",
+  // })
   // const [ isMatching, setIsMatching ] = useState(false)
-  const { me, you } = selectLine
-  function selectChange(e) {
-    const { name, value } = e.target
-    setLine({
-      ...selectLine,
-      [name] : value
-    })
-  }
+  // const { me, you } = selectLine
+  // function selectChange(e) {
+  //   const { name, value } = e.target
+  //   setLine({
+  //     ...selectLine,
+  //     [name] : value
+  //   })
+  // }
   // function toggleMatching() {
   //   setIsMatching(!isMatching)
   // }
@@ -25,7 +25,7 @@ function MainMatching({isMatching, changeMatching, time}) {
           <div className="center-group"> 
             <div className="select-box">
               <img className="line-image" alt="라인 이미지" src={"img/" + me + ".png"} />
-              <select value={ me } onChange={ selectChange } name="me" className="drop-down">
+              <select value={ me } onChange={(e) => myLine(e.target.value)} name="me" className="drop-down">
                 <option value="">내 라인 선택</option>
                 <option value="top">Top</option>
                 <option value="middle">Middle</option>
@@ -40,7 +40,7 @@ function MainMatching({isMatching, changeMatching, time}) {
             </div>
             <div className="select-box">
               <img className="line-image" alt="라인 이미지" src={"img/" + you + ".png"} />
-              <select value={ you } onChange={ selectChange } name="you" className="drop-down">
+              <select value={ you } onChange={(e) => yourLine(e.target.value)} name="you" className="drop-down">
                 <option>상대방 라인 선택</option>
                 <option value="top">Top</option>
                 <option value="middle">Middle</option>
