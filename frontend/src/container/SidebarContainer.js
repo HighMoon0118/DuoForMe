@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 
 function SidebarContainer ({time, me, you}) {
   return (
-    <Sidebar time={time} me={me} you={you}/>
+    <Sidebar time={Math.floor((new Date().getTime() - new Date(time))/ 1000)} me={me} you={you}/>
   )
 }
 
