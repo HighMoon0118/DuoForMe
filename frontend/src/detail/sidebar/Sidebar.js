@@ -3,6 +3,7 @@ import "./Sidebar.css"
 import Timer from "../../main/Timer"
 
 function Sidebar ({time, me, you}) {
+  console.log(time)
   return (
     <div id="sidebar">
       <h1>SideBar</h1>
