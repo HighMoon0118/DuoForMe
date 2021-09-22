@@ -6,20 +6,11 @@ const Modal = ( props ) => {
   const { open, close } = props;
 
 
-  const [location, setLocation] = useState({
-    x: 0,
-    y: 50
-  })
+  const [location, setLocation] = useState({ x: 495, y: 50 })
 
-  const [startLocation, setStartLocation] = useState({
-    x: 0,
-    y: 0
-  })
+  const [startLocation, setStartLocation] = useState({ x: 0, y: 0 })
 
-  const [mouseLocation, setMouseLocation] = useState({
-    x: 0,
-    y: 0
-  }) 
+  const [mouseLocation, setMouseLocation] = useState({ x: 0,  y: 0 }) 
 
   const [fold, setFold] = useState(false)
   const [size, setSize] = useState({w: 700, h:700})
@@ -31,7 +22,7 @@ const Modal = ( props ) => {
   const drag = (e) =>{
     const xGap = e.pageX - mouseLocation.x
     const yGap = e.pageY - mouseLocation.y
-    if (Math.abs(location.x-startLocation.x-xGap) <= 50) {
+    if (Math.abs(location.x-startLocation.x-xGap) <= 100) {
       setLocation({x:startLocation.x+xGap, y:startLocation.y+yGap})
     }
   }
@@ -53,18 +44,22 @@ const Modal = ( props ) => {
         open ? (
           <div id="matching-modal">
             <div className="modal" 
+            draggable
             onDragStart={dragStart}
             onDrag={drag}
             style={{left: location.x, top: location.y, height: size.h}}>
-              <div className="header" draggable>
-                매칭 모달
-                <button onClick={ foldModal }>버튼</button>
-              </div>
-              <div className="main" style={fold ? {opacity: 0} : {opacity: 1}}>
-                {props.children}
-              </div>
-              <div className="footer" style={fold ? {opacity: 0} : {opacity: 1}}>
-                <button className="close" onClick={close}> close </button>
+              <div className="main" draggable>
+                <div className="info">
+                  <button>수락</button>
+                  <button onClick={close}>거절</button>
+                </div>
+                <div className="chat" style={fold && {}}>
+                  <div className="message"></div>
+                  <input type="text" />
+                </div>
+                <div>
+                  <button onClick={ foldModal }>버튼</button>
+                </div>
               </div>
             </div>
           </div>
