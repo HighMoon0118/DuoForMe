@@ -4,10 +4,6 @@
 
 #matching-modal .modal {
   position: absolute;
-  top: 50;
-  bottom: 0;
-  left: 0;
-  right: 0;
   z-index: 99;
 
   display: flex;
@@ -18,35 +14,29 @@
   border-radius: 20px;
   animation: modal-show .3s;
 }
-#matching-modal .header {
-  position: relative;
+#matching-modal .main {
+  display: flex;
   padding: 16px 64px 16px 16px;
   color: black;
-  font-weight: 700;
   cursor: grab;
 }
 
-#matching-modal .main {
-  padding: 16px;
-  border-bottom: 1px solid #dee2e6;
-  border-top: 1px solid #dee2e6;
-  background-color: rgb(5, 80, 55);
+#matching-modal button {
+  outline: none;
+}
+
+#matching-modal .info {
   flex-grow: 1;
 }
-#matching-modal .footer {
-  background-color: antiquewhite;
-  padding: 12px 16px;
-  text-align: right;
+
+#matching-modal .chat {
+  flex-grow: 1;
 }
-#matching-modal .footer button {
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  padding: 6px 12px;
-  color: #fff;
-  background-color: #6c757d;
-  border-radius: 5px;
-  font-size: 13px;
+
+#matching-modal .message {
+  width: 300px;
+  height: 500px;
+  background: rgb(151, 190, 235);
 }
 
 @keyframes modal-show {
