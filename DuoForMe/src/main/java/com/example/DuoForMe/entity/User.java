@@ -1,15 +1,10 @@
-package com.example.DuoForMe.domain;
+package com.example.DuoForMe.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.LifecycleState;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -35,18 +30,11 @@ public class User {
 
     private String serviceNickname;
 
-//    @OneToMany(mappedBy = "ownerUser", fetch = FetchType.LAZY)
-//    private List<MatchingHistory> matchingHistoryOwnerList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "matchedUser", fetch = FetchType.LAZY)
-//    private List<MatchingHistory> matchingHistoryMatchedList = new ArrayList<>();
-
-
-//    @Enumerated(EnumType.STRING)
-//    private Authority authority;
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
 
     @Builder
-    public User(Long userId, NicknameCount nicknameCount, String password, String email, int profileIconId, float userCredit, String serviceNickname) {
+    public User(Long userId, NicknameCount nicknameCount, String password, String email, int profileIconId, float userCredit, String serviceNickname, Authority authority) {
         this.userId = userId;
         this.nicknameCount = nicknameCount;
         this.password = password;
@@ -54,6 +42,6 @@ public class User {
         this.profileIconId = profileIconId;
         this.userCredit = userCredit;
         this.serviceNickname = serviceNickname;
-//        this.authority = authority;
+        this.authority = authority;
     }
 }
