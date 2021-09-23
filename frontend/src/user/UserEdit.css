@@ -1,0 +1,43 @@
+#user-edit-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 900px;
+  height: 600px;
+  margin: 100px auto;
+  background-color: #4e5363;
+  border-radius: 60px;
+}
+#user-edit-box .input-box {
+  background-color: #4e5363;
+  outline: none;
+  border: 2px solid white;
+  margin: 10px 0px;
+  width: 300px;
+  height: 30px;
+  border-radius: 10px;
+  display: table-cell;
+  color: white;
+}
+
+#user-edit-box input::placeholder {
+  color: white;
+}
+
+#user-edit-box .flex-box {
+  display: flex;
+}
+
+#user-edit-box > table > tr > td > div {
+  display: inline-block;
+  margin: 0px 5px;
+  border: 2px solid white;
+  border-radius: 5px;
+  color: black;
+  background-color: white;
+}
+#user-edit-box > table > tr > td > div > button {
+  background-color: white;
+  border: none;
+  margin-left: 5px;
+}
