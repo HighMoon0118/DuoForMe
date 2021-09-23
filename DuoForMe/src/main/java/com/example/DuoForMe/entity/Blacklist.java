@@ -1,26 +1,23 @@
-package com.example.DuoForMe.domain;
+package com.example.DuoForMe.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "matchinghistory")
-public class MatchingHistory {
-
+public class Blacklist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long matchinghistoryId;
+    private long blacklistId;
 
     @ManyToOne
     @JoinColumn(name = "owner_user_id")
     private User ownerUser;
 
     @ManyToOne
-    @JoinColumn(name = "matched_user_id")
-    private User matchedUser;
+    @JoinColumn(name = "black_user_id")
+    private User blackUser;
 }

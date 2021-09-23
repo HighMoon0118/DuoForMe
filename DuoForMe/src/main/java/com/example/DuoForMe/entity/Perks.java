@@ -1,4 +1,4 @@
-package com.example.DuoForMe.domain;
+package com.example.DuoForMe.entity;
 
 import lombok.Builder;
 import lombok.Getter;

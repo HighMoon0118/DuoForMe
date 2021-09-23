@@ -1,4 +1,4 @@
-package com.example.DuoForMe.domain;
+package com.example.DuoForMe.entity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 @Getter //Getter 메서드 생성
 @NoArgsConstructor // 해당 클래스의 기본 생성자를 생성해주는 어노테이션
