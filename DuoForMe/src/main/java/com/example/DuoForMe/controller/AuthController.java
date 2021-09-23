@@ -24,15 +24,12 @@ public class AuthController {
     public ResponseEntity<Void> signup(@Valid @RequestBody UserCreateRequest userCreateRequest) {
         Long id = authService.signup(userCreateRequest);
         log.info(Long.toString(id));
-        System.out.println(id);
-        System.out.println(12312314);
         System.out.println(ResponseEntity.status(HttpStatus.CREATED).build());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> authorize(@Valid @RequestBody LoginRequest loginRequest) {
-        System.out.println("controller");
         return ResponseEntity.ok(authService.authorize(loginRequest));
     }
 }

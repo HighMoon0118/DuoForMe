@@ -24,7 +24,8 @@ public class AuthService {
     private final UserRepository userRepository;
     private final TokenProvider tokenProvider;
     private final PasswordEncoder passwordEncoder;
-    private AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+
 
     public Long signup(UserCreateRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -39,15 +40,13 @@ public class AuthService {
     }
 
     public TokenResponse authorize(LoginRequest loginRequest) {
-        System.out.println("service1");
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(new UsernamePasswordAuthenticationToken(
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(
+                new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
                         loginRequest.getPassword()
                 )
         );
-        System.out.println("sevice2");
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println("sevice3");
         return new TokenResponse(tokenProvider.createToken(authentication));
     }
 }
