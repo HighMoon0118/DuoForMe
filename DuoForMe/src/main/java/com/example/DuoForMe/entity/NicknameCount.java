@@ -1,4 +1,4 @@
-package com.example.DuoForMe.domain;
+package com.example.DuoForMe.entity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,21 +6,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class RiotUser {
+public class NicknameCount {
 
     @Id
-    private String puuId;
-
     private String lolNickname;
 
+    private int count;
+
     @Builder
-    public RiotUser(String puuId, String lolNickname) {
-        this.puuId = puuId;
+    public NicknameCount(String lolNickname, int count) {
         this.lolNickname = lolNickname;
+        this.count = count;
     }
 }
