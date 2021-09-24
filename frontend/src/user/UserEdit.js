@@ -2,13 +2,11 @@ import React, {useState} from 'react'
 import "./UserEdit.css"
 
 function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit} ) {
-  // let blackLists = []
-  // for (let i = 0; i < Object.keys(blackList).length; i++) {
-  //   blackLists.push({id: i, nickname: blackList[i]})
-  // }
   let [blacklist, setBlacklist] = useState(blackList)
   let [lolNicknameChange, setLolNickname] = useState("")
   let [serviceNicknameChange, setServiceNickname] = useState("")
+  let [password, setPassword] = useState("")
+  let [passwordConfirm, setPasswordConfirm] = useState("")
   function lolNicknameEdit(e) {
     lolNicknameChange = e.target.value
     setLolNickname(lolNicknameChange)
@@ -38,6 +36,21 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
     setBlacklist(blacklist)
     blackListEdit(blacklist)
   }
+  function passwordEdit(e) {
+    password = e.target.value
+    setPassword(password)
+  }
+  function passwordConfirmEdit(e) {
+    passwordConfirm = e.target.value
+    setPasswordConfirm(passwordConfirm)
+  }
+  function passwordSubmit(e) {
+    e.preventDefault()
+    // 비밀번호 변경 api 보내기
+    if (password !== passwordConfirm) {
+      alert("비밀번호가 일치하지 않습니다")
+    }
+  }
   return(
     <div id="user-edit-box">
       <h1>회원정보 수정</h1>
@@ -58,8 +71,20 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
         <tr>
           <th>서비스 닉네임</th>
           <td>
-            <input onChange={serviceNicknameEdit} value={serviceNicknameChange} className="input-box" placeholder={serviceNickname}/>
-            <button onClick={serviceNicknameSubmit}>수정</button>
+            <form>
+              <input onChange={serviceNicknameEdit} value={serviceNicknameChange} className="input-box" placeholder={serviceNickname}/>
+              <button onClick={serviceNicknameSubmit}>수정</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <th>비밀번호 수정</th>
+          <td>
+            <div className="inline-block">
+              <div><input type="password" onChange={passwordEdit} value={password} className="input-box" placeholder="새로운 비밀번호를 입력하세요"/></div>
+              <div><input type="password" onChange={passwordConfirmEdit} value={passwordConfirm} className="input-box" placeholder="새로운 비밀번호를 입력하세요"/></div>
+            </div>
+            <button className="password-btn" onClick={passwordSubmit}>수정</button>
           </td>
         </tr>
         <tr>
@@ -73,7 +98,6 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
           })}
           </td>
         </tr>
-        
       </table>
     </div>
   )
