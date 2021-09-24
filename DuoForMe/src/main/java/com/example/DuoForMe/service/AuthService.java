@@ -1,10 +1,13 @@
 package com.example.DuoForMe.service;
 
 import com.example.DuoForMe.dto.LoginRequest;
+import com.example.DuoForMe.dto.LolNicknameCountCreateRequest;
 import com.example.DuoForMe.dto.TokenResponse;
 import com.example.DuoForMe.dto.UserCreateRequest;
+import com.example.DuoForMe.entity.NicknameCount;
 import com.example.DuoForMe.entity.User;
 import com.example.DuoForMe.jwt.TokenProvider;
+import com.example.DuoForMe.repository.NicknameCountRepository;
 import com.example.DuoForMe.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,12 +19,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 
 @RequiredArgsConstructor
 @Transactional
 @Service
 public class AuthService {
     private final UserRepository userRepository;
+    private final NicknameCountRepository nicknameCountRepository;
     private final TokenProvider tokenProvider;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -36,6 +41,22 @@ public class AuthService {
         }
         User user = request.toEntity(passwordEncoder);
         User saved = userRepository.save(user);
+
+        String lolNickname = request.getLolNickname();
+        boolean lolNickExists = nicknameCountRepository.existsByLolNickname(lolNickname);
+        int newCount;
+
+        if (lolNickExists) {
+            NicknameCount nicknameCount = nicknameCountRepository.findById(lolNickname)
+                    .orElseThrow(() -> new EntityNotFoundException("해당 되는 롤 닉네임이 없습니다."));
+            newCount = nicknameCount.getCount() + 1;
+            nicknameCountRepository.updateCount(lolNickname, newCount);
+        }
+        else {
+//            LolNicknameCountCreateRequest countCreateRequest;
+            NicknameCount nicknameCount = LolNicknameCountCreateRequest.toEntity(lolNickname);
+            nicknameCountRepository.save(nicknameCount);
+        }
         return saved.getUserId();
     }
 
