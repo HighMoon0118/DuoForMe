@@ -1,9 +1,6 @@
 package com.example.DuoForMe.service;
 
-import com.example.DuoForMe.dto.NicknameCountResponse;
-import com.example.DuoForMe.dto.UserDetailResponse;
-import com.example.DuoForMe.dto.UserResponse;
-import com.example.DuoForMe.dto.UserUpdateCreditRequest;
+import com.example.DuoForMe.dto.*;
 import com.example.DuoForMe.entity.NicknameCount;
 import com.example.DuoForMe.entity.User;
 import com.example.DuoForMe.repository.NicknameCountRepository;
@@ -64,6 +61,38 @@ public class UserService {
         }
         userRepository.updateCredit(newCredit, user.getUserId());
         userRepository.updateEvaluated(evaluated + 1, user.getUserId());
+    }
+
+    public void updateNicknameById(Long id, NicknameUpdateRequest request) {
+        User user = userRepository.findByUserId(id)
+                .orElseThrow(() -> new EntityNotFoundException(NO_USER_EXCEPTION_MESSAGE));
+
+        // 기존 닉네임 찾고 -1
+        String oldNickname = user.getLolNickname();
+
+        NicknameCount nicknameCount = nicknameCountRepository.findById(oldNickname)
+                .orElseThrow(() -> new EntityNotFoundException("해당 되는 롤 닉네임이 없습니다."));
+        int minusCount = nicknameCount.getCount() - 1;
+        nicknameCountRepository.updateCount(oldNickname, minusCount);
+
+
+        // 바꾼 닉네임 존재하는지 찾고 + 1
+        String newNickname = request.getLolNickname();
+        System.out.println(newNickname);
+        boolean lolNickExists = nicknameCountRepository.existsByLolNickname(newNickname);
+        int newCount;
+        if (lolNickExists) {
+            NicknameCount newNicknameCount = nicknameCountRepository.findById(newNickname)
+                    .orElseThrow(() -> new EntityNotFoundException("해당 되는 롤 닉네임이 없습니다."));
+            newCount = newNicknameCount.getCount() + 1;
+            nicknameCountRepository.updateCount(newNickname, newCount);
+        }
+        else {
+            NicknameCount newNicknameCount = LolNicknameCountCreateRequest.toEntity(newNickname);
+            nicknameCountRepository.save(newNicknameCount);
+        }
+
+        userRepository.updateNickname(newNickname, user.getUserId());
     }
 
 }
