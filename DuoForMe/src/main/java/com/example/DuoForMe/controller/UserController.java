@@ -67,6 +67,17 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/lolnickname/{id}")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<SimpleSuccessResponse> updateNicknameById(@PathVariable Long id,
+                                                            @RequestBody @Valid NicknameUpdateRequest request) {
+        service.updateNicknameById(id, request);
+
+        SimpleSuccessResponse response = new SimpleSuccessResponse("User LolNickname 정보 수정 성공");
+        log.info(response.toString());
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/nicknamecount/{nickname}")
     public ResponseEntity<NicknameCountResponse> findByNickname(@PathVariable String nickname) {
         NicknameCountResponse response = service.findByNickname(nickname);

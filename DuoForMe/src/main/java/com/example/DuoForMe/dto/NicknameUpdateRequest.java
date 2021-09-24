@@ -5,7 +5,8 @@ import lombok.Getter;
 import javax.validation.constraints.NotNull;
 
 @Getter
-public class UserUpdateCreditRequest {
+public class NicknameUpdateRequest {
     @NotNull
-    private double credit;
+    private String lolNickname;
+
 }
