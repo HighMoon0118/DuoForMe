@@ -1,25 +1,41 @@
 package com.example.DuoForMe.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-@Getter
+@Data
 @NoArgsConstructor
+@ToString
 @Entity
+@Table(name="riotuser")
 public class RiotUser {
 
     @Id
-    private String puuId;
+    @Column(name = "puu_id")
+    private String puuid;
 
-    private String lolNickname;
+    private String accountId;
 
-    @Builder
-    public RiotUser(String puuId, String lolNickname) {
-        this.puuId = puuId;
-        this.lolNickname = lolNickname;
-    }
+//    @Column(name = "puu_id")
+    private String id;
+
+    @Column(name = "lol_nickname")
+    private String name;
+
+    private Long profileIconId;
+
+    private Long revisionDate;
+
+    private Long summonerLevel;
+
+//    @Builder
+//    public RiotUser(String puuId, String lolNickname) {
+//        this.puuId = puuId;
+//        this.lolNickname = lolNickname;
+//    }
 }
