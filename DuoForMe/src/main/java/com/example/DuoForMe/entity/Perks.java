@@ -3,6 +3,7 @@ package com.example.DuoForMe.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import com.example.DuoForMe.entity.MatchesUsers;
 
 import javax.persistence.*;
 
@@ -34,20 +35,20 @@ public class Perks{
     private int subStylePerk1;
     private int subStylePerk2;
 
-    @Builder
-    public Perks(Long matchesUsersId, MatchesUsers matchesUsers, int defense, int flex, int offense, int primaryStyle, int primaryStylePerk1, int primaryStylePerk2, int primaryStylePerk3, int primaryStylePerk4, int subStyle, int subStylePerk1, int subStylePerk2) {
-        this.matchesUsersId = matchesUsersId;
-        this.matchesUsers = matchesUsers;
-        this.defense = defense;
-        this.flex = flex;
-        this.offense = offense;
-        this.primaryStyle = primaryStyle;
-        this.primaryStylePerk1 = primaryStylePerk1;
-        this.primaryStylePerk2 = primaryStylePerk2;
-        this.primaryStylePerk3 = primaryStylePerk3;
-        this.primaryStylePerk4 = primaryStylePerk4;
-        this.subStyle = subStyle;
-        this.subStylePerk1 = subStylePerk1;
-        this.subStylePerk2 = subStylePerk2;
-    }
+//    @Builder
+//    public Perks(Long matchesUsersId, MatchesUsers matchesUsers, int defense, int flex, int offense, int primaryStyle, int primaryStylePerk1, int primaryStylePerk2, int primaryStylePerk3, int primaryStylePerk4, int subStyle, int subStylePerk1, int subStylePerk2) {
+//        this.matchesUsersId = matchesUsersId;
+//        this.matchesUsers = matchesUsers;
+//        this.defense = defense;
+//        this.flex = flex;
+//        this.offense = offense;
+//        this.primaryStyle = primaryStyle;
+//        this.primaryStylePerk1 = primaryStylePerk1;
+//        this.primaryStylePerk2 = primaryStylePerk2;
+//        this.primaryStylePerk3 = primaryStylePerk3;
+//        this.primaryStylePerk4 = primaryStylePerk4;
+//        this.subStyle = subStyle;
+//        this.subStylePerk1 = subStylePerk1;
+//        this.subStylePerk2 = subStylePerk2;
+//    }
 }
