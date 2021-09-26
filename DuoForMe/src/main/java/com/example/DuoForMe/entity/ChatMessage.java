@@ -1,40 +1,22 @@
-//package com.example.DuoForMe.entity;
-//
-//import java.awt.*;package demo.domain;
-//
-//public class ChatMessage {
-//
-//    private String senderSessionId;
-//    private String message;
-//    private TrayIcon.MessageType messageType;
-//
-//    public MessageType getMessageType() {
-//        return messageType;
+package com.example.DuoForMe.entity;
+
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+public class ChatMessage {
+    // 메시지 타입 : 입장, 채팅
+//    public enum MessageType {
+//        ENTER, TALK
 //    }
-//
-//    public void setMessageType(MessageType messageType) {
-//        this.messageType = messageType;
-//    }
-//
-//    public String getSenderSessionId() {
-//        return senderSessionId;
-//    }
-//
-//    public void setSenderSessionId(String senderSessionId) {
-//        this.senderSessionId = senderSessionId;
-//    }
-//
-//    public String getMessage() {
-//        return message;
-//    }
-//
-//    public void setMessage(String message) {
-//        this.message = message;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "ChatMessage{" + "senderSessionId='" + senderSessionId + '\'' + ", message='" + message + '\'' + ", messageType=" + messageType + '}';
-//    }
-//}
-//}
+//    private MessageType type; // 메시지 타입
+    private String roomId; // 방번호
+    private String sender; // 메시지 보낸사람
+    private String message; // 메시지
+}

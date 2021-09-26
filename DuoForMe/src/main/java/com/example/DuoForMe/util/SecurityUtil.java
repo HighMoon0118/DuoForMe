@@ -19,9 +19,12 @@ public class SecurityUtil {
 
        System.out.println(authentication);
        System.out.println(authentication.getName());
+       System.out.println("무야");
         if (authentication == null || authentication.getName() == null) {
             throw new AccessControlException("No authentication in Security Context.");
         }
         return authentication.getName();
     }
+
+
 }
