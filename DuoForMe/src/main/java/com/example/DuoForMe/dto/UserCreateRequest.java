@@ -34,7 +34,7 @@ public class UserCreateRequest {
                 .email(email)
                 .serviceNickname(serviceNickname)
                 .password(passwordEncoder.encode(password))
-//                .nicknameCount.(lolNickname)
+                .lolNickname(lolNickname)
                 .authority(Authority.ROLE_USER)
                 .build();
     }
