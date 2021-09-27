@@ -1,6 +1,40 @@
 #sidebar {
     display: inline;
-    width: 400px;
+    width: 300px;
     height: 700px;
-    background-color: gray;
   }
+#sidebar .fixed {
+  position: fixed;
+  background-color: gray;
+  width: 300px;
+  height: 700px;
+  right: 5rem;
+}
+#sidebar .user-img {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+#sidebar .user-info {
+  display: inline-block;
+  vertical-align: middle;
+}
+#sidebar .margin-0 {
+  margin: 0px;
+}
+#sidebar .user-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: darkkhaki;
+  height: 50px;
+  margin: 10px 15px;
+}
+#sidebar .fixed .select-box {
+  margin: 10px 0px;
+}
+
+#sidebar .fixed .select-box .drop-down {
+  margin-top: 10px;
+  width: 130px;
+}
