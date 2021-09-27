@@ -13,7 +13,7 @@ const Modal = ( props ) => {
   const [mouseLocation, setMouseLocation] = useState({ x: 0,  y: 0 }) 
 
   const [fold, setFold] = useState(false)
-  const [size, setSize] = useState({w: 700, h:700})
+  const [size, setSize] = useState({w: 1000, h:600})
 
   const dragStart = (e) =>{
     setMouseLocation({x:e.pageX, y:e.pageY})
@@ -29,7 +29,7 @@ const Modal = ( props ) => {
 
   const foldModal = () => {
     if (fold) {
-      setSize({w:700, h:700})
+      setSize({w:900, h:600})
       setFold(false)
     } else {
       setSize({w:700, h:60})
@@ -47,18 +47,19 @@ const Modal = ( props ) => {
             draggable
             onDragStart={dragStart}
             onDrag={drag}
-            style={{left: location.x, top: location.y, height: size.h}}>
+            style={{left: location.x, top: location.y, width: size.w, height: size.h}}>
               <div className="main" draggable>
                 <div className="info">
                   <button>수락</button>
                   <button onClick={close}>거절</button>
                 </div>
-                <div className="chat" style={fold && {}}>
-                  <div className="message"></div>
+                <div className="chat" >
+                  <div className="message"  style={fold ? {display: "none"} : {display: "block"}}></div>
                   <input type="text" />
+                  <button>></button>
                 </div>
-                <div>
-                  <button onClick={ foldModal }>버튼</button>
+                <div className="fold">
+                  <button onClick={ foldModal }>▼</button>
                 </div>
               </div>
             </div>
