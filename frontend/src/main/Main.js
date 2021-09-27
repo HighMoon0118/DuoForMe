@@ -28,6 +28,7 @@ function Main() {
       <Link to="/detail">디테일 확인</Link>
       <button onClick={ openModal }>모달팝업</button>
       <Modal open={ modalOpen } close={ closeModal }>모달 내용 아아아</Modal>
+      <Link to="/useredit">회원정보 수정</Link>
     </div>
   )
 }

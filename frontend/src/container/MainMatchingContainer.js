@@ -4,7 +4,7 @@ import { changeMatching } from "../modules/matching"
 import { myLine, yourLine } from "../modules/selectLine"
 function MainMatchingContainer ({isMatching, changeMatching, time, me, you, myLine, yourLine}) {
   return (
-    <MaingMatching isMatching={isMatching} changeMatching={changeMatching} time={time} me={me} you={you} myLine={myLine} yourLine={yourLine}/>
+    <MaingMatching isMatching={isMatching} changeMatching={changeMatching} time={Math.floor((new Date().getTime() - new Date(time))/ 1000)} me={me} you={you} myLine={myLine} yourLine={yourLine}/>
   )
 }
 function mapStateToProps(state) {

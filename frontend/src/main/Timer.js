@@ -3,7 +3,7 @@ import React, {useState} from "react"
 function Timer(props) {
   let [ time, setTime ] = useState(props.time)
   setTimeout(()=>{
-    time = Math.floor((new Date().getTime() - new Date(props.time))/ 1000);
+    time += 1
     setTime(time)
   }, 1000)
   let hour = "00"
