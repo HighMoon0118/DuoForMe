@@ -2,9 +2,11 @@
 import { combineReducers } from "redux"
 import matching from "./matching"
 import selectLine from "./selectLine"
+import userInfoEdit from "./userInfoEdit"
 
 const rootReducer = combineReducers({
   matching,
-  selectLine
+  selectLine,
+  userInfoEdit
 })
 export default rootReducer
