@@ -13,8 +13,6 @@ const initialState = {
 function matching(state = initialState, action) {
   switch (action.type) {
     case CHANGE_MATCHING:
-      console.log("isMatching", action.isMatching)
-      console.log("time", action.time)
       return {
         ...state,
         isMatching: !action.isMatching,
