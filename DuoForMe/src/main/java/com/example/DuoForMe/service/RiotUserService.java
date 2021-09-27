@@ -3,13 +3,14 @@ package com.example.DuoForMe.service;
 import com.example.DuoForMe.entity.Matches;
 import com.example.DuoForMe.entity.MatchesUsers;
 import com.example.DuoForMe.entity.RiotUser;
+import org.json.simple.parser.ParseException;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserService {
-    public void insert(String name) throws HttpClientErrorException;
+public interface RiotUserService {
+    public void insert(String name) throws HttpClientErrorException, ParseException;
 
     public Optional<RiotUser> selectOneUser(String name);
 

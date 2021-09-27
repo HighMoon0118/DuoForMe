@@ -1,34 +1,26 @@
 package com.example.DuoForMe.service;
 
-import com.example.DuoForMe.dto.MatchDTO;
-import com.example.DuoForMe.dto.MatchListDTO;
-import com.example.DuoForMe.entity.Matches;
-import com.example.DuoForMe.entity.MatchesUsers;
 import com.example.DuoForMe.entity.RiotUser;
 import com.example.DuoForMe.repository.MatchesRepository;
 import com.example.DuoForMe.repository.MatchesUsersRepository;
 import com.example.DuoForMe.repository.RiotUserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.tomcat.util.json.JSONParser;
+import com.google.gson.Gson;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static org.apache.logging.log4j.message.MapMessage.MapFormat.JSON;
+import java.util.*;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class RiotUserServiceImpl implements RiotUserService {
     private static final String RIOTGAMES_URL = "https://developer.riotgames.com";
 
     private static final String SEARCH_BY_NAME_URL = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/";
@@ -58,12 +50,11 @@ public class UserServiceImpl implements UserService {
         headers.set(HttpHeaders.ACCEPT_LANGUAGE, "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7");
         headers.set(HttpHeaders.ACCEPT_CHARSET, "application/x-www-form-urlencoded; charset=UTF-8");
         headers.set(HttpHeaders.ORIGIN, RIOTGAMES_URL);
-//        headers.set(X_Riot_Token, API_KEY);
         return new HttpEntity<T>(headers);
     }
 
     @Override
-    public void insert(String name) throws HttpClientErrorException {
+    public void insert(String name) throws HttpClientErrorException, ParseException {
         RestTemplate restTemplate = restTemplateBuilder.build();
 
         HttpEntity<RiotUser> httpEntity = setHeaders();
@@ -90,17 +81,6 @@ public class UserServiceImpl implements UserService {
         Optional<RiotUser> existRiotUser = selectOneUser(name);
 
         // 매치 리스트 받아서 저장
-//        RestTemplate restTemplate2 = restTemplateBuilder.build();
-
-//        HttpEntity<MatchListDTO> httpEntity2 = setHeaders();
-//        System.out.println(SEARCH_BY_ID_RECENT_20_GAMES + riotUser.getPuuid() + "/ids" + "?start=0&count=20&api_key=" + API_KEY);
-//
-//        ResponseEntity<MatchListDTO> responseEntity2 = restTemplate2.exchange(SEARCH_BY_ID_RECENT_20_GAMES + riotUser.getPuuid() + "/ids" + "?start=0&count=20&api_key=" + API_KEY, HttpMethod.GET, httpEntity2,
-//                MatchListDTO.class);
-//        System.out.println(responseEntity2.getBody());
-//
-//        MatchListDTO matchesList = responseEntity2.getBody();
-
         String[] responseString = restTemplate.getForObject(SEARCH_BY_ID_RECENT_20_GAMES + riotUser.getPuuid() + "/ids" + "?start=0&count=20&api_key=" + API_KEY, String[].class);
         System.out.println(responseString);
         List<String> matchlist = Arrays.asList(responseString);
@@ -110,33 +90,28 @@ public class UserServiceImpl implements UserService {
         for(String match : matchlist) {
             System.out.println(match);
 
-//            List<SomeClass> list = mapper.readValue(jsonString, new TypeReference<List<SomeClass>>() { });
-//            SomeClass[] array = mapper.readValue(jsonString, SomeClass[].class);
-
-//            HttpEntity httpEntity3 = setHeaders();
-            HttpHeaders headers = new HttpHeaders();
-            headers.set(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36");
-            headers.set(HttpHeaders.ACCEPT_LANGUAGE, "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7");
-            headers.set(HttpHeaders.ACCEPT_CHARSET, "application/x-www-form-urlencoded; charset=UTF-8");
-            headers.set(HttpHeaders.ORIGIN, RIOTGAMES_URL);
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
+            HttpEntity httpEntity3 = setHeaders();
             System.out.println(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY);
-            ResponseEntity responseEntity3 = restTemplate.exchange(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY, HttpMethod.GET, httpEntity3,
-                    String.class);
+            ResponseEntity<JSONObject> responseEntity3 = restTemplate.exchange(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY, HttpMethod.GET, httpEntity3,
+                    JSONObject.class);
 
-            System.out.println(responseEntity3.getBody());
-            System.out.println(responseEntity3.getClass());
-//            System.out.println(Arrays.asList(responseEntity3));
-
-
-//            System.out.println(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY);
-//            Object responseEntity3 = restTemplate.exchange(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY, HttpMethod.GET, httpEntity3,
-//                    Object.class);
-//            List matchdata = Arrays.asList(responseEntity3);
 //            System.out.println(responseEntity3.getBody());
-//            System.out.println(responseEntity3.getClass());
-//            System.out.println(Arrays.asList(responseEntity3));
+//            System.out.println(responseEntity3.getBody().get("metadata"));
+//            System.out.println(responseEntity3.getBody().get("info"));
+//
+//            System.out.println(responseEntity3.getBody().get("metadata").getClass());
+
+            // 이중 json 형태 접근
+            Gson gson = new Gson();
+            String metadata_to_json = gson.toJson(responseEntity3.getBody().get("metadata"), LinkedHashMap.class);
+
+            JSONParser jparser = new JSONParser();
+            Object metaobj = jparser.parse(metadata_to_json);
+
+            JSONObject metadata = (JSONObject) metaobj;
+            System.out.println(metadata);
+            System.out.println(metadata.get("matchId"));
+
 
 
 
