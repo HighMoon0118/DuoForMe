@@ -56,7 +56,7 @@ const Modal = ( props ) => {
                 <div className="chat" >
                   <div className="message"  style={fold ? {display: "none"} : {display: "block"}}></div>
                   <input type="text" />
-                  <button>></button>
+                  <button></button>
                 </div>
                 <div className="fold">
                   <button onClick={ foldModal }>▼</button>
