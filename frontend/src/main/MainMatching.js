@@ -1,23 +1,23 @@
 import React from "react"
+import { cancelMatching, requestMatching } from "../api/MatchingAPI";
 import Timer from "./Timer"
 
 function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLine}) {
-  // const [ selectLine, setLine ] = useState({
-  //   me: "",
-  //   you: "",
-  // })
-  // const [ isMatching, setIsMatching ] = useState(false)
-  // const { me, you } = selectLine
-  // function selectChange(e) {
-  //   const { name, value } = e.target
-  //   setLine({
-  //     ...selectLine,
-  //     [name] : value
-  //   })
-  // }
-  // function toggleMatching() {
-  //   setIsMatching(!isMatching)
-  // }
+  function matching() {
+    if (me === "" || you === "") {
+      alert("매칭 정보를 입력해주세요")
+    }
+    else {
+      if (!isMatching) {
+        const position = {"myPosition": me, "duoPosition": you}
+        requestMatching(position)
+      }
+      else {
+        cancelMatching()
+      }
+      changeMatching(isMatching, new Date().getTime())
+    }
+  }
   return (
     <div id="main-matching">
       <div className="center">
@@ -35,8 +35,7 @@ function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLi
               </select>
             </div>
             <div className="timer">
-              {/* 지금 그냥 숫자 올라가는 걸로 해뒀는데 다른곳에서도 같은 시간 보이게 redux로 고쳐야하지 않을까 */}
-              { isMatching ? <Timer time={time}/> : <div></div>}
+              { isMatching && <Timer time={time}/>}
             </div>
             <div className="select-box">
               <img className="line-image" alt="라인 이미지" src={"img/" + you + ".png"} />
@@ -50,7 +49,7 @@ function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLi
               </select>
             </div>
           </div>
-          <button className="matching-btn" onClick={ () => changeMatching(isMatching, new Date().getTime()) }>{ isMatching ? "매칭 중" : "매칭하기" }</button>
+          <button className="matching-btn" onClick={ matching }>{ isMatching ? "매칭 중" : "매칭하기" }</button>
         </div>
       </div>
     </div>

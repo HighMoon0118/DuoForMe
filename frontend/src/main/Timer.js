@@ -1,11 +1,18 @@
-import React, {useState} from "react"
+import React, {useEffect, useState, useRef} from "react"
 
 function Timer(props) {
   let [ time, setTime ] = useState(props.time)
-  setTimeout(()=>{
-    time += 1
-    setTime(time)
-  }, 1000)
+  const timerId = useRef(null)
+  useEffect(() => {
+    timerId.current = setTimeout(()=>{
+      time += 1
+      setTime(time)
+    }, 1000)
+    return () => {
+      clearTimeout(timerId.current)
+    }
+  })
+
   let hour = "00"
   let min = parseInt(time / 60).toString().length < 2 ?  "0" + parseInt(time / 60).toString() : parseInt(time / 60).toString()
   if (time >= 3600) {
