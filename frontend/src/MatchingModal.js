@@ -6,23 +6,14 @@ const Modal = ( props ) => {
   const { open, close } = props;
 
 
-  const [location, setLocation] = useState({
-    x: 0,
-    y: 50
-  })
+  const [location, setLocation] = useState({ x: 495, y: 50 })
 
-  const [startLocation, setStartLocation] = useState({
-    x: 0,
-    y: 0
-  })
+  const [startLocation, setStartLocation] = useState({ x: 0, y: 0 })
 
-  const [mouseLocation, setMouseLocation] = useState({
-    x: 0,
-    y: 0
-  }) 
+  const [mouseLocation, setMouseLocation] = useState({ x: 0,  y: 0 }) 
 
   const [fold, setFold] = useState(false)
-  const [size, setSize] = useState({w: 700, h:700})
+  const [size, setSize] = useState({w: 1000, h:600})
 
   const dragStart = (e) =>{
     setMouseLocation({x:e.pageX, y:e.pageY})
@@ -31,14 +22,14 @@ const Modal = ( props ) => {
   const drag = (e) =>{
     const xGap = e.pageX - mouseLocation.x
     const yGap = e.pageY - mouseLocation.y
-    if (Math.abs(location.x-startLocation.x-xGap) <= 50) {
+    if (Math.abs(location.x-startLocation.x-xGap) <= 100) {
       setLocation({x:startLocation.x+xGap, y:startLocation.y+yGap})
     }
   }
 
   const foldModal = () => {
     if (fold) {
-      setSize({w:700, h:700})
+      setSize({w:900, h:600})
       setFold(false)
     } else {
       setSize({w:700, h:60})
@@ -53,18 +44,23 @@ const Modal = ( props ) => {
         open ? (
           <div id="matching-modal">
             <div className="modal" 
+            draggable
             onDragStart={dragStart}
             onDrag={drag}
-            style={{left: location.x, top: location.y, height: size.h}}>
-              <div className="header" draggable>
-                매칭 모달
-                <button onClick={ foldModal }>버튼</button>
-              </div>
-              <div className="main" style={fold ? {opacity: 0} : {opacity: 1}}>
-                {props.children}
-              </div>
-              <div className="footer" style={fold ? {opacity: 0} : {opacity: 1}}>
-                <button className="close" onClick={close}> close </button>
+            style={{left: location.x, top: location.y, width: size.w, height: size.h}}>
+              <div className="main" draggable>
+                <div className="info">
+                  <button>수락</button>
+                  <button onClick={close}>거절</button>
+                </div>
+                <div className="chat" >
+                  <div className="message"  style={fold ? {display: "none"} : {display: "block"}}></div>
+                  <input type="text" />
+                  <button>></button>
+                </div>
+                <div className="fold">
+                  <button onClick={ foldModal }>▼</button>
+                </div>
               </div>
             </div>
           </div>
