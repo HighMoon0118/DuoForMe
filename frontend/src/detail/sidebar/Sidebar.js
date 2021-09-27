@@ -2,9 +2,25 @@ import React from 'react';
 import "./Sidebar.css"
 import Timer from "../../main/Timer"
 import SuccessMatchingUser from './SuccessMatchingUser'
+import { cancelMatching, requestMatching } from "../../api/MatchingAPI";
 
 function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine}) {
   const successMatchingUser = [{id: 1, image: "img/userIcon1.jpg", userName: "소환사1"}, {id: 2, image: "img/userIcon1.jpg", userName: "소환사2"}, {id: 3, image: "img/userIcon1.jpg", userName: "소환사3"}]
+  function matching() {
+    if (me === "" || you === "") {
+      alert("매칭 정보를 입력해주세요")
+    }
+    else {
+      if (!isMatching) {
+        const position = {"myPosition": me, "duoPosition": you}
+        requestMatching(position)
+      }
+      else {
+        cancelMatching()
+      }
+      changeMatching(isMatching, new Date().getTime())
+    }
+  }
   return (
     <div id="sidebar">
       <div className="fixed">
@@ -40,7 +56,7 @@ function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine})
             </div>
           </div>
         }
-        <button className="matching-btn" onClick={ () => changeMatching(isMatching, new Date().getTime()) }>{ isMatching ? "매칭 중" : "매칭하기" }</button>
+        <button className="matching-btn" onClick={ matching }>{ isMatching ? "매칭 중" : "매칭하기" }</button>
         {successMatchingUser.map((successUser) => <SuccessMatchingUser key={successUser.id} image={successUser.image} userName={successUser.userName} />)}
       </div>
     </div>
