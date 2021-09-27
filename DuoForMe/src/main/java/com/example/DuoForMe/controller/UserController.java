@@ -21,8 +21,9 @@ public class UserController {
     private final UserService service;
 
     @GetMapping("/me")
-    public ResponseEntity<UserResponse> getMyMemberInfo() {
-        return ResponseEntity.ok(new UserResponse(service.getMyId().getUserId()));
+    public ResponseEntity<UserDetailResponse> getMyMemberInfo() {
+        UserDetailResponse response = service.findByUserId(service.getMyId().getUserId());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
