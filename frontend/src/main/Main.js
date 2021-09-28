@@ -4,31 +4,35 @@ import MainSearch from "./MainSearch"
 import { Link } from "react-router-dom"
 import MainMatchingContainer from "../container/MainMatchingContainer"
 import Modal from "../MatchingModal"
-function Main({history}) {
+function Main({history, isLogin, logout}) {
   const [ modalOpen, setModalOpen ] = useState(false);
 
   const openModal = () => {
-      setModalOpen(true);
+    setModalOpen(true);
   }
   const closeModal = () => {
-      setModalOpen(false);
+    setModalOpen(false);
+  }
+  const logOut = () => {
+    localStorage.setItem("token", "")
+    logout()
   }
   return (
     <div id="main">
       <div className="text-left nav-padding">
-        {/* 로그인, 회원가입 페이지 만들면 링크로 바뀌게 */}
-        <span>회원가입</span>
-        <span>로그인</span>
+        { isLogin && <span className="mw-10 log-out" onClick={logOut}>로그아웃</span> }
+        { isLogin && <Link to="/useredit">회원정보</Link> }
+        { !isLogin && <Link className="mw-10" to="/login">로그인</Link> }
+        { !isLogin && <Link className="mw-10" to="/signup">회원가입</Link> }
+        
       </div>
       <h1 className="main-font">
         Duofor.me
       </h1>
       <MainSearch history={history}/>
       <MainMatchingContainer />
-      <Link to="/detail">디테일 확인</Link>
       <button onClick={ openModal }>모달팝업</button>
       <Modal open={ modalOpen } close={ closeModal }>모달 내용 아아아</Modal>
-      <Link to="/useredit">회원정보 수정</Link>
     </div>
   )
 }
