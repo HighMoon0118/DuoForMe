@@ -83,7 +83,7 @@ public class RiotUserServiceImpl implements RiotUserService {
         System.out.println("유저저장 완료");
 
         // 매치 리스트 받아서 저장
-        String[] responseString = restTemplate.getForObject(SEARCH_BY_ID_RECENT_20_GAMES + riotUser.getPuuid() + "/ids" + "?start=0&count=10&api_key=" + API_KEY, String[].class);
+        String[] responseString = restTemplate.getForObject(SEARCH_BY_ID_RECENT_20_GAMES + riotUser.getPuuid() + "/ids" + "?start=0&count=20&api_key=" + API_KEY, String[].class);
         System.out.println(responseString);
         List<String> matchlist = Arrays.asList(responseString);
         System.out.println(matchlist);
