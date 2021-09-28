@@ -1,21 +1,51 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "./UserEdit.css"
-
+import {lolNicknameEditAPI, getLolNicknameCount} from "../api/UserEditAPI"
 function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit} ) {
   let [blacklist, setBlacklist] = useState(blackList)
   let [lolNicknameChange, setLolNickname] = useState("")
   let [serviceNicknameChange, setServiceNickname] = useState("")
   let [password, setPassword] = useState("")
   let [passwordConfirm, setPasswordConfirm] = useState("")
+  let [nicknameCount, setNicknameCount] = useState(null)
+  useEffect(() => {
+    getLolNicknameCount(lolNickname)
+    .then((e) => {
+      nicknameCount = e.data.count - 1
+      setNicknameCount(nicknameCount)
+    }).catch(() => {
+      nicknameCount = 0
+      setNicknameCount(nicknameCount)
+    })
+  },[])
   function lolNicknameEdit(e) {
     lolNicknameChange = e.target.value
     setLolNickname(lolNicknameChange)
   }
   function lolNicknameSubmit(e) {
     e.preventDefault()
-    lolEdit(lolNicknameChange)
-    lolNicknameChange = ""
-    setLolNickname(lolNicknameChange)
+    const lolNickname = {"lolNickname": lolNicknameChange}
+    lolNicknameEditAPI(1, lolNickname)
+    .then((e) => {
+      if (e.status === 200) {
+        lolEdit(lolNicknameChange)
+        getLolNicknameCount(lolNicknameChange)
+        .then((e) => {
+          nicknameCount = e.data.count - 1
+          setNicknameCount(nicknameCount)
+        }).catch(() => {
+          nicknameCount = 0
+          setNicknameCount(nicknameCount)
+        })
+        lolNicknameChange = ""
+        setLolNickname(lolNicknameChange)
+        alert(`${e.data.message}`)
+      } else {
+        alert(`수정에 실패하였습니다! 사유 : ${e.data.message}`)
+      }
+    })
+    
+    
   }
   function serviceNicknameEdit(e) {
     serviceNicknameChange = e.target.value
@@ -65,6 +95,7 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
             <form> 
               <input onChange={lolNicknameEdit} className="input-box" value={lolNicknameChange} placeholder={lolNickname}/>
               <button onClick={lolNicknameSubmit}>수정</button>
+              { nicknameCount ? <p className="margin-0">같은 닉네임을 가진 사람이 {nicknameCount}명입니다. </p> : <span></span>}
             </form>
           </td>
         </tr>
