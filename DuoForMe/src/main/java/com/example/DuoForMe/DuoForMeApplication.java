@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class DuoForMeApplication {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(DuoForMeApplication.class, args);
 	}
 
