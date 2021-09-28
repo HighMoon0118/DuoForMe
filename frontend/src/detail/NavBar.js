@@ -2,9 +2,12 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import "./NavBar.css"
 import { Link } from 'react-router-dom';
-
-function NavBar ({isLogin, logout}) {
+import { cancelMatching } from "../api/MatchingAPI"
+function NavBar ({isLogin, logout, isMatching}) {
   const logOut = () => {
+    if (isMatching) {
+      cancelMatching()
+    }
     localStorage.setItem("token", "")
     logout()
   }
