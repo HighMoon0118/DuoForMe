@@ -4,17 +4,14 @@ function MainSearch({history}) {
   function onChangeInput(e) {
     setInputText(e.target.value)
   }
-  function onSearch(e) {
-    e.preventDefault()
-    history.push("/detail/" + `${inputText}`)
+  function onSearch() {
+    history.push(`/detail/${inputText}`)
   }
   return (
     <div id="main-search">
       <div className="center">
-        <form>
-          <input onChange={onChangeInput} value={inputText} placeholder="소환사명" className="large-input" />
-          <button onClick={onSearch}>검색</button>
-        </form>
+        <input onChange={onChangeInput} value={inputText} placeholder="소환사명" className="large-input" />
+        <button onClick={onSearch}>검색</button>
       </div>
     </div>
   )
