@@ -17,7 +17,7 @@
   font-size: 16px;
   padding-left: 4px;
   height: 30px;
-  width: 240px;
+  width: 300px;
   border-radius: 8px;
 }
 
@@ -32,10 +32,11 @@
 #login .login-btn {
   margin-top: 70px;
   height: 50px;
-  width: 300px;
+  width: 350px;
   font-size: 20px;
   font-weight: bold;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 #login .input-msg {

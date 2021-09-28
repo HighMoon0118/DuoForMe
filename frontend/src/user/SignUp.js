@@ -1,14 +1,24 @@
 import React from 'react';
 import "./SignUp.css"
 import { useState } from 'react';
+import { signup } from '../api/UserAPI';
 
 
-function SignUp () {
+function SignUp ({ history }) {
 
   const [error, setErrors] = useState({
     email: "",
+    serviceNickname: "",
     password: "",
+    lolNickname: "",
   });
+
+  const [data, setData] = useState({
+    email: "",
+    serviceNickname: "",
+    password: "",
+    lolNickname: ""
+  })
 
   const [password, setPassword] = useState("")
 
@@ -16,8 +26,18 @@ function SignUp () {
     setPassword(e.target.value)
   }
 
+  const doSignup = () => {
+    signup(data).then(res => {
+      history.goBack()
+    })
+  }
+
   const checkEmail = (e) => {
     var regExp = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
+    setData({
+      ...data,
+      email: e.target.value
+    })
     if (e.target.value.length > 0 && !regExp.test(e.target.value)) {
       setErrors({
         ...error,
@@ -32,6 +52,10 @@ function SignUp () {
   } 
 
   const checkPassword = (e) => {
+    setData({
+      ...data,
+      password: e.target.value
+    })
       if (password.length > 0 && e.target.value.length > 0 && password !== e.target.value) {
         setErrors({
           ...error,
@@ -44,8 +68,19 @@ function SignUp () {
         })
       }
   }
+  
+  const checkNickname = (e) => {
+    setData({
+      ...data,
+      serviceNickname: e.target.value
+    })
+  }
 
   const checkGameName = (e) => {
+    setData({
+      ...data,
+      lolNickname: e.target.value
+    })
     console.log("체크");
   }
 
@@ -59,6 +94,11 @@ function SignUp () {
           <div className="input-msg">{error.email}</div>
         </div>
         <div className="mt-30">
+          <div>닉네임</div>
+          <input className="mt-5" type="text" placeholder="닉네임을 입력하세요"  onChange={checkNickname}/>
+          <div className="input-msg">{error.serviceNickname}</div>
+        </div>
+        <div className="mt-30">
           <div>비밀번호</div>
           <input className="mt-5" type="password" placeholder="비밀번호를 입력하세요." onChange={textChange}/>
           <div>비밀번호 확인</div>
@@ -68,10 +108,11 @@ function SignUp () {
         <div className="mt-30">
           <div>소환사 이름</div>
           <input className="mt-5" type="text" placeholder="소환사 이름을 입력하세요." onChange={checkGameName}/>
+          <div className="input-msg">{error.lolNickname}</div>
         </div>
       </div>
       <div>
-          <button className="signup-btn">회원 가입</button>
+          <button className="signup-btn" onClick={doSignup}>회원 가입</button>
         </div>
     </div>
   );

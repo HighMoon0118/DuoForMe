@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { login } from '../api/UserAPI';
 
 
-function Login () {
+function Login ({ history }) {
 
   const [data, setData] = useState({
     email: "",
@@ -16,34 +16,43 @@ function Login () {
     password: "",
   });
 
-  const [check, setCheck] = useState(false)
+  const [check, setCheck] = useState({
+    email: false,
+    password: false
+  })
 
   const checkEmail = (e) => {
+    setData({...data, email: e.target.value})
     var regExp = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
     if (e.target.value.length > 0 && !regExp.test(e.target.value)) {
       setErrors({
         ...error,
         email: "올바른 이메일 주소를 입력하세요"
       })
-      setCheck(false)
-      setData({...data, email: e.target.value})
+      setCheck({...check, email: false})
     } else {
       setErrors({
         ...error,
         email: ""
       })
-      if (e.target.value.length > 0) { 
-        setCheck(true)
-      }
+      setCheck({...check, email: true})
     }
   } 
 
   const setPassword = (e) => {
     setData({...data, password: e.target.value})
+    if (e.target.value.length > 0) {
+      setCheck({...check, password: true})
+    } else {
+      setCheck({...check, password: false})
+    }
   }
   const doLogin = () => {
-    var res = login(data)
-    console.log(res)
+    console.log(data.password);
+    login(data).then(res => {
+      localStorage.setItem('token', res.data.token)
+      history.goBack()
+    })
   }
 
   return (
@@ -62,7 +71,7 @@ function Login () {
         </div>
       </div>
       <div>
-          <button className="login-btn" disabled={!check} onClick={doLogin}>로그인</button>
+          <button className="login-btn" disabled={!check.email || !check.password} onClick={doLogin} >로그인</button>
       </div>
     </div>
   );
