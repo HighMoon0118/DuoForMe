@@ -1,6 +1,6 @@
 import UserEdit from "../user/UserEdit"
 import { connect } from "react-redux"
-import { lolEdit, serviceEdit, blackListEdit} from "../modules/userInfoEdit"
+import { lolEdit, serviceEdit, blackListEdit} from "../modules/userInfo"
 function UserEditContainer ({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit }) {
   return (
     <UserEdit 
@@ -17,10 +17,10 @@ function UserEditContainer ({lolNickname, serviceNickname, blackList, email, lol
 
 function mapStateToProps (state) {
   return {
-    lolNickname: state.userInfoEdit.lolNickname,
-    serviceNickname: state.userInfoEdit.serviceNickname,
-    blackList: state.userInfoEdit.blackList,
-    email: state.userInfoEdit.email,
+    lolNickname: state.userInfo.lolNickname,
+    serviceNickname: state.userInfo.serviceNickname,
+    blackList: state.userInfo.blackList,
+    email: state.userInfo.email,
   }
 }
 function mapDispatchToProps(dispatch) {

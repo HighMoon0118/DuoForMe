@@ -1,6 +1,6 @@
 import UserEdit from "../user/UserEdit"
 import { connect } from "react-redux"
-import {blackListEdit} from "../modules/userInfoEdit"
+import {blackListEdit} from "../modules/userInfo"
 function UserEditContainer ({ blackList, blackListEdit }) {
   return (
     <UserEdit blackList={blackList} blackListEdit={blackListEdit}/>
