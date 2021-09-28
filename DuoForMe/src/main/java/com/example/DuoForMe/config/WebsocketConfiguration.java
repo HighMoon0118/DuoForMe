@@ -13,13 +13,12 @@ public class WebsocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-
-        registry.enableSimpleBroker("/sub"); //구독(채팅방) (해당 주소를 구독하고 있는 유저들에게 메세지 전달)
-        registry.setApplicationDestinationPrefixes("/pub"); //publish(클라이언트에서 보낸 메시지를 받을 prefix)
+        registry.enableSimpleBroker("/sub"); // 해당경로를 구독(sub)하는 client에게 메시지 전달
+//        registry.setApplicationDestinationPrefixes("/app"); //client에서 send 요청을 처리 (publish) (클라이언트가 서버로 메시지를 보낼때 붙여야하는 prefix)
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws-stomp").setAllowedOrigins("*").withSockJS();
+        registry.addEndpoint("/socket").setAllowedOrigins("*").withSockJS();
     }
 }
