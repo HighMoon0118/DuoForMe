@@ -1,15 +1,20 @@
 import React, { useState } from "react"
-function MainSearch() {
+function MainSearch({history}) {
   const [ inputText, setInputText ] = useState("")
   function onChangeInput(e) {
     setInputText(e.target.value)
   }
+  function onSearch(e) {
+    e.preventDefault()
+    history.push("/detail/" + `${inputText}`)
+  }
   return (
     <div id="main-search">
       <div className="center">
-        <input onChange={onChangeInput} value={inputText} placeholder="소환사명" className="large-input" />
-        <button>검색</button>
-        <p>{inputText}</p>
+        <form>
+          <input onChange={onChangeInput} value={inputText} placeholder="소환사명" className="large-input" />
+          <button onClick={onSearch}>검색</button>
+        </form>
       </div>
     </div>
   )
