@@ -3,9 +3,12 @@ const axiosService = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 })
 
-
-function login(data) {
-  return axiosService.post("login", data)
+function signup(data) {
+  return axiosService.post("auth/signup", data)
 }
 
-export {login}
+function login(data) {
+  return axiosService.post("auth/login", data)
+}
+
+export {signup, login}
