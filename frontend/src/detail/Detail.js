@@ -25,7 +25,7 @@ function Detail({match, history}) {
 
   return(
     <div>
-      <NavBarContainer/>
+      <NavBarContainer history={history}/>
       <div id="detail">
         <div id="info">
           <SeasonInfo/>
