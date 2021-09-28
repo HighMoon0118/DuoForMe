@@ -1,10 +1,8 @@
 import React from 'react';
 import "./Login.css"
 import { useState } from 'react';
-import { login } from '../api/UserAPI';
-
-
-function Login ({ history }) {
+import { getId, login } from '../api/UserAPI';
+function Login ({history, getUserInfo}) {
 
   const [data, setData] = useState({
     email: "",
@@ -48,10 +46,12 @@ function Login ({ history }) {
     }
   }
   const doLogin = () => {
-    console.log(data.password);
     login(data).then(res => {
       localStorage.setItem('token', res.data.token)
       history.goBack()
+      getId().then(res => {
+        getUserInfo(res.data)
+      })
     })
   }
 
