@@ -4,7 +4,7 @@ import MainSearch from "./MainSearch"
 import { Link } from "react-router-dom"
 import MainMatchingContainer from "../container/MainMatchingContainer"
 import Modal from "../MatchingModal"
-function Main() {
+function Main({history}) {
   const [ modalOpen, setModalOpen ] = useState(false);
 
   const openModal = () => {
@@ -23,7 +23,7 @@ function Main() {
       <h1 className="main-font">
         Duofor.me
       </h1>
-      <MainSearch />
+      <MainSearch history={history}/>
       <MainMatchingContainer />
       <Link to="/detail">디테일 확인</Link>
       <button onClick={ openModal }>모달팝업</button>

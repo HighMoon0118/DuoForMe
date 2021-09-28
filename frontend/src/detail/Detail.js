@@ -7,20 +7,21 @@ import SeasonInfo from "./seasonInfo/SeasonInfo.js"
 import NavBar from "./NavBar.js"
 import SidebarContainer from "../container/SidebarContainer";
 
-function Detail() {
+function Detail({match}) {
+  //match.params.nickname에 소환사 이름 담겨져있음 이걸로 데이터 얻는 api 보내기
+  console.log(match.params.nickname)
+  const [isRecommend, setIsRecommend] = useState(false);
+  const [btnMsg, setBtmMsg] = useState("유저 추천")
 
-const [isRecommend, setIsRecommend] = useState(false);
-const [btnMsg, setBtmMsg] = useState("유저 추천")
-
-const toggleRecommend = () => {
-  if (isRecommend) {
-    setIsRecommend(false)
-    setBtmMsg("유저 전적")
-  } else {
-    setIsRecommend(true)
-    setBtmMsg("유저 추천")
+  const toggleRecommend = () => {
+    if (isRecommend) {
+      setIsRecommend(false)
+      setBtmMsg("유저 전적")
+    } else {
+      setIsRecommend(true)
+      setBtmMsg("유저 추천")
+    }
   }
-}
 
   return(
     <div>
