@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface RiotUserService {
     public void insert(String name) throws HttpClientErrorException, ParseException;
 
-    public Optional<RiotUser> selectOneUser(String name);
+//    public Optional<RiotUser> selectOneUser(String name);
 
 
 //    public List<MatchesUsers> selectAllByPuuId(String puuId) throws HttpClientErrorException;

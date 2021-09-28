@@ -16,6 +16,9 @@ import javax.validation.constraints.NotNull;
 public class RiotUser {
 
     @Id
+    @Column(name = "lol_nickname")
+    private String name;
+
     @Column(name = "puu_id")
     private String puuid;
 
@@ -24,8 +27,7 @@ public class RiotUser {
 //    @Column(name = "puu_id")
     private String id;
 
-    @Column(name = "lol_nickname")
-    private String name;
+
 
     private Long profileIconId;
 
