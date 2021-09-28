@@ -3,21 +3,10 @@ import { useState, useEffect } from "react";
 import "./NavBar.css"
 import { Link } from 'react-router-dom';
 
-function NavBar () {
-
-  const [isLogin, setIsLogin] = useState(false)
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setIsLogin(true)
-    } else {
-      setIsLogin(false)
-    }
-  })
-
+function NavBar ({isLogin, logout}) {
   const logOut = () => {
-    setIsLogin(false)
     localStorage.setItem("token", "")
+    logout()
   }
 
   return (
@@ -26,6 +15,7 @@ function NavBar () {
       <div className="m-30">
         <input className="input-search mw-10" type="text" />
         { isLogin && <span className="mw-10 log-out" onClick={logOut}>로그아웃</span> }
+        { isLogin && <Link to="/useredit">회원정보</Link> }
         { !isLogin && <Link className="mw-10" to="/login">로그인</Link> }
         { !isLogin && <Link className="mw-10" to="/signup">회원가입</Link> }
       </div>

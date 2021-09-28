@@ -9,7 +9,7 @@ function UserEditContainer ({ blackList, blackListEdit }) {
 
 function mapStateToProps (state) {
   return {
-    blackList: state.userInfoEdit.blackList,
+    blackList: state.userInfo.blackList,
   }
 }
 function mapDispatchToProps(dispatch) {

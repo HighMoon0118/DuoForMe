@@ -4,8 +4,8 @@ import "./Detail.css"
 import Recommend from "./recommend/Recommend.js"
 import PlayList from "./playlist/PlayList.js"
 import SeasonInfo from "./seasonInfo/SeasonInfo.js"
-import NavBar from "./NavBar.js"
 import SidebarContainer from "../container/SidebarContainer";
+import NavBarContainer from "../container/NavBarContainer";
 
 function Detail({match}) {
   //match.params.nickname에 소환사 이름 담겨져있음 이걸로 데이터 얻는 api 보내기
@@ -25,7 +25,7 @@ function Detail({match}) {
 
   return(
     <div>
-      <NavBar/>
+      <NavBarContainer/>
       <div id="detail">
         <div id="info">
           <SeasonInfo/>
