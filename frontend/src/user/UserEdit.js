@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import "./UserEdit.css"
 import {lolNicknameEditAPI, getLolNicknameCount} from "../api/UserEditAPI"
-function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit} ) {
+function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit, userId} ) {
   let [blacklist, setBlacklist] = useState(blackList)
   let [lolNicknameChange, setLolNickname] = useState("")
   let [serviceNicknameChange, setServiceNickname] = useState("")
@@ -25,7 +25,7 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
   function lolNicknameSubmit(e) {
     e.preventDefault()
     const lolNickname = {"lolNickname": lolNicknameChange}
-    lolNicknameEditAPI(1, lolNickname)
+    lolNicknameEditAPI(userId, lolNickname)
     .then((e) => {
       if (e.status === 200) {
         lolEdit(lolNicknameChange)
