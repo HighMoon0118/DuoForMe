@@ -1,9 +1,6 @@
 package com.example.DuoForMe.controller;
 
 import com.example.DuoForMe.dto.MatchingUserCreateRequest;
-import com.example.DuoForMe.dto.UserCreateRequest;
-import com.example.DuoForMe.entity.ChatRoom;
-import com.example.DuoForMe.service.AuthService;
 import com.example.DuoForMe.service.MatchingUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

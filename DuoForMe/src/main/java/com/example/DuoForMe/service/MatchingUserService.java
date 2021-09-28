@@ -1,9 +1,6 @@
 package com.example.DuoForMe.service;
 
 import com.example.DuoForMe.dto.MatchingUserCreateRequest;
-import com.example.DuoForMe.dto.UserCreateRequest;
-import com.example.DuoForMe.dto.UserResponse;
-import com.example.DuoForMe.entity.ChatRoom;
 import com.example.DuoForMe.entity.MatchingUser;
 import com.example.DuoForMe.entity.User;
 import com.example.DuoForMe.repository.MatchingUserRepository;
