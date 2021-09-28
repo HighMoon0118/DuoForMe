@@ -10,5 +10,12 @@ function signup(data) {
 function login(data) {
   return axiosService.post("auth/login", data)
 }
-
-export {signup, login}
+function getId() {
+  return axiosService.get("/users/me", {headers: {
+    Authorization: "Bearer " + localStorage.getItem("token")
+  }})
+}
+function getUserInfo(id) {
+  return axiosService.get(`/users/${id}`)
+}
+export {signup, login, getId, getUserInfo}
