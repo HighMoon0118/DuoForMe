@@ -1,14 +1,22 @@
 import React from 'react';
 import "./Login.css"
 import { useState } from 'react';
+import { login } from '../api/UserAPI';
 
 
 function Login () {
+
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  })
 
   const [error, setErrors] = useState({
     email: "",
     password: "",
   });
+
+  const [check, setCheck] = useState(false)
 
   const checkEmail = (e) => {
     var regExp = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
@@ -17,27 +25,25 @@ function Login () {
         ...error,
         email: "올바른 이메일 주소를 입력하세요"
       })
+      setCheck(false)
+      setData({...data, email: e.target.value})
     } else {
       setErrors({
         ...error,
         email: ""
       })
+      if (e.target.value.length > 0) { 
+        setCheck(true)
+      }
     }
   } 
 
-  const checkPassword = (e) => { // 나중에  비밀번호 일치하는지 안하는지 체크
-      var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/
-      if (e.target.value.length > 0 && !regExp.test(e.target.value)) {
-        setErrors({
-          ...error,
-          password: "비밀번호가 틀렸습니다"
-        })
-      } else {
-        setErrors({
-          ...error,
-          password: ""
-        })
-      }
+  const setPassword = (e) => {
+    setData({...data, password: e.target.value})
+  }
+  const doLogin = () => {
+    var res = login(data)
+    console.log(res)
   }
 
   return (
@@ -51,12 +57,12 @@ function Login () {
         </div>
         <div className="mt-30">
           <div>비밀번호</div>
-          <input className="mt-10" type="password" placeholder="비밀번호를 입력하세요." onChange={checkPassword}/>
+          <input className="mt-10" type="password" placeholder="비밀번호를 입력하세요." onChange={setPassword}/>
           <div className="input-msg">{error.password}</div>
         </div>
       </div>
       <div>
-          <button className="login-btn">로그인</button>
+          <button className="login-btn" disabled={!check} onClick={doLogin}>로그인</button>
       </div>
     </div>
   );
