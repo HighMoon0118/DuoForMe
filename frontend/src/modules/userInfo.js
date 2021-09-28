@@ -1,8 +1,8 @@
 const USER_INFO = "userInfo/USER_INFO"
-const LOL_NICKNAME_EDIT = "userEdit/LOL_NICKNAME_EDIT"
-const SERVICE_NICKNAME_EDIT = "userEdit/SERVICE_NICKNAME_EDIT"
-const BLACKLIST_EDIT = "userEdit/BLACKLIST_EDIT"
-
+const LOL_NICKNAME_EDIT = "userInfo/LOL_NICKNAME_EDIT"
+const SERVICE_NICKNAME_EDIT = "userInfo/SERVICE_NICKNAME_EDIT"
+const BLACKLIST_EDIT = "userInfo/BLACKLIST_EDIT"
+const LOGOUT ="userInfo/LOGOUT"
 export const getUserInfo = ( data ) => ({
   type: USER_INFO,
   data
@@ -19,6 +19,9 @@ export const blackListEdit = ( blackList ) => ({
   type: BLACKLIST_EDIT,
   blackList
   })
+export const logout = () => ({
+  type: LOGOUT,
+})
 const initialState = {
   isLogin: false,
   userId: null,
@@ -33,7 +36,7 @@ function userInfo(state = initialState, action) {
     case USER_INFO:
       return {
         ...state,
-        isLogin: !action.data.isLogin,
+        isLogin: true,
         userId: action.data.userId,
         serviceNickname: action.data.serviceNickname,
         email: action.data.email,
@@ -55,7 +58,12 @@ function userInfo(state = initialState, action) {
         ...state,
         blackList: action.blackList,
       }
-    default:
+    case LOGOUT:
+      return {
+        ...state,
+        isLogin: false
+      }
+    default: 
       return state
   }
 }
