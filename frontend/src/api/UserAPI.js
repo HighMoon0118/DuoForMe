@@ -26,5 +26,8 @@ function getId() {
 function getUserInfo(id) {
   return axiosService.get(`users/${id}`)
 }
-export {checkEmail, checkNickname, signup, login, getId, getUserInfo}
+function receiveRiot(lolNickname) {
+  return axiosService.get(`riotuser/receivedata/${lolNickname}`)
+}
+export {checkEmail, checkNickname, signup, login, getId, getUserInfo, receiveRiot}
 
