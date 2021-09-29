@@ -17,11 +17,8 @@
     "react-scripts": "^4.0.3",
     "react-stomp": "^5.1.0",
     "redux": "^4.1.1",
-<<<<<<< HEAD
     "redux-persist": "^6.0.0",
-=======
     "sockjs-client": "^1.5.2",
->>>>>>> feature/websocket/fe
     "web-vitals": "^1.0.1"
   },
   "scripts": {
