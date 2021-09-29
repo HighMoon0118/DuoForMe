@@ -10,8 +10,8 @@ export const yourLine = ( you ) => ({
   you
 })
 const initialState = {
-  me: "",
-  you: ""
+  me: "default",
+  you: "default"
 }
 function selectLine(state = initialState, action) {
   switch (action.type) {

@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import "./UserEdit.css"
 import {lolNicknameEditAPI, getLolNicknameCount} from "../api/UserEditAPI"
+import { receiveRiot } from '../api/UserAPI';
+
 function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit, userId} ) {
   let [blacklist, setBlacklist] = useState(blackList)
   let [lolNicknameChange, setLolNickname] = useState("")
@@ -29,6 +31,7 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
     .then((e) => {
       if (e.status === 200) {
         lolEdit(lolNicknameChange)
+        receiveRiot(lolNicknameChange)
         getLolNicknameCount(lolNicknameChange)
         .then((e) => {
           nicknameCount = e.data.count - 1
