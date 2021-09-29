@@ -15,15 +15,19 @@ function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLi
       if (!isMatching) {
         const position = {"myPosition": me, "duoPosition": you}
         requestMatching(position)
-        .then(
-          changeMatching(isMatching, new Date().getTime())
-        )
+        .then((res) => {
+          if (res.status  === 201){
+            changeMatching(isMatching, new Date().getTime())
+          }
+        })
       }
       else {
         cancelMatching()
-        .then(
-          changeMatching(isMatching, null)
-        )
+        .then((res) => {
+          if (res.status  === 201){
+            changeMatching(isMatching, null)
+          }
+        })
       }
     }
   }
@@ -58,7 +62,7 @@ function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLi
               </select>
             </div>
           </div>
-          <button className="matching-btn" onClick={ matching }>{ isMatching ? "매칭 중" : "매칭하기" }</button>
+          <button className="matching-btn" onClick={ matching }>{ isMatching ? "매칭취소" : "매칭하기" }</button>
         </div>
       </div>
     </div>

@@ -13,19 +13,24 @@ body {
 #main > .nav-padding {
   padding-top: 30px;
 }
-#main-search > .center {
+#main-search {
   display: flex;
   justify-content: center;
 }
-#main-search > .center {
+#main-search > .input-box {
   display: flex;
   justify-content: center;
-}
-#main-search > .center .large-input {
-  width: 800px;
+  width: 700px;
   height: 35px;
   border-radius: 90px;
+  background-color: white;
+}
+#main-search > .input-box .large-input {
+  width: 620px;
+  height: 35px;
+  border: none;
   outline: none;
+  background-color: transparent;
 }
 #main-matching > .center {
   display: flex;
@@ -58,12 +63,21 @@ body {
 #main-matching > .center .matching-box .center-group .select-box .drop-down {
   margin-top: 10px;
   width: 130px;
+  height: 20px;
+  border-radius: 5px;
+  text-decoration: none;
 }
+
 #main-matching > .center .matching-box .matching-btn {
   display: block;
   position: absolute;
   top: 75%;
-  left: 47%;
+  left: 44.287%;
+  background-color: #9badeb;
+  border: none;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
 }
 #main-matching > .center .matching-box .center-group .timer {
   display: inline-block;
