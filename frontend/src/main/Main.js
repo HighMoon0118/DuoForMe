@@ -4,7 +4,8 @@ import MainSearch from "./MainSearch"
 import { Link } from "react-router-dom"
 import MainMatchingContainer from "../container/MainMatchingContainer"
 import Modal from "../MatchingModal"
-function Main({history, isLogin, logout}) {
+import { cancelMatching } from "../api/MatchingAPI"
+function Main({history, isLogin, logout, isMatching}) {
   const [ modalOpen, setModalOpen ] = useState(false);
 
   const openModal = () => {
@@ -14,8 +15,12 @@ function Main({history, isLogin, logout}) {
     setModalOpen(false);
   }
   const logOut = () => {
+    if (isMatching) {
+      cancelMatching()
+    }
     localStorage.setItem("token", "")
     logout()
+    
   }
   return (
     <div id="main">
@@ -30,7 +35,7 @@ function Main({history, isLogin, logout}) {
         Duofor.me
       </h1>
       <MainSearch history={history}/>
-      <MainMatchingContainer />
+      <MainMatchingContainer history={history}/>
       <button onClick={ openModal }>모달팝업</button>
       <Modal open={ modalOpen } close={ closeModal }>모달 내용 아아아</Modal>
     </div>
