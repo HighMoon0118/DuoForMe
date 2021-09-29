@@ -7,7 +7,7 @@ import SeasonInfo from "./seasonInfo/SeasonInfo.js"
 import SidebarContainer from "../container/SidebarContainer";
 import NavBarContainer from "../container/NavBarContainer";
 
-function Detail({match}) {
+function Detail({match, history}) {
   //match.params.nickname에 소환사 이름 담겨져있음 이걸로 데이터 얻는 api 보내기
   console.log(match.params.nickname)
   const [isRecommend, setIsRecommend] = useState(false);
@@ -25,7 +25,7 @@ function Detail({match}) {
 
   return(
     <div>
-      <NavBarContainer/>
+      <NavBarContainer history={history}/>
       <div id="detail">
         <div id="info">
           <SeasonInfo/>
@@ -36,7 +36,7 @@ function Detail({match}) {
             : <PlayList/>
           }
         </div>
-        <SidebarContainer />
+        <SidebarContainer history={history} />
       </div>
     </div>
   )
