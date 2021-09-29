@@ -3,7 +3,6 @@ import { cancelMatching, requestMatching } from "../api/MatchingAPI";
 import Timer from "./Timer"
 
 function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLine, isLogin, history}) {
-  console.log(isMatching)
   function matching() {
     if (!isLogin) {
       alert("로그인이 필요합니다!")
