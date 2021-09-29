@@ -26,9 +26,9 @@ function Main({history, isLogin, logout, isMatching}) {
     <div id="main">
       <div className="text-left nav-padding">
         { isLogin && <span className="mw-10 log-out" onClick={logOut}>로그아웃</span> }
-        { isLogin && <Link to="/useredit">회원정보</Link> }
-        { !isLogin && <Link className="mw-10" to="/login">로그인</Link> }
-        { !isLogin && <Link className="mw-10" to="/signup">회원가입</Link> }
+        { isLogin && <Link to="/useredit" style={{ textDecoration: "none", color: "white", marginLeft:"10px"}}>회원정보</Link> }
+        { !isLogin && <Link className="mw-10" style={{ textDecoration: "none", color: "white"}} to="/login">로그인</Link> }
+        { !isLogin && <Link className="mw-10" style={{ textDecoration: "none", color: "white", marginLeft:"10px"}} to="/signup">회원가입</Link> }
         
       </div>
       <h1 className="main-font">

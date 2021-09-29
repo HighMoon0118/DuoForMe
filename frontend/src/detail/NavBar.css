@@ -21,3 +21,21 @@
   margin-left: 10px;
   margin-right: 10px;
 }
+
+#navbar .m-30 .input-search {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 26px;
+  background-color: white;
+  border-radius: 10px;
+}
+#navbar .m-30 .input-search .small-input {
+  border: none;
+  outline: none;
+  width: 180px;
+  height: 26px;
+  background-color: transparent;
+  padding: 0px;
+}
