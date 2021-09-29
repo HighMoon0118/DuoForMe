@@ -32,7 +32,7 @@ function Main({history, isLogin, logout, isMatching}) {
         
       </div>
       <h1 className="main-font">
-        Duofor.me
+        Duofor.me Jenkins되냐?
       </h1>
       <MainSearch history={history}/>
       <MainMatchingContainer history={history}/>
