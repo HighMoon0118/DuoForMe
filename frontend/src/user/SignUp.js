@@ -1,7 +1,7 @@
 import React from 'react';
 import "./SignUp.css"
 import { useState } from 'react';
-import { checkEmail, checkNickname, signup } from '../api/UserAPI';
+import { checkEmail, checkNickname, signup, receiveRiot } from '../api/UserAPI';
 
 
 function SignUp ({ history }) {
@@ -35,7 +35,6 @@ function SignUp ({ history }) {
     var possible = true
 
     await checkEmail(data.email).then(res => {
-      console.log(res);
     }).catch(error => {
       possible = false
       console.log(error);
@@ -45,6 +44,7 @@ function SignUp ({ history }) {
     if (possible) {
       signup(data).then(res => {
         history.goBack()
+        receiveRiot(data.lolNickname)
       }).catch(error => {
         console.log(error);
       })
