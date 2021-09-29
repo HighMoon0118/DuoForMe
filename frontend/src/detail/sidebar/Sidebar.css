@@ -1,14 +1,15 @@
 #sidebar {
-    display: inline;
-    width: 300px;
-    height: 700px;
+  display: inline;
+  width: 300px;
+  height: 700px;
   }
 #sidebar .fixed {
   position: fixed;
   background-color: gray;
   width: 300px;
-  height: 700px;
+  height: 660px;
   right: 5rem;
+  margin-top: 10px;
 }
 #sidebar .user-img {
   display: inline-block;
@@ -29,6 +30,7 @@
   background-color: darkkhaki;
   height: 50px;
   margin: 10px 15px;
+  width: 240px;
 }
 #sidebar .fixed .select-box {
   margin: 10px 0px;
@@ -37,4 +39,20 @@
 #sidebar .fixed .select-box .drop-down {
   margin-top: 10px;
   width: 130px;
+  height: 20px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+#sidebar .fixed .success-user {
+  position: absolute;
+  top: 40%;
+  height: 380px;
+  overflow-y: scroll;
+}
+#sidebar .fixed .matching-btn {
+  border: none;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  margin-top: 10px;
 }

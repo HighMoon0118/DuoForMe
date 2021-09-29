@@ -62,7 +62,7 @@ function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLi
               </select>
             </div>
           </div>
-          <button className="matching-btn" onClick={ matching }>{ isMatching ? "매칭 중" : "매칭하기" }</button>
+          <button className="matching-btn" onClick={ matching }>{ isMatching ? "매칭취소" : "매칭하기" }</button>
         </div>
       </div>
     </div>
