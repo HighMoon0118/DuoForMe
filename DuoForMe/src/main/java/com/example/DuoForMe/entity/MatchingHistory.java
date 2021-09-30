@@ -24,10 +24,13 @@ public class MatchingHistory {
     @JoinColumn(name = "matched_user_id")
     private User matchedUser;
 
+    private Double credit;
+
     @Builder
-    public MatchingHistory(Long matchinghistoryId, User ownerUser, User matchedUser) {
+    public MatchingHistory(Long matchinghistoryId, User ownerUser, User matchedUser, Double credit) {
         this.matchinghistoryId = matchinghistoryId;
         this.ownerUser = ownerUser;
         this.matchedUser = matchedUser;
+        this.credit = credit;
     }
 }
