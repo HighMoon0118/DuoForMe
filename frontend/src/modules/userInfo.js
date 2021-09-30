@@ -4,6 +4,7 @@ const LOL_NICKNAME_EDIT = "userInfo/LOL_NICKNAME_EDIT"
 const SERVICE_NICKNAME_EDIT = "userInfo/SERVICE_NICKNAME_EDIT"
 const BLACKLIST_EDIT = "userInfo/BLACKLIST_EDIT"
 const LOGOUT ="userInfo/LOGOUT"
+const GET_MATHCING_HISTORY = "userInfo/GET_MATHCING_HISTORY"
 export const getUserInfo = ( data ) => ({
   type: USER_INFO,
   data
@@ -27,6 +28,10 @@ export const blackListEdit = ( blackList ) => ({
 export const logout = () => ({
   type: LOGOUT,
 })
+export const getMatching = ( matchinghistory ) => ({
+  type: GET_MATHCING_HISTORY,
+  matchinghistory
+})
 const initialState = {
   isLogin: false,
   userId: null,
@@ -35,6 +40,7 @@ const initialState = {
   userCredit: null,
   lolNickname: "",
   blackList: [],
+  matchinghistory: []
 }
 function userInfo(state = initialState, action) {
   switch (action.type) {
@@ -72,6 +78,11 @@ function userInfo(state = initialState, action) {
       return {
         ...state,
         isLogin: false
+      }
+    case GET_MATHCING_HISTORY:
+      return {
+        ...state,
+        matchinghistory: action.matchinghistory
       }
     default: 
       return state
