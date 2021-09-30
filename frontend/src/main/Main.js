@@ -32,7 +32,7 @@ function Main({history, isLogin, logout, isMatching}) {
         
       </div>
       <h1 className="main-font">
-        Duofor.me Jenkins되냐? webhook도 되나?
+        Duofor.me 왜 안되지??
       </h1>
       <MainSearch history={history}/>
       <MainMatchingContainer history={history}/>
