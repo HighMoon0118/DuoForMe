@@ -3,11 +3,9 @@ package com.example.DuoForMe.service;
 import com.example.DuoForMe.entity.Matches;
 import com.example.DuoForMe.entity.MatchesUsers;
 import com.example.DuoForMe.entity.RiotUser;
-import com.example.DuoForMe.entity.RiotUserTier;
 import com.example.DuoForMe.repository.MatchesRepository;
 import com.example.DuoForMe.repository.MatchesUsersRepository;
 import com.example.DuoForMe.repository.RiotUserRepository;
-import com.example.DuoForMe.repository.RiotUserTierRepository;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import org.json.simple.JSONArray;
@@ -35,15 +33,11 @@ public class RiotUserServiceImpl implements RiotUserService {
     private static final String SEARCH_BY_PUUID_URL = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/";
     private static final String SEARCH_BY_ID_RECENT_20_GAMES = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/";
     private static final String SEARCH_BY_MATCH = "https://asia.api.riotgames.com/lol/match/v5/matches/";
-    private static final String SEARCH_BY_TIER = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/";
     private static final String X_Riot_Token = "X-Riot-Token";
     private static final String API_KEY = "RGAPI-40420afe-e73b-4b4a-b536-b127a9db84b1";
 
     @Autowired
     private RiotUserRepository riotUserRepository;
-
-    @Autowired
-    private RiotUserTierRepository riotUserTierRepository;
 
     @Autowired
     private MatchesUsersRepository matchesUsersRepository;
@@ -75,64 +69,21 @@ public class RiotUserServiceImpl implements RiotUserService {
 //        System.out.println(responseEntity.getBody());
 
         RiotUser riotUser = responseEntity.getBody();
-        String summonerId = riotUser.getId();
 
         boolean checkRiotUser = riotUserRepository.existsByName(name);
 
         // DB에 등록되어있는 소환사인지 확인
         if (!checkRiotUser){
             System.out.println("새로운 소환사 등록");
+
             riotUserRepository.save(riotUser);
-
-            // 소환사 티어정보 가져오기
-//            HttpEntity<RiotUserTier> tierEntity = setHeaders();
-//            ResponseEntity<RiotUserTier> responseTierEntity = restTemplate.exchange(SEARCH_BY_TIER + summonerId + "?api_key=" + API_KEY, HttpMethod.GET, tierEntity, RiotUserTier.class);
-
-            List<RiotUserTier> responseTierList = restTemplate.getForObject(SEARCH_BY_TIER + summonerId + "?api_key=" + API_KEY, List.class);
-            System.out.println(responseTierList.get(0));
-
-
-            for (int i = 0; i < responseTierList.size(); i++) {
-//                RiotUserTier riotUserTier = responseTierList.get(i);
-
-                Gson gson = new Gson();
-                JSONParser jparser = new JSONParser();
-
-                String string_to_riotUserTier = gson.toJson(responseTierList.get(i), LinkedHashMap.class);
-
-                Object riotUserTierobj = jparser.parse(string_to_riotUserTier);
-                JSONObject riotUserTier = (JSONObject) riotUserTierobj;
-                String queueType = riotUserTier.get("queueType").toString();
-                System.out.println(queueType);
-                System.out.println(queueType.getClass());
-//                System.out.println(responseTierList.get(0).getTier());
-//                System.out.println(responseTierList.size());
-
-                if (queueType.equals("RANKED_SOLO_5x5")) {
-                    String tier = riotUserTier.get("tier").toString();
-                    String rank = riotUserTier.get("rank").toString();
-                    int win = Integer.parseInt(riotUserTier.get("wins").toString());
-                    int lose = Integer.parseInt(riotUserTier.get("losses").toString());
-
-                    RiotUserTier buildRiotUserTier = RiotUserTier.builder()
-                            .riotUser(riotUser)
-                            .queueType(queueType)
-                            .tier(tier)
-                            .rank(rank)
-                            .win(win)
-                            .lose(lose)
-                            .build();
-                    riotUserTierRepository.save(buildRiotUserTier);
-                    break;
-                }
-            }
         }
 
         // 완료
         System.out.println("유저저장 완료");
 
         // 매치 리스트 받아서 저장
-        String[] responseString = restTemplate.getForObject(SEARCH_BY_ID_RECENT_20_GAMES + riotUser.getPuuid() + "/ids" + "?start=0&count=5&api_key=" + API_KEY, String[].class);
+        String[] responseString = restTemplate.getForObject(SEARCH_BY_ID_RECENT_20_GAMES + riotUser.getPuuid() + "/ids" + "?start=0&count=10&api_key=" + API_KEY, String[].class);
         System.out.println(responseString);
         List<String> matchlist = Arrays.asList(responseString);
         System.out.println(matchlist);
