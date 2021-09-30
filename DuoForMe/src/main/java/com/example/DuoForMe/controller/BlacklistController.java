@@ -1,8 +1,6 @@
 package com.example.DuoForMe.controller;
 
 import com.example.DuoForMe.dto.BlacklistRequest;
-import com.example.DuoForMe.dto.MatchingHistoryDelete;
-import com.example.DuoForMe.dto.MatchingHistoryRequest;
 import com.example.DuoForMe.entity.User;
 import com.example.DuoForMe.service.BlacklistService;
 import com.example.DuoForMe.service.MatchingHistoryService;
