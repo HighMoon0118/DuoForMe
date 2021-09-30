@@ -32,7 +32,7 @@ function Main({history, isLogin, logout, isMatching}) {
         
       </div>
       <h1 className="main-font">
-        Duofor.me 왜 안되지?? 3000번 포트 확인
+        Duofor.me nohup을 이용한 배포!
       </h1>
       <MainSearch history={history}/>
       <MainMatchingContainer history={history}/>
