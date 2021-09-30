@@ -127,7 +127,6 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
           <td>
             {blackList.map((black) => {
             return <div id="black-list" key={black.userId}>
-              { black.userId }
               { black.lolNickname }
               <button onClick={() => blackListSubmit(black.blacklistId)}>X</button>
             </div>
