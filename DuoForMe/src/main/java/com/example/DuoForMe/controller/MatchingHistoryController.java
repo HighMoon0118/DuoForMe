@@ -1,9 +1,9 @@
 package com.example.DuoForMe.controller;
 
-import com.example.DuoForMe.dto.MatchingHistoryDelete;
+import com.example.DuoForMe.dto.MatchingHistoryIdDTO;
 import com.example.DuoForMe.dto.MatchingHistoryRequest;
-import com.example.DuoForMe.dto.MatchingUserCreateRequest;
-import com.example.DuoForMe.entity.MatchingHistory;
+import com.example.DuoForMe.dto.SimpleSuccessResponse;
+import com.example.DuoForMe.dto.UserUpdateCreditRequest;
 import com.example.DuoForMe.entity.User;
 import com.example.DuoForMe.service.MatchingHistoryService;
 import com.example.DuoForMe.service.MatchingUserService;
@@ -36,7 +36,7 @@ public class MatchingHistoryController {
 
     @DeleteMapping
     @PreAuthorize("hasAnyRole('USER')")
-    public ResponseEntity<Void> delete(@Valid @RequestBody MatchingHistoryDelete matchingHistoryDelete) {
+    public ResponseEntity<Void> delete(@Valid @RequestBody MatchingHistoryIdDTO matchingHistoryDelete) {
         matchingHistoryService.deleteHistory(matchingHistoryDelete);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -46,5 +46,17 @@ public class MatchingHistoryController {
     @PreAuthorize("hasAnyRole('USER')")
     public List getHistory() {
         return matchingHistoryService.findByUser();
+    }
+
+
+    @PutMapping("/credit/{hitoryId}")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<SimpleSuccessResponse> updateById(@PathVariable Long hitoryId,
+                                                            @RequestBody @Valid UserUpdateCreditRequest request) {
+        matchingHistoryService.updateMatchingCredit(hitoryId, request);
+
+        SimpleSuccessResponse response = new SimpleSuccessResponse("User Credit, MatchingHistory 정보 수정 성공");
+        log.info(response.toString());
+        return ResponseEntity.ok(response);
     }
 }
