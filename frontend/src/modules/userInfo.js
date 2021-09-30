@@ -1,4 +1,5 @@
 const USER_INFO = "userInfo/USER_INFO"
+const GET_BLACKLIST = "userInfo/GET_BLACKLIST"
 const LOL_NICKNAME_EDIT = "userInfo/LOL_NICKNAME_EDIT"
 const SERVICE_NICKNAME_EDIT = "userInfo/SERVICE_NICKNAME_EDIT"
 const BLACKLIST_EDIT = "userInfo/BLACKLIST_EDIT"
@@ -6,6 +7,10 @@ const LOGOUT ="userInfo/LOGOUT"
 export const getUserInfo = ( data ) => ({
   type: USER_INFO,
   data
+})
+export const blacklist = ( blackList) => ({
+  type: GET_BLACKLIST,
+  blackList
 })
 export const lolEdit = ( lolNickname ) => ({
   type: LOL_NICKNAME_EDIT,
@@ -29,7 +34,7 @@ const initialState = {
   serviceNickname: "",
   userCredit: null,
   lolNickname: "",
-  blackList: ["닉네임1", "닉네임2", "닉네임3"],
+  blackList: [],
 }
 function userInfo(state = initialState, action) {
   switch (action.type) {
@@ -42,6 +47,11 @@ function userInfo(state = initialState, action) {
         email: action.data.email,
         userCredit: action.data.userCredit,
         lolNickname: action.data.lolNickname,
+      }
+    case GET_BLACKLIST:
+      return {
+        ...state,
+        blackList: action.blackList
       }
     case LOL_NICKNAME_EDIT:
       return {
