@@ -12,8 +12,15 @@ function WebSocket ({userId, isLogin}) {
   })
 
   const sendMessage = () => {
-    $websocket.current.sendMessage ('/pub/userId');
+    const chat = {
+      receiver: "",
+      sender: "",
+      message: "안녕하세요"
+    }
+    $websocket.current.sendMessage (`/pub/${userId}`, JSON.stringify(chat));
+    console.log("sendMessage", userId, isLogin);
   }
+  
   // {process.env.REACT_BASE_URL+"socket"}
   return (
       <div>
