@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import "./UserEdit.css"
 import {lolNicknameEditAPI, getLolNicknameCount} from "../api/UserEditAPI"
-import { receiveRiot } from '../api/UserAPI';
+import { receiveRiot, deleteBlacklist } from '../api/UserAPI';
 
 function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit, userId} ) {
-  let [blacklist, setBlacklist] = useState(blackList)
   let [lolNicknameChange, setLolNickname] = useState("")
   let [serviceNicknameChange, setServiceNickname] = useState("")
   let [password, setPassword] = useState("")
@@ -58,16 +57,18 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
     e.preventDefault()
     serviceEdit(serviceNicknameChange)
   }
-  function blackListSubmit(black) {
-    let temp = []
-    for (let j = 0; j < Object.keys(blackList).length; j++) {
-      if (blacklist[j] !== black) {
-        temp.push(blackList[j])
+  function blackListSubmit(blackId) {
+    const blackUserId = { "blackUserId": blackId }
+    deleteBlacklist(blackUserId).then(() => {
+      let blacklist = []
+      for (let i = 0; i < blackList.length; i++) {
+        if (blackList[i].blacklistId !== blackId) {
+          blacklist.push(blackList[i])
+        }
       }
-    }
-    blacklist = temp
-    setBlacklist(blacklist)
-    blackListEdit(blacklist)
+      blackListEdit(blacklist)
+      }
+    )
   }
   function passwordEdit(e) {
     password = e.target.value
@@ -124,10 +125,11 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
         <tr>
           <th>블랙리스트</th>
           <td>
-            {blacklist.map((black) => {
-            return <div id="black-list">
-              { black }
-              <button onClick={() => blackListSubmit(black)}>X</button>
+            {blackList.map((black) => {
+            return <div id="black-list" key={black.userId}>
+              { black.userId }
+              { black.lolNickname }
+              <button onClick={() => blackListSubmit(black.blacklistId)}>X</button>
             </div>
           })}
           </td>
