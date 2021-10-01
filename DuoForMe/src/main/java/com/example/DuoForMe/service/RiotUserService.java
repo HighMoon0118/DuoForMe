@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface RiotUserService {
     public void insert(String name) throws HttpClientErrorException, ParseException;
 
+    public void summonerInsert(String name) throws HttpClientErrorException, ParseException;
 //    public Optional<RiotUser> selectOneUser(String name);
 
 
