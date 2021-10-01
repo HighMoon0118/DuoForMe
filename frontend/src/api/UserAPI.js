@@ -38,16 +38,12 @@ function deleteBlacklist(data) {
     Authorization: "Bearer " + localStorage.getItem("token")
   }})
 }
-<<<<<<< HEAD
 function getMatchinghistory() {
   return axiosService.get("matchinghistory", {headers: {
     Authorization: "Bearer " + localStorage.getItem("token")
   }})
 }
 
-export {checkEmail, checkNickname, signup, login, getId, getUserInfo, receiveRiot, getBlacklist, deleteBlacklist, getMatchinghistory}
-=======
-export {checkEmail, checkNickname, signup, login, getId, getUserInfo, getBlacklist, deleteBlacklist}
->>>>>>> feature/season-info/fe
+export {checkEmail, checkNickname, signup, login, getId, getUserInfo, getBlacklist, deleteBlacklist, getMatchinghistory}
 
 
