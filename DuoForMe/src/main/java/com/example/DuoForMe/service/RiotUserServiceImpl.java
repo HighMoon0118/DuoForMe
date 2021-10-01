@@ -38,7 +38,7 @@ public class RiotUserServiceImpl implements RiotUserService {
     private static final String SEARCH_BY_TIER = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/";
     private static final String X_Riot_Token = "X-Riot-Token";
     private static final String API_KEY = "RGAPI-40420afe-e73b-4b4a-b536-b127a9db84b1";
-
+    // 머지 테스트
     @Autowired
     private RiotUserRepository riotUserRepository;
 
