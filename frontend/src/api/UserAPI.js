@@ -26,9 +26,8 @@ function getId() {
 function getUserInfo(id) {
   return axiosService.get(`users/${id}`)
 }
-function receiveRiot(lolNickname) {
-  return axiosService.get(`riotuser/receivedata/${lolNickname}`)
-}
+
+
 function getBlacklist() {
   return axiosService.get("blacklist", {headers: {
     Authorization: "Bearer " + localStorage.getItem("token")
@@ -39,6 +38,6 @@ function deleteBlacklist(data) {
     Authorization: "Bearer " + localStorage.getItem("token")
   }})
 }
-export {checkEmail, checkNickname, signup, login, getId, getUserInfo, receiveRiot, getBlacklist, deleteBlacklist}
+export {checkEmail, checkNickname, signup, login, getId, getUserInfo, getBlacklist, deleteBlacklist}
 
 

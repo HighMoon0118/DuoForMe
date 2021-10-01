@@ -1,7 +1,8 @@
 import React from 'react';
 import "./SignUp.css"
 import { useState } from 'react';
-import { checkEmail, checkNickname, signup, receiveRiot } from '../api/UserAPI';
+import { checkEmail, checkNickname, signup } from '../api/UserAPI';
+import { receiveRiot } from '../api/RUserAPI';
 
 
 function SignUp ({ history }) {
