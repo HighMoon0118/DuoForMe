@@ -28,7 +28,7 @@ function Detail({match, history}) {
       <NavBarContainer history={history}/>
       <div id="detail">
         <div id="info">
-          <SeasonInfo/>
+          <SeasonInfo nickname={match.params.nickname}/>
           <button onClick={toggleRecommend}>{ btnMsg }</button>
           {
             isRecommend

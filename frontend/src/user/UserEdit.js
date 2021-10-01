@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import "./UserEdit.css"
 import {lolNicknameEditAPI, getLolNicknameCount} from "../api/UserEditAPI"
-import { receiveRiot, deleteBlacklist } from '../api/UserAPI';
+import { deleteBlacklist } from '../api/UserAPI';
+import { receiveRiot } from '../api/RUserAPI';
 
 function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit, userId} ) {
   let [lolNicknameChange, setLolNickname] = useState("")

@@ -26,9 +26,8 @@ function getId() {
 function getUserInfo(id) {
   return axiosService.get(`users/${id}`)
 }
-function receiveRiot(lolNickname) {
-  return axiosService.get(`riotuser/receivedata/${lolNickname}`)
-}
+
+
 function getBlacklist() {
   return axiosService.get("blacklist", {headers: {
     Authorization: "Bearer " + localStorage.getItem("token")
@@ -39,6 +38,7 @@ function deleteBlacklist(data) {
     Authorization: "Bearer " + localStorage.getItem("token")
   }})
 }
+<<<<<<< HEAD
 function getMatchinghistory() {
   return axiosService.get("matchinghistory", {headers: {
     Authorization: "Bearer " + localStorage.getItem("token")
@@ -46,5 +46,8 @@ function getMatchinghistory() {
 }
 
 export {checkEmail, checkNickname, signup, login, getId, getUserInfo, receiveRiot, getBlacklist, deleteBlacklist, getMatchinghistory}
+=======
+export {checkEmail, checkNickname, signup, login, getId, getUserInfo, getBlacklist, deleteBlacklist}
+>>>>>>> feature/season-info/fe
 
 
