@@ -5,14 +5,15 @@ import SuccessMatchingUser from './SuccessMatchingUser'
 import { cancelMatching, requestMatching } from "../../api/MatchingAPI";
 
 function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine, isLogin, history, successMatchingUser}) {
-  // const successMatchingUser = [{id: 1, image: "img/userIcon1.jpg", userName: "소환사1"}, {id: 2, image: "img/userIcon1.jpg", userName: "소환사2"}, {id: 3, image: "img/userIcon1.jpg", userName: "소환사3"},
-  // {id: 4, image: "img/userIcon1.jpg", userName: "소환사1"}, {id: 5, image: "img/userIcon1.jpg", userName: "소환사2"}, {id: 6, image: "img/userIcon1.jpg", userName: "소환사3"}, {id: 7, image: "img/userIcon1.jpg", userName: "소환사7"},
-  // {id: 8, image: "img/userIcon1.jpg", userName: "소환사3"}, {id: 9, image: "img/userIcon1.jpg", userName: "소환사7"}]
-  // let matchingLength = Object.keys(successMatchingUser).length
-  // let scroll = false
-  // if (matchingLength > 6) {
-  //   scroll = true
-  // }
+  let isHistory = false
+  let scroll = false
+  if (successMatchingUser.length) {
+    isHistory = true
+    let matchingLength = Object.keys(successMatchingUser).length
+    if (matchingLength > 6) {
+      scroll = true
+    }
+  }
   function matching() {
     if (!isLogin) {
       alert("로그인이 필요합니다!")
@@ -75,12 +76,9 @@ function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine, 
           }
           <button className="matching-btn" onClick={ matching }>{ isMatching ? "매칭취소" : "매칭하기" }</button>
         </div>
-        {/* { scroll ? <div className="success-user-scroll">
+        { isHistory && <div className={ scroll ? "success-user-scroll" : "success-user" }>
           {successMatchingUser.map((successUser) => <SuccessMatchingUser key={successUser.matchinghistoryId} image={successUser.matchedUser.profileIconId} userName={successUser.matchedUser.lolNickname} matchinghistoryId={successUser.matchinghistoryId} userId={successUser.matchedUser.userId} isCredit={successUser.credit}/>)}
-        </div> : <div className="success-user">
-          {successMatchingUser.map((successUser) => <SuccessMatchingUser key={successUser.matchinghistoryId} image={successUser.matchedUser.profileIconId} userName={successUser.matchedUser.lolNickname} matchinghistoryId={successUser.matchinghistoryId} userId={successUser.matchedUser.userId} isCredit={successUser.credit}/>)}
-        </div>} */}
-
+        </div>}
       </div>
     </div>
   )
