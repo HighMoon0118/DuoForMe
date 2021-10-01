@@ -34,6 +34,13 @@ public class RiotUserController {
         return "search";
     }
 
+    // 소환사 이름으로 10개 매치데이터 해당 게임의 10명의 유저들 데이터 저장
+    @GetMapping("/receivesummonerdata/{name}")
+    public String summonersearch(@PathVariable String name) throws Exception {
+        userService.summonerInsert(name);
+        return "search";
+    }
+
     // 소환사 이름으로 검색 시
     @GetMapping("/search/{name}")
     public ResponseEntity<List<MatchesUsers>> findAllByName(@PathVariable String name){
