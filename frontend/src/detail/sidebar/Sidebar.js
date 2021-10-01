@@ -7,13 +7,15 @@ import { cancelMatching, requestMatching } from "../../api/MatchingAPI";
 function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine, isLogin, history, successMatchingUser}) {
   let isHistory = false
   let scroll = false
-  if (successMatchingUser.length) {
+  console.log(successMatchingUser);
+  if (successMatchingUser !== undefined) {
     isHistory = true
     let matchingLength = Object.keys(successMatchingUser).length
     if (matchingLength > 6) {
       scroll = true
     }
   }
+  
   function matching() {
     if (!isLogin) {
       alert("로그인이 필요합니다!")
