@@ -1,10 +1,28 @@
-import React from 'react';
-// import { useState } from "react";
+import React, {useEffect, useState} from 'react';
+import { receiveRiot, getGameData, getRUserInfo } from '../../api/RUserAPI';
 import "./SeasonInfo.css"
 
-function SeasonInfo () {
+function SeasonInfo (props) {
 
   // const [gameName, setGameName] = useState("hideOnBush")
+  const [riotName, setRiotName] = useState("")
+
+  useEffect(() => {
+    setRiotName(props.nickname)
+
+    receiveRiot(riotName).then(res => {
+      console.log("최근 전적 검색", res)
+    })
+
+    getGameData(riotName).then(res => {
+      console.log("전적 검색", res)
+    })
+
+    getRUserInfo(riotName).then(res => {
+      console.log("소환사 정보", res)
+    })
+
+  })
 
     const showSeasonInfo = () => {
       const list = []
@@ -42,7 +60,7 @@ function SeasonInfo () {
               <img src="img/userIcon1.jpg" alt="user icon" height="80px" width="80px" />
             </div>
             <div className="user-table-info">
-              <div>소환사 이름</div>
+              <div>{ props.nickname }</div>
               <div>주 : 정글(21%)</div>
               <div>부 : 원딜(30%)</div>
             </div>
