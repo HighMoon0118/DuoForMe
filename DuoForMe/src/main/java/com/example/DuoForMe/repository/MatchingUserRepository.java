@@ -5,11 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Stack;
 
 public interface MatchingUserRepository extends JpaRepository<MatchingUser, Long> {
     boolean existsMatchingUserByUserId(Long userId);
 
-    List<MatchingUser> findAll();
+    Stack<MatchingUser> findAll();
 
 //    Optional<MatchingUser> findById(Long userId);
     MatchingUser findMatchingUserByUserId(Long userId);
