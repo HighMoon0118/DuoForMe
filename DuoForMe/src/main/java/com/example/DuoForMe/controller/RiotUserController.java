@@ -34,11 +34,11 @@ public class RiotUserController {
         return "search";
     }
 
-    // 소환사 이름으로 10개 매치데이터 해당 게임의 10명의 유저들 데이터 저장
+    // 검색된 소환사 이름으로 10개 게임상세 정보 데이터 저장
     @GetMapping("/receivesummonerdata/{name}")
     public String summonersearch(@PathVariable String name) throws Exception {
         userService.summonerInsert(name);
-        return "search";
+        return "summoner search";
     }
 
     // 소환사 이름으로 검색 시
@@ -48,6 +48,19 @@ public class RiotUserController {
         List<MatchesUsers> findAllMatchesUsersByRiotUser = matchesUsersRepository.findAllByRiotUser(selectedRiotUser.get());
         if(findAllMatchesUsersByRiotUser != null && !findAllMatchesUsersByRiotUser.isEmpty()) {
             return new ResponseEntity<List<MatchesUsers>>(findAllMatchesUsersByRiotUser, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+    }
+
+    // 소환사 이름으로 검색 시
+    @GetMapping("/summonersearch/{name}")
+    public ResponseEntity<List<MatchesUsers>> find50ByRiotUser(@PathVariable String name){
+        Optional<RiotUser> selectedRiotUser = riotUserRepository.findById(name);
+        List<MatchesUsers> find50ByRiotUser = matchesUsersRepository.find50ByRiotUser(selectedRiotUser.get());
+        if(find50ByRiotUser != null && !find50ByRiotUser.isEmpty()) {
+            return new ResponseEntity<List<MatchesUsers>>(find50ByRiotUser, HttpStatus.OK);
         }
         else {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
