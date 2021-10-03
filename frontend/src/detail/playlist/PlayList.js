@@ -9,7 +9,7 @@ function PlayList () {
     const list = []
     for (let i=0; i<10; i++) {
       list.push(
-        <div>
+        <div key={i}>
           <div className="play-table">
             <div className="play-table-item">
               <div>솔랭</div>

@@ -4,22 +4,38 @@ import "./SeasonInfo.css"
 
 function SeasonInfo (props) {
 
-  // const [gameName, setGameName] = useState("hideOnBush")
-  const [riotName, setRiotName] = useState("")
+  // const [rUser, setRUser] = useState({
+  //   tier: "",
+  //   rank: "",
+  //   win: 0,
+  //   lose: 0,
+  //   riotUser: {
+  //     profileIconId: 0,
+  //     summonerLevel: 0
+  //   }
+  // })
+
+  const updateGames = () => {
+    receiveRiot(props.nickname).then(res => {
+      console.log("최근 전적 업데이트", res)
+
+      getGameData(props.nickname).then(res => {
+        console.log("전적 검색", res)
+      })
+    })
+  }
+  // const [recentGames, setRecentGames] = useState({
+
+  // })
 
   useEffect(() => {
-    setRiotName(props.nickname)
 
-    receiveRiot(riotName).then(res => {
-      console.log("최근 전적 검색", res)
-    })
-
-    getGameData(riotName).then(res => {
+    getGameData(props.nickname).then(res => {
       console.log("전적 검색", res)
     })
 
-    getRUserInfo(riotName).then(res => {
-      console.log("소환사 정보", res)
+    getRUserInfo(props.nickname).then(res => {
+      console.log("소환사 정보", res) 
     })
 
   })
@@ -28,7 +44,7 @@ function SeasonInfo (props) {
       const list = []
       for (let i=0; i<5; i++) {
         list.push(
-        <div>
+        <div key={i}>
           <div className="champion-table">
             <div className="champion-info">
               <img className="champion-icon" src="img/champion1.jpg" alt="champion"/>
@@ -77,6 +93,8 @@ function SeasonInfo (props) {
           <div className="user-season-info">
             {showSeasonInfo()}
           </div>
+
+          <button onClick={updateGames}>업데이트</button>
         </div>
       </div>
     );
