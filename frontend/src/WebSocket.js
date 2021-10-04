@@ -29,7 +29,7 @@ function WebSocket ({userId, isLogin}) {
               url = "http://localhost:8080/socket"
               topics = {[`/sub/${userId}`]}
               onMessage = {msg => {
-                console.log("받은 메세지"+msg)
+                console.log(msg.message)
               }}
               ref = {$websocket}
             />
