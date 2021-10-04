@@ -14,15 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableScheduling
 public class DuoForMeApplication {
 
-
-	public static void main(String[] args) {
-
-		SpringApplication.run(DuoForMeApplication.class, args);
-
-//		MatchingThread matchingThread = new MatchingThread();
-//		matchingThread.start();
-	}
-
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
@@ -31,5 +22,13 @@ public class DuoForMeApplication {
 				registry.addMapping("/api/*").allowedOriginPatterns("http://localhost:3000/").allowCredentials(true);
 			}
 		};
+	}
+
+	public static void main(String[] args) {
+
+		SpringApplication.run(DuoForMeApplication.class, args);
+
+//		MatchingThread matchingThread = new MatchingThread();
+//		matchingThread.start();
 	}
 }
