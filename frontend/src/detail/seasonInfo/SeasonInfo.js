@@ -16,6 +16,7 @@ function SeasonInfo (props) {
   // })
 
   const updateGames = () => {
+    console.log("업데이트 버튼 클릭", props.nickname);
     receiveRiot(props.nickname).then(res => {
       console.log("최근 전적 업데이트", res)
 

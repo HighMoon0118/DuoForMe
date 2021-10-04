@@ -26,7 +26,7 @@ function WebSocket ({userId, isLogin}) {
       <div>
           {
             isLogin && <SockJsClient
-              url = "http://localhost:8080/socket"
+              url = "http://localhost:8080/api/socket"
               topics = {[`/sub/${userId}`]}
               onMessage = {msg => {
                 console.log("받은 메세지"+msg)
