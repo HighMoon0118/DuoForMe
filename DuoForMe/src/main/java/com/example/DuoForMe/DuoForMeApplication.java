@@ -28,7 +28,7 @@ public class DuoForMeApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*");
+				registry.addMapping("/api/*").allowedOriginPatterns("http://localhost:3000/").allowCredentials(true);
 			}
 		};
 	}
