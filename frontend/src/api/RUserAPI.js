@@ -5,10 +5,10 @@ const axiosService = axios.create({
 
 
 function receiveRiot(lolNickname) {
-  return axiosService.get(`riotuser/receivedata/${lolNickname}`)
+  return axiosService.get(`riotuser/receivesummonerdata/${lolNickname}`)
 }
 function getGameData(lolNickname) {
-  return axiosService.get(`riotuser/search/${lolNickname}`)
+  return axiosService.get(`riotuser/summonersearch/${lolNickname}`)
 }
 function getRUserInfo(lolNickname) {
   return axiosService.get(`riotuser/riotuserinfo/${lolNickname}`)
