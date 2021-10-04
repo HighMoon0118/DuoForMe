@@ -11,6 +11,7 @@
 
 #navbar .logo {
   display: inline;
+  cursor: pointer;
 }
 
 #navbar .m-30 {

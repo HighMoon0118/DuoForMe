@@ -1,68 +1,73 @@
-import React, {useEffect, useState} from 'react';
-import { receiveRiot, getGameData, getRUserInfo } from '../../api/RUserAPI';
+import React from 'react';
 import "./SeasonInfo.css"
 
 function SeasonInfo (props) {
 
-  // const [rUser, setRUser] = useState({
-  //   tier: "",
-  //   rank: "",
-  //   win: 0,
-  //   lose: 0,
-  //   riotUser: {
-  //     profileIconId: 0,
-  //     summonerLevel: 0
-  //   }
-  // })
+    const linesInKorean = {"TOP":"탑","JUNGLE":"정글","MIDDLE":"미드","BOTTOM":"원딜","UTILITY":"서포터",}
+    const lineCnt = {"TOP":0,"JUNGLE":0,"MIDDLE":0,"BOTTOM":0,"UTILITY":0,}
+    const totalChamps = {}
+    console.log(props.rUser.tier);
+    for (const game of props.gameData) {
+      lineCnt[game.individualPosition] += 1
+      if (game.championName in totalChamps) {
+        totalChamps[game.championName].kills += game.kills
+        totalChamps[game.championName].deaths += game.deaths
+        totalChamps[game.championName].assists += game.assists
+        totalChamps[game.championName].cnt += 1
+        totalChamps[game.championName].cs += game.totalMinionsKilled
+        totalChamps[game.championName].play += parseInt(game.matches.gameDuration/60000)
+        totalChamps[game.championName].win += game.win?1:0
+      } else {
+        totalChamps[game.championName] = {
+          kills: game.kills,
+          deaths: game.deaths,
+          assists: game.assists,
+          cnt: 1,
+          cs: game.totalMinionsKilled,
+          play: parseInt(game.matches.gameDuration/60000),
+          win: game.win?1:0,
+        }
+      }
+    }
 
-  const updateGames = () => {
-    console.log("업데이트 버튼 클릭", props.nickname);
-    receiveRiot(props.nickname).then(res => {
-      console.log("최근 전적 업데이트", res)
-
-      getGameData(props.nickname).then(res => {
-        console.log("전적 검색", res)
-      })
+    const mainLines = Object.keys(lineCnt)
+    mainLines.sort(function(first, second) {
+      return lineCnt[second] - lineCnt[first]
     })
-  }
-  // const [recentGames, setRecentGames] = useState({
-
-  // })
-
-  useEffect(() => {
-
-    getGameData(props.nickname).then(res => {
-      console.log("전적 검색", res)
+    
+    const mainChamps = Object.keys(totalChamps)
+    
+    mainChamps.sort(function(first, second) {
+      return  totalChamps[second].cnt - totalChamps[first].cnt;
     })
 
-    getRUserInfo(props.nickname).then(res => {
-      console.log("소환사 정보", res) 
-    })
-
-  })
 
     const showSeasonInfo = () => {
+
       const list = []
       for (let i=0; i<5; i++) {
         list.push(
         <div key={i}>
-          <div className="champion-table">
-            <div className="champion-info">
-              <img className="champion-icon" src="img/champion1.jpg" alt="champion"/>
+          {mainChamps.length>i
+            ?<div className="champion-table">
+              <div className="champion-info">
+                <img className="champion-icon" src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/${mainChamps[i]}.png`} alt="champion"/>
+              </div>
+              <div className="champion-info">
+                <div>{mainChamps[i]}</div>
+                <div>CS {parseInt(totalChamps[mainChamps[i]].cs/totalChamps[mainChamps[i]].cnt)}({parseInt(totalChamps[mainChamps[i]].cs/totalChamps[mainChamps[i]].play*10)/10})</div>
+              </div>
+              <div className="champion-info">
+                <div>{Math.round(totalChamps[mainChamps[i]].kills/totalChamps[mainChamps[i]].cnt)}/{Math.round(totalChamps[mainChamps[i]].deaths/totalChamps[mainChamps[i]].cnt)}/{Math.round(totalChamps[mainChamps[i]].assists/totalChamps[mainChamps[i]].cnt)}</div>
+                <div>{Math.round(totalChamps[mainChamps[i]].kills+totalChamps[mainChamps[i]].assists/totalChamps[mainChamps[i]].deaths*100)/100}:1 평점</div>
+              </div>
+              <div className="champion-info">
+                <div>{Math.round(totalChamps[mainChamps[i]].win/totalChamps[mainChamps[i]].cnt*100)}%</div>
+                <div>{totalChamps[mainChamps[i]].cnt}게임</div>
+              </div>
             </div>
-            <div className="champion-info">
-              <div>유미</div>
-              <div>CS 3(0.0)</div>
-            </div>
-            <div className="champion-info">
-              <div>1/2/0</div>
-              <div>0.50:1 평점</div>
-            </div>
-            <div className="champion-info">
-              <div>0%</div>
-              <div>1게임</div>
-            </div>
-          </div>
+            :<div className="champion-table"/>
+          }
         </div>
         )
       }
@@ -74,28 +79,27 @@ function SeasonInfo (props) {
         <div id="season-info">
           <div className="user-table">
             <div className="user-table-info">
-              <img src="img/userIcon1.jpg" alt="user icon" height="80px" width="80px" />
+              <img className="profile-icon" src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${props.rUser.riotUser.profileIconId}.png`} alt="user icon"/>
+              <div><h1>{ props.nickname }</h1></div>
+              <div>주 : {linesInKorean[mainLines[0]]}({Math.round(lineCnt[mainLines[0]]/props.gameData.length*100)}%)</div>
+              {lineCnt[mainLines[1]]>0?<div>부 : {linesInKorean[mainLines[1]]}({Math.round(lineCnt[mainLines[1]]/props.gameData.length*100)}%)</div>:null}
             </div>
             <div className="user-table-info">
-              <div>{ props.nickname }</div>
-              <div>주 : 정글(21%)</div>
-              <div>부 : 원딜(30%)</div>
+              {props.rUser.tier!=="CHALLENGER"&&props.rUser.tier!=="MASTER"
+                ?<img src={`img/${(props.rUser.tier).toLowerCase()}_${(props.rUser.rank).toLowerCase()}.png`} alt="tier"  height="200px" width="200px" />
+                :<img src={`img/${(props.rUser.tier).toLowerCase()}.png`} alt="tier"  height="200px" width="200px" />
+              }
             </div>
             <div className="user-table-info">
-              <img src="img/userTier.png" alt="user tier icon"  height="200px" width="200px" />
-            </div>
-            <div className="user-table-info">
-              <div>Platinum 4</div>
-              <div>0Lp / 200승 400패</div>
-              <div>승률 33%</div>
+              <div>{props.rUser.tier} {props.rUser.rank}</div>
+              <div>{props.rUser.win}승 {props.rUser.lose}패</div>
+              <div>승률 {Math.ceil(props.rUser.win/(props.rUser.win+props.rUser.lose)*100)}%</div>
             </div>
           </div>
           
           <div className="user-season-info">
             {showSeasonInfo()}
           </div>
-
-          <button onClick={updateGames}>업데이트</button>
         </div>
       </div>
     );

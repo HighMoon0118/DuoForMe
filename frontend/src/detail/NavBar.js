@@ -23,9 +23,12 @@ function NavBar ({isLogin, logout, isMatching, history}) {
       history.push(`/detail/${inputText}`)
     }
   }
+  const goHome = () => {
+    history.push('/')
+  }
   return (
     <div id="navbar">
-      <div className="logo"><h1>Duofor.me</h1></div>
+      <div onClick={goHome} className="logo"><h1>Duofor.me</h1></div>
       <div className="m-30">
         <div className="input-search mw-10">
           <input onChange={onChangeInput} value={inputText} placeholder="소환사명" className="small-input" onKeyUp={enterkey} />
