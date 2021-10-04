@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000/")
 @RequiredArgsConstructor
 @RequestMapping("/api/blacklist")
 @RestController
@@ -44,6 +44,7 @@ public class BlacklistController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('USER')")
     public List getBlacklist() {
+        System.out.println("oooooooooooooooooooooooo");
         return blacklistService.findByUser();
     }
 }
