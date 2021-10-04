@@ -433,74 +433,76 @@ public class RiotUserServiceImpl implements RiotUserService {
                             Object infoParticipantsObj = jparser.parse(info_part_arraylist.get(i).toString());
                             JSONObject infoParticipants = (JSONObject) infoParticipantsObj;
 
-                            // DB에 있는 해당 이름의 riot user 가져옴
-                            Optional<RiotUser> summoner = riotUserRepository.findByPuuid(puuid);
-                            System.out.println(summoner);
+                            if (infoParticipants.get("gameEndedInEarlySurrender").toString().equals("false")) {
+                                // DB에 있는 해당 이름의 riot user 가져옴
+                                Optional<RiotUser> summoner = riotUserRepository.findByPuuid(puuid);
+                                System.out.println(summoner);
 
-                            //DB에 있는 해당 게임의 match 가져옴
-                            String matchid = metadata.get("matchId").toString();
-                            Optional<Matches> matches = matchesRepository.findByMatchId(matchid);
-
-
-                            int assists = Integer.parseInt(infoParticipants.get("assists").toString());
-                            int champLevel = Integer.parseInt(infoParticipants.get("champLevel").toString());
-                            int championId = Integer.parseInt(infoParticipants.get("championId").toString());
-                            String championName = infoParticipants.get("championName").toString();
-                            int deaths = Integer.parseInt(infoParticipants.get("deaths").toString());
-                            int totalDamagesDealtToChampions = Integer.parseInt(infoParticipants.get("totalDamageDealtToChampions").toString());
-                            int detectorWardsPlaced = Integer.parseInt(infoParticipants.get("detectorWardsPlaced").toString());
-                            int visionScore = Integer.parseInt(infoParticipants.get("visionScore").toString());
-                            int totalDamageTaken = Integer.parseInt(infoParticipants.get("totalDamageTaken").toString());
-                            int totalHeal = Integer.parseInt(infoParticipants.get("totalHeal").toString());
-                            int totalMinionsKilled = Integer.parseInt(infoParticipants.get("totalMinionsKilled").toString());
-                            int visionWardsBoughtInGames = Integer.parseInt(infoParticipants.get("visionWardsBoughtInGame").toString());
-                            int kills = Integer.parseInt(infoParticipants.get("kills").toString());
-                            String individualPosition = infoParticipants.get("individualPosition").toString();
-                            int item0 = Integer.parseInt(infoParticipants.get("item0").toString());
-                            int item1 = Integer.parseInt(infoParticipants.get("item1").toString());
-                            int item2 = Integer.parseInt(infoParticipants.get("item2").toString());
-                            int item3 = Integer.parseInt(infoParticipants.get("item3").toString());
-                            int item4 = Integer.parseInt(infoParticipants.get("item4").toString());
-                            int item5 = Integer.parseInt(infoParticipants.get("item5").toString());
-                            int item6 = Integer.parseInt(infoParticipants.get("item6").toString());
-                            String teamPosition = infoParticipants.get("teamPosition").toString();
-                            int summoner1Id = Integer.parseInt(infoParticipants.get("summoner1Id").toString());
-                            int summoner2Id = Integer.parseInt(infoParticipants.get("summoner2Id").toString());
-                            boolean win = Boolean.parseBoolean(infoParticipants.get("win").toString());
-                            LocalDateTime updatedTime = LocalDateTime.now();
+                                //DB에 있는 해당 게임의 match 가져옴
+                                String matchid = metadata.get("matchId").toString();
+                                Optional<Matches> matches = matchesRepository.findByMatchId(matchid);
 
 
-                            MatchesUsers buildMatchesUsers = MatchesUsers.builder()
-                                    .matches(matches.get())
-                                    .riotUser(summoner.get())
-                                    .assists(assists)
-                                    .champLevel(champLevel)
-                                    .championId(championId)
-                                    .championName(championName)
-                                    .deaths(deaths)
-                                    .totalDamagesDealtToChampions(totalDamagesDealtToChampions)
-                                    .detectorWardsPlaced(detectorWardsPlaced)
-                                    .visionScore(visionScore)
-                                    .totalDamageTaken(totalDamageTaken)
-                                    .totalHeal(totalHeal)
-                                    .totalMinionsKilled(totalMinionsKilled)
-                                    .visionWardsBoughtInGames(visionWardsBoughtInGames)
-                                    .kills(kills)
-                                    .individualPosition(individualPosition)
-                                    .item0(item0)
-                                    .item1(item1)
-                                    .item2(item2)
-                                    .item3(item3)
-                                    .item4(item4)
-                                    .item5(item5)
-                                    .item6(item6)
-                                    .teamPosition(teamPosition)
-                                    .summoner1Id(summoner1Id)
-                                    .summoner2Id(summoner2Id)
-                                    .win(win)
-                                    .updatedTime(updatedTime)
-                                    .build();
-                            matchesUsersRepository.save(buildMatchesUsers);
+                                int assists = Integer.parseInt(infoParticipants.get("assists").toString());
+                                int champLevel = Integer.parseInt(infoParticipants.get("champLevel").toString());
+                                int championId = Integer.parseInt(infoParticipants.get("championId").toString());
+                                String championName = infoParticipants.get("championName").toString();
+                                int deaths = Integer.parseInt(infoParticipants.get("deaths").toString());
+                                int totalDamagesDealtToChampions = Integer.parseInt(infoParticipants.get("totalDamageDealtToChampions").toString());
+                                int detectorWardsPlaced = Integer.parseInt(infoParticipants.get("detectorWardsPlaced").toString());
+                                int visionScore = Integer.parseInt(infoParticipants.get("visionScore").toString());
+                                int totalDamageTaken = Integer.parseInt(infoParticipants.get("totalDamageTaken").toString());
+                                int totalHeal = Integer.parseInt(infoParticipants.get("totalHeal").toString());
+                                int totalMinionsKilled = Integer.parseInt(infoParticipants.get("totalMinionsKilled").toString());
+                                int visionWardsBoughtInGames = Integer.parseInt(infoParticipants.get("visionWardsBoughtInGame").toString());
+                                int kills = Integer.parseInt(infoParticipants.get("kills").toString());
+                                String individualPosition = infoParticipants.get("individualPosition").toString();
+                                int item0 = Integer.parseInt(infoParticipants.get("item0").toString());
+                                int item1 = Integer.parseInt(infoParticipants.get("item1").toString());
+                                int item2 = Integer.parseInt(infoParticipants.get("item2").toString());
+                                int item3 = Integer.parseInt(infoParticipants.get("item3").toString());
+                                int item4 = Integer.parseInt(infoParticipants.get("item4").toString());
+                                int item5 = Integer.parseInt(infoParticipants.get("item5").toString());
+                                int item6 = Integer.parseInt(infoParticipants.get("item6").toString());
+                                String teamPosition = infoParticipants.get("teamPosition").toString();
+                                int summoner1Id = Integer.parseInt(infoParticipants.get("summoner1Id").toString());
+                                int summoner2Id = Integer.parseInt(infoParticipants.get("summoner2Id").toString());
+                                boolean win = Boolean.parseBoolean(infoParticipants.get("win").toString());
+                                LocalDateTime updatedTime = LocalDateTime.now();
+
+
+                                MatchesUsers buildMatchesUsers = MatchesUsers.builder()
+                                        .matches(matches.get())
+                                        .riotUser(summoner.get())
+                                        .assists(assists)
+                                        .champLevel(champLevel)
+                                        .championId(championId)
+                                        .championName(championName)
+                                        .deaths(deaths)
+                                        .totalDamagesDealtToChampions(totalDamagesDealtToChampions)
+                                        .detectorWardsPlaced(detectorWardsPlaced)
+                                        .visionScore(visionScore)
+                                        .totalDamageTaken(totalDamageTaken)
+                                        .totalHeal(totalHeal)
+                                        .totalMinionsKilled(totalMinionsKilled)
+                                        .visionWardsBoughtInGames(visionWardsBoughtInGames)
+                                        .kills(kills)
+                                        .individualPosition(individualPosition)
+                                        .item0(item0)
+                                        .item1(item1)
+                                        .item2(item2)
+                                        .item3(item3)
+                                        .item4(item4)
+                                        .item5(item5)
+                                        .item6(item6)
+                                        .teamPosition(teamPosition)
+                                        .summoner1Id(summoner1Id)
+                                        .summoner2Id(summoner2Id)
+                                        .win(win)
+                                        .updatedTime(updatedTime)
+                                        .build();
+                                matchesUsersRepository.save(buildMatchesUsers);
+                            }
                         }
                     }
                 }
@@ -574,70 +576,67 @@ public class RiotUserServiceImpl implements RiotUserService {
                                 Object infoParticipantsObj = jparser.parse(info_part_arraylist.get(i).toString());
                                 JSONObject infoParticipants = (JSONObject) infoParticipantsObj;
 
-                                //DB에 있는 해당 게임의 match 가져옴
-//                                String matchid = metadata.get("matchId").toString();
-//                                Optional<Matches> matches = matchesRepository.findByMatchId(matchid);
+                                if (infoParticipants.get("gameEndedInEarlySurrender").toString().equals("false")) {
+                                    int assists = Integer.parseInt(infoParticipants.get("assists").toString());
+                                    int champLevel = Integer.parseInt(infoParticipants.get("champLevel").toString());
+                                    int championId = Integer.parseInt(infoParticipants.get("championId").toString());
+                                    String championName = infoParticipants.get("championName").toString();
+                                    int deaths = Integer.parseInt(infoParticipants.get("deaths").toString());
+                                    int totalDamagesDealtToChampions = Integer.parseInt(infoParticipants.get("totalDamageDealtToChampions").toString());
+                                    int detectorWardsPlaced = Integer.parseInt(infoParticipants.get("detectorWardsPlaced").toString());
+                                    int visionScore = Integer.parseInt(infoParticipants.get("visionScore").toString());
+                                    int totalDamageTaken = Integer.parseInt(infoParticipants.get("totalDamageTaken").toString());
+                                    int totalHeal = Integer.parseInt(infoParticipants.get("totalHeal").toString());
+                                    int totalMinionsKilled = Integer.parseInt(infoParticipants.get("totalMinionsKilled").toString());
+                                    int visionWardsBoughtInGames = Integer.parseInt(infoParticipants.get("visionWardsBoughtInGame").toString());
+                                    int kills = Integer.parseInt(infoParticipants.get("kills").toString());
+                                    String individualPosition = infoParticipants.get("individualPosition").toString();
+                                    int item0 = Integer.parseInt(infoParticipants.get("item0").toString());
+                                    int item1 = Integer.parseInt(infoParticipants.get("item1").toString());
+                                    int item2 = Integer.parseInt(infoParticipants.get("item2").toString());
+                                    int item3 = Integer.parseInt(infoParticipants.get("item3").toString());
+                                    int item4 = Integer.parseInt(infoParticipants.get("item4").toString());
+                                    int item5 = Integer.parseInt(infoParticipants.get("item5").toString());
+                                    int item6 = Integer.parseInt(infoParticipants.get("item6").toString());
+                                    String teamPosition = infoParticipants.get("teamPosition").toString();
+                                    int summoner1Id = Integer.parseInt(infoParticipants.get("summoner1Id").toString());
+                                    int summoner2Id = Integer.parseInt(infoParticipants.get("summoner2Id").toString());
+                                    boolean win = Boolean.parseBoolean(infoParticipants.get("win").toString());
+                                    LocalDateTime updatedTime = LocalDateTime.now();
 
 
-                                int assists = Integer.parseInt(infoParticipants.get("assists").toString());
-                                int champLevel = Integer.parseInt(infoParticipants.get("champLevel").toString());
-                                int championId = Integer.parseInt(infoParticipants.get("championId").toString());
-                                String championName = infoParticipants.get("championName").toString();
-                                int deaths = Integer.parseInt(infoParticipants.get("deaths").toString());
-                                int totalDamagesDealtToChampions = Integer.parseInt(infoParticipants.get("totalDamageDealtToChampions").toString());
-                                int detectorWardsPlaced = Integer.parseInt(infoParticipants.get("detectorWardsPlaced").toString());
-                                int visionScore = Integer.parseInt(infoParticipants.get("visionScore").toString());
-                                int totalDamageTaken = Integer.parseInt(infoParticipants.get("totalDamageTaken").toString());
-                                int totalHeal = Integer.parseInt(infoParticipants.get("totalHeal").toString());
-                                int totalMinionsKilled = Integer.parseInt(infoParticipants.get("totalMinionsKilled").toString());
-                                int visionWardsBoughtInGames = Integer.parseInt(infoParticipants.get("visionWardsBoughtInGame").toString());
-                                int kills = Integer.parseInt(infoParticipants.get("kills").toString());
-                                String individualPosition = infoParticipants.get("individualPosition").toString();
-                                int item0 = Integer.parseInt(infoParticipants.get("item0").toString());
-                                int item1 = Integer.parseInt(infoParticipants.get("item1").toString());
-                                int item2 = Integer.parseInt(infoParticipants.get("item2").toString());
-                                int item3 = Integer.parseInt(infoParticipants.get("item3").toString());
-                                int item4 = Integer.parseInt(infoParticipants.get("item4").toString());
-                                int item5 = Integer.parseInt(infoParticipants.get("item5").toString());
-                                int item6 = Integer.parseInt(infoParticipants.get("item6").toString());
-                                String teamPosition = infoParticipants.get("teamPosition").toString();
-                                int summoner1Id = Integer.parseInt(infoParticipants.get("summoner1Id").toString());
-                                int summoner2Id = Integer.parseInt(infoParticipants.get("summoner2Id").toString());
-                                boolean win = Boolean.parseBoolean(infoParticipants.get("win").toString());
-                                LocalDateTime updatedTime = LocalDateTime.now();
-
-
-                                MatchesUsers buildMatchesUsers = MatchesUsers.builder()
-                                        .matches(matches.get())
-                                        .riotUser(summoner.get())
-                                        .assists(assists)
-                                        .champLevel(champLevel)
-                                        .championId(championId)
-                                        .championName(championName)
-                                        .deaths(deaths)
-                                        .totalDamagesDealtToChampions(totalDamagesDealtToChampions)
-                                        .detectorWardsPlaced(detectorWardsPlaced)
-                                        .visionScore(visionScore)
-                                        .totalDamageTaken(totalDamageTaken)
-                                        .totalHeal(totalHeal)
-                                        .totalMinionsKilled(totalMinionsKilled)
-                                        .visionWardsBoughtInGames(visionWardsBoughtInGames)
-                                        .kills(kills)
-                                        .individualPosition(individualPosition)
-                                        .item0(item0)
-                                        .item1(item1)
-                                        .item2(item2)
-                                        .item3(item3)
-                                        .item4(item4)
-                                        .item5(item5)
-                                        .item6(item6)
-                                        .teamPosition(teamPosition)
-                                        .summoner1Id(summoner1Id)
-                                        .summoner2Id(summoner2Id)
-                                        .win(win)
-                                        .updatedTime(updatedTime)
-                                        .build();
-                                matchesUsersRepository.save(buildMatchesUsers);
+                                    MatchesUsers buildMatchesUsers = MatchesUsers.builder()
+                                            .matches(matches.get())
+                                            .riotUser(summoner.get())
+                                            .assists(assists)
+                                            .champLevel(champLevel)
+                                            .championId(championId)
+                                            .championName(championName)
+                                            .deaths(deaths)
+                                            .totalDamagesDealtToChampions(totalDamagesDealtToChampions)
+                                            .detectorWardsPlaced(detectorWardsPlaced)
+                                            .visionScore(visionScore)
+                                            .totalDamageTaken(totalDamageTaken)
+                                            .totalHeal(totalHeal)
+                                            .totalMinionsKilled(totalMinionsKilled)
+                                            .visionWardsBoughtInGames(visionWardsBoughtInGames)
+                                            .kills(kills)
+                                            .individualPosition(individualPosition)
+                                            .item0(item0)
+                                            .item1(item1)
+                                            .item2(item2)
+                                            .item3(item3)
+                                            .item4(item4)
+                                            .item5(item5)
+                                            .item6(item6)
+                                            .teamPosition(teamPosition)
+                                            .summoner1Id(summoner1Id)
+                                            .summoner2Id(summoner2Id)
+                                            .win(win)
+                                            .updatedTime(updatedTime)
+                                            .build();
+                                    matchesUsersRepository.save(buildMatchesUsers);
+                                }
                             }
                         }
                     }
