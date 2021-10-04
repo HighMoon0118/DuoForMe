@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class WebSocketController {
 
     private final SimpMessageSendingOperations simpMessagingTemplate;
-    public HashMap<String, Boolean> userAccept;
+    public HashMap<String, Boolean> userAccept = new HashMap<>();
 
     @MessageMapping("/pub/{userId}")
     public void ChatSocketHandler(@DestinationVariable("userId") Long userId, ChatRequest request) {
