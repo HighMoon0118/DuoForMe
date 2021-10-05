@@ -1,21 +1,40 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import SockJsClient from 'react-stomp'
-import { useRef } from 'react';
 
 function WebSocket ({userId, isLogin}) {
 
   const $websocket = useRef(null)
 
+  useEffect(() => {
+    if (isLogin) {
+      console.log("hi");
+    }
+  })
+
+  const sendMessage = () => {
+    const chat = {
+      receiver: "",
+      sender: "",
+      message: "안녕하세요"
+    }
+    $websocket.current.sendMessage (`/pub/${userId}`, JSON.stringify(chat));
+    console.log("sendMessage", userId, isLogin);
+  }
+  
+  // {process.env.REACT_BASE_URL+"socket"}
   return (
       <div>
-          <SockJsClient
-            url = {process.env.REACT_BASE_URL+"socket"}
-            topics = {[`/sub/${userId}`]}
-            onMessage = {msg => {
-              console.log(msg)
-            }}
-            ref = {$websocket}
-          />
+          {
+            isLogin && <SockJsClient
+              url = "http://localhost:8080/socket"
+              topics = {[`/sub/${userId}`]}
+              onMessage = {msg => {
+                console.log(msg.message)
+              }}
+              ref = {$websocket}
+            />
+          }
+          <button onClick={sendMessage}>웹소켓</button>
       </div>
   );
 }

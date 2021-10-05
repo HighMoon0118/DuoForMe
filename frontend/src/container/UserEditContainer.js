@@ -35,9 +35,8 @@ function mapDispatchToProps(dispatch) {
       dispatch(serviceEdit(serviceNickname))
     },
     blackListEdit: (blackList) => {
-      console.log(blackList)
       dispatch(blackListEdit(blackList))
-    }
+    },
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UserEditContainer)

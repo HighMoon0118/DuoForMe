@@ -22,7 +22,7 @@ public class User {
 
     private String email;
 
-    private int profileIconId;
+    private Long profileIconId;
 
     private int evaluated;
 
@@ -34,7 +34,7 @@ public class User {
     private Authority authority;
 
     @Builder
-    public User(Long userId, String lolNickname, String password, String email, int profileIconId, int evaluated, Double userCredit, String serviceNickname, Authority authority) {
+    public User(Long userId, String lolNickname, String password, String email, Long profileIconId, int evaluated, Double userCredit, String serviceNickname, Authority authority) {
         this.userId = userId;
         this.lolNickname = lolNickname;
         this.password = password;
