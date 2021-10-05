@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-s
+@CrossOrigin("http://localhost:3000/")
 @RequiredArgsConstructor
 @RequestMapping("/api/matchinghistory")
 @RestController
