@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("http://localhost:3000/")
 @RequestMapping("/api/riotuser")
 public class RiotUserController {
     @Autowired
