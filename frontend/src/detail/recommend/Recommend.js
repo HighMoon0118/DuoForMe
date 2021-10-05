@@ -9,17 +9,19 @@ function Recommend() {
                             {id: 3, nickName: "셋", line: "bottom", rate:"20%", image: imageUrl, champions: [{image: imageUrl, name: "챔피언7"}, {image: imageUrl, name: "챔피언8"}, {image: imageUrl, name: "챔피언9"}]}] 
   const RecommendUsers = RecommendUserInfo.map((user) =>
     <div key={user.id} className="recommend-info">
-      <img src={user.image} className="user-image" alt="소환사 이미지"/>
-      <div className="user-info">
-        <p>{user.nickName}</p>
-        <p>{user.line}</p>
-        <p>{user.rate}</p>
+      <div className="top-box">
+        <img src={user.image} className="user-image" alt="소환사 이미지"/>
+        <div className="user-info">
+          <div>{user.nickName}</div>
+          <div>{user.line}</div>
+          <div>{user.rate}</div>
+        </div>
       </div>
-      <div>
+      <div className="bottom-box">
         {user.champions.map((champion) =>
           <div className="champion-info">
             <img src={champion.image} className="champion-img" alt="챔피언 이미지"/>
-            <span>{champion.name}</span>  
+            <div className="champion-name">{champion.name}</div>  
           </div>
         )}
       </div>

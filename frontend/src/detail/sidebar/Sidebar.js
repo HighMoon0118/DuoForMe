@@ -48,8 +48,8 @@ function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine, 
           {isMatching ? 
             <div> 
               <Timer time={time}/>
-              { me && <h3>내 라인: {me}</h3> }
-              { you && <h3>듀오 라인: {you}</h3>}
+              { me && <div className="matching-info-font">내 라인: {me}</div> }
+              { you && <div className="matching-info-font">듀오 라인: {you}</div>}
             </div> :
             <div>
               <div className="select-box">
