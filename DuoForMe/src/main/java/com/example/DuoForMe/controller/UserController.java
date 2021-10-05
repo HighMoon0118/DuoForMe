@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("*")
 @RequiredArgsConstructor
 @RequestMapping("api/users")
 @RestController
