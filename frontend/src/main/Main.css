@@ -3,21 +3,21 @@ body {
   color: white;
   padding: 0px 50px;
 }
-#main > .main-font {
+#main .main-font {
   text-align: center;
   font-size: 42px;
 }
-#main > .text-left {
+#main .text-left {
   text-align: right;
 }
-#main > .nav-padding {
+#main .nav-padding {
   padding-top: 30px;
 }
 #main-search {
   display: flex;
   justify-content: center;
 }
-#main-search > .input-box {
+#main-search .input-box {
   display: flex;
   justify-content: center;
   width: 700px;
@@ -25,18 +25,18 @@ body {
   border-radius: 90px;
   background-color: white;
 }
-#main-search > .input-box .large-input {
+#main-search .large-input {
   width: 620px;
   height: 35px;
   border: none;
   outline: none;
   background-color: transparent;
 }
-#main-matching > .center {
+#main-matching .center {
   display: flex;
   justify-content: center;
 }
-#main-matching > .center .matching-box {
+#main-matching .matching-box {
   margin-top: 50px;
   border-radius: 90px;
   width: 700px;
@@ -45,22 +45,22 @@ body {
   position: relative;
   border: 8px solid #5667A0;
 }
-#main-matching > .center .matching-box .center-group {
+#main-matching .center-group {
   display: flex;
   justify-content: center;
 }
-#main-matching > .center .matching-box .center-group .select-box {
+#main-matching .select-box {
   display: inline-block;
   color: black;
   margin-top: 100px;
 }
-#main-matching > .center .matching-box .center-group .select-box .line-image {
+#main-matching .line-image {
   display: block;
   width: 130px;
   height: 130px;
   background-color: #202947;
 }
-#main-matching > .center .matching-box .center-group .select-box .drop-down {
+#main-matching .drop-down {
   margin-top: 10px;
   width: 130px;
   height: 20px;
@@ -68,21 +68,27 @@ body {
   text-decoration: none;
 }
 
-#main-matching > .center .matching-box .matching-btn {
+#main-matching .matching-btn {
   display: block;
   position: absolute;
   top: 75%;
-  left: 44.287%;
-  background-color: #9badeb;
+  left: 43.573%;
+  background-color: #b0bce9;
   border: none;
-  width: 80px;
-  height: 30px;
+  width: 90px;
+  height: 35px;
   border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
 }
-#main-matching > .center .matching-box .center-group .timer {
+#main-matching .timer {
   display: inline-block;
   color: black;
   width: 130px;
   margin-top: 180px;
   text-align: center;
+}
+
+#main .log-out {
+  cursor: pointer;
 }

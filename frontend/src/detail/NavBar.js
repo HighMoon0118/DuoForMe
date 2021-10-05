@@ -17,6 +17,7 @@ function NavBar ({isLogin, logout, isMatching, history}) {
     }
     localStorage.setItem("token", "")
     logout()
+    history.push("/")
   }
   function enterkey() {
     if (window.event.keyCode === 13) {
@@ -25,11 +26,11 @@ function NavBar ({isLogin, logout, isMatching, history}) {
   }
   return (
     <div id="navbar">
-      <div className="logo"><h1>Duofor.me</h1></div>
+      <div onClick={() => {history.push('/')}} className="logo" ><h1>Duofor.me</h1></div>
       <div className="m-30">
         <div className="input-search mw-10">
           <input onChange={onChangeInput} value={inputText} placeholder="소환사명" className="small-input" onKeyUp={enterkey} />
-          <BiSearch size="20" color="black" onClick={onSearch}/>
+          <BiSearch size="20" color="black" onClick={onSearch} style={{cursor: "pointer"}}/>
         </div>
         {/* <input onChange={onChangeInput} value={inputText} placeholder="소환사명"  className="input-search mw-10" />
         <button onClick={onSearch}>검색</button> */}

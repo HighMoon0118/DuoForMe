@@ -14,11 +14,11 @@ function Detail({match, history}) {
   const [btnMsg, setBtmMsg] = useState("유저 추천")
 
   const toggleRecommend = () => {
-    if (isRecommend) {
-      setIsRecommend(false)
+    if (!isRecommend) {
+      setIsRecommend(true)
       setBtmMsg("유저 전적")
     } else {
-      setIsRecommend(true)
+      setIsRecommend(false)
       setBtmMsg("유저 추천")
     }
   }
@@ -29,7 +29,7 @@ function Detail({match, history}) {
       <div id="detail">
         <div id="info">
           <SeasonInfo nickname={match.params.nickname}/>
-          <button onClick={toggleRecommend}>{ btnMsg }</button>
+          <button className="detail-btn" onClick={toggleRecommend}>{ btnMsg }</button>
           {
             isRecommend
             ? <Recommend/>
