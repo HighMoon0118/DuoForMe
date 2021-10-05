@@ -1,13 +1,7 @@
 package com.example.DuoForMe.service;
 
-import com.example.DuoForMe.entity.Matches;
-import com.example.DuoForMe.entity.MatchesUsers;
-import com.example.DuoForMe.entity.RiotUser;
-import com.example.DuoForMe.entity.RiotUserTier;
-import com.example.DuoForMe.repository.MatchesRepository;
-import com.example.DuoForMe.repository.MatchesUsersRepository;
-import com.example.DuoForMe.repository.RiotUserRepository;
-import com.example.DuoForMe.repository.RiotUserTierRepository;
+import com.example.DuoForMe.entity.*;
+import com.example.DuoForMe.repository.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import org.json.simple.JSONArray;
@@ -50,6 +44,9 @@ public class RiotUserServiceImpl implements RiotUserService {
 
     @Autowired
     private MatchesRepository matchesRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
 //    @Override
 //    public Optional<RiotUser> selectOneUser(String name) { return riotUserRepository.findByPuuid(name); }
@@ -305,10 +302,18 @@ public class RiotUserServiceImpl implements RiotUserService {
         String selectedPuuid = riotUser.getPuuid();
 
         boolean checkRiotUser = riotUserRepository.existsByName(name);
-
+        if (userRepository.existsByLolNickname(name)) {
+            List<User> userList = userRepository.findAllByLolNickname(name);
+            Long profileIconId = riotUser.getProfileIconId();
+            for (User u: userList) {
+                Long id = u.getUserId();
+                userRepository.updateProfileIconId(profileIconId, id);
+            }
+        }
         // DB에 등록되어있는 소환사인지 확인
         if (!checkRiotUser){
             System.out.println("새로운 소환사 등록");
+
             riotUserRepository.save(riotUser);
 
             // 소환사 티어정보 가져오기
