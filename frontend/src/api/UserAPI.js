@@ -26,8 +26,24 @@ function getId() {
 function getUserInfo(id) {
   return axiosService.get(`users/${id}`)
 }
-function receiveRiot(lolNickname) {
-  return axiosService.get(`riotuser/receivedata/${lolNickname}`)
+
+
+function getBlacklist() {
+  return axiosService.get("blacklist", {headers: {
+    Authorization: "Bearer " + localStorage.getItem("token")
+  }})
 }
-export {checkEmail, checkNickname, signup, login, getId, getUserInfo, receiveRiot}
+function deleteBlacklist(data) {
+  return axiosService.delete("blacklist", {data, headers: {
+    Authorization: "Bearer " + localStorage.getItem("token")
+  }})
+}
+function getMatchinghistory() {
+  return axiosService.get("matchinghistory", {headers: {
+    Authorization: "Bearer " + localStorage.getItem("token")
+  }})
+}
+
+export {checkEmail, checkNickname, signup, login, getId, getUserInfo, getBlacklist, deleteBlacklist, getMatchinghistory}
+
 
