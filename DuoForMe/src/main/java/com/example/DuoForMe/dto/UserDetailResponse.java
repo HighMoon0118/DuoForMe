@@ -13,7 +13,7 @@ public class UserDetailResponse {
     private Double userCredit;
     private int evaluated;
     private String lolNickname;
-    private int profileIconId;
+    private Long profileIconId;
 
     public UserDetailResponse(User user) {
         this.userId = user.getUserId();

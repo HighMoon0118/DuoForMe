@@ -1,8 +1,8 @@
 import React from 'react';
 import "./Login.css"
 import { useState } from 'react';
-import { getId, login } from '../api/UserAPI';
-function Login ({history, getUserInfo}) {
+import { getId, login, getBlacklist, getMatchinghistory } from '../api/UserAPI';
+function Login ({history, getUserInfo, blacklist, getMatching}) {
 
   const [data, setData] = useState({
     email: "",
@@ -51,6 +51,18 @@ function Login ({history, getUserInfo}) {
       history.goBack()
       getId().then(res => {
         getUserInfo(res.data)
+      })
+      getBlacklist().then(res => {
+        let blackList = []
+        for (let i = 0; i < res.data.length; i++) {
+          let black = res.data[i].blackUser
+          black["blacklistId"] = res.data[i].blacklistId
+          blackList.push(black)
+        }
+        blacklist(blackList)
+      })
+      getMatchinghistory().then(res => {
+        getMatching(res.data)
       })
     })
   }

@@ -4,10 +4,18 @@ import Timer from "../../main/Timer"
 import SuccessMatchingUser from './SuccessMatchingUser'
 import { cancelMatching, requestMatching } from "../../api/MatchingAPI";
 
-function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine, isLogin, history}) {
-  const successMatchingUser = [{id: 1, image: "img/userIcon1.jpg", userName: "소환사1"}, {id: 2, image: "img/userIcon1.jpg", userName: "소환사2"}, {id: 3, image: "img/userIcon1.jpg", userName: "소환사3"},
-  {id: 4, image: "img/userIcon1.jpg", userName: "소환사1"}, {id: 5, image: "img/userIcon1.jpg", userName: "소환사2"}, {id: 6, image: "img/userIcon1.jpg", userName: "소환사3"}, {id: 7, image: "img/userIcon1.jpg", userName: "소환사7"},
-  {id: 8, image: "img/userIcon1.jpg", userName: "소환사3"}, {id: 9, image: "img/userIcon1.jpg", userName: "소환사7"}]
+function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine, isLogin, history, successMatchingUser}) {
+  let isHistory = false
+  let scroll = false
+  console.log(successMatchingUser);
+  if (successMatchingUser !== undefined) {
+    isHistory = true
+    let matchingLength = Object.keys(successMatchingUser).length
+    if (matchingLength > 6) {
+      scroll = true
+    }
+  }
+  
   function matching() {
     if (!isLogin) {
       alert("로그인이 필요합니다!")
@@ -35,42 +43,44 @@ function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine, 
   return (
     <div id="sidebar">
       <div className="fixed">
-        {isMatching? <h1>매칭정보</h1> : <h1>매칭신청</h1>}
-        {isMatching ? 
-          <div> 
-            <Timer time={time}/>
-            { me && <h3>내 라인: {me}</h3> }
-            { you && <h3>듀오 라인: {you}</h3>}
-          </div> :
-          <div>
-            <div className="select-box">
-              <span>내 라인: </span>
-              <select value={ me } onChange={(e) => myLine(e.target.value)} name="me" className="drop-down">
-                <option value="default">내 라인 선택</option>
-                <option value="top">Top</option>
-                <option value="middle">Middle</option>
-                <option value="bottom">Bottom</option>
-                <option value="jungle">Jungle</option>
-                <option value="support">Support</option>
-              </select>
+        <div>
+          {isMatching? <h1>매칭정보</h1> : <h1>매칭신청</h1>}
+          {isMatching ? 
+            <div> 
+              <Timer time={time}/>
+              { me && <h3>내 라인: {me}</h3> }
+              { you && <h3>듀오 라인: {you}</h3>}
+            </div> :
+            <div>
+              <div className="select-box">
+                <span>내 라인: </span>
+                <select value={ me } onChange={(e) => myLine(e.target.value)} name="me" className="drop-down">
+                  <option value="default">내 라인 선택</option>
+                  <option value="top">Top</option>
+                  <option value="middle">Middle</option>
+                  <option value="bottom">Bottom</option>
+                  <option value="jungle">Jungle</option>
+                  <option value="support">Support</option>
+                </select>
+              </div>
+              <div className="select-box">
+                <span>상대방 라인: </span>
+                <select value={ you } onChange={(e) => yourLine(e.target.value)} name="you" className="drop-down">
+                  <option value="default">상대방 라인 선택</option>
+                  <option value="top">Top</option>
+                  <option value="middle">Middle</option>
+                  <option value="bottom">Bottom</option>
+                  <option value="jungle">Jungle</option>
+                  <option value="support">Support</option>
+                </select>
+              </div>
             </div>
-            <div className="select-box">
-              <span>상대방 라인: </span>
-              <select value={ you } onChange={(e) => yourLine(e.target.value)} name="you" className="drop-down">
-                <option value="default">상대방 라인 선택</option>
-                <option value="top">Top</option>
-                <option value="middle">Middle</option>
-                <option value="bottom">Bottom</option>
-                <option value="jungle">Jungle</option>
-                <option value="support">Support</option>
-              </select>
-            </div>
-          </div>
-        }
-        <button className="matching-btn" onClick={ matching }>{ isMatching ? "매칭취소" : "매칭하기" }</button>
-        <div className="success-user">
-          {successMatchingUser.map((successUser) => <SuccessMatchingUser key={successUser.id} image={successUser.image} userName={successUser.userName} />)}
+          }
+          <button className="matching-btn" onClick={ matching }>{ isMatching ? "매칭취소" : "매칭하기" }</button>
         </div>
+        { isHistory && <div className={ scroll ? "success-user-scroll" : "success-user" }>
+          {successMatchingUser.map((successUser) => <SuccessMatchingUser key={successUser.matchinghistoryId} image={successUser.matchedUser.profileIconId} userName={successUser.matchedUser.lolNickname} matchinghistoryId={successUser.matchinghistoryId} userId={successUser.matchedUser.userId} isCredit={successUser.credit}/>)}
+        </div>}
       </div>
     </div>
   )

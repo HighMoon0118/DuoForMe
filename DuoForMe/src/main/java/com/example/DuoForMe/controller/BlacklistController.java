@@ -1,8 +1,6 @@
 package com.example.DuoForMe.controller;
 
 import com.example.DuoForMe.dto.BlacklistRequest;
-import com.example.DuoForMe.dto.MatchingHistoryDelete;
-import com.example.DuoForMe.dto.MatchingHistoryRequest;
 import com.example.DuoForMe.entity.User;
 import com.example.DuoForMe.service.BlacklistService;
 import com.example.DuoForMe.service.MatchingHistoryService;
@@ -18,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000/")
 @RequiredArgsConstructor
 @RequestMapping("/api/blacklist")
 @RestController
@@ -46,6 +44,7 @@ public class BlacklistController {
     @ResponseBody
     @PreAuthorize("hasAnyRole('USER')")
     public List getBlacklist() {
+        System.out.println("oooooooooooooooooooooooo");
         return blacklistService.findByUser();
     }
 }
