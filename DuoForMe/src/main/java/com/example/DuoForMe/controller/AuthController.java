@@ -22,7 +22,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<Void> signup(@Valid @RequestBody UserCreateRequest userCreateRequest) {
-        System.out.println("들어왔당!")
+        // System.out.println("들어왔당!")
         Long id = authService.signup(userCreateRequest);
         log.info(Long.toString(id));
         System.out.println(ResponseEntity.status(HttpStatus.CREATED).build());
