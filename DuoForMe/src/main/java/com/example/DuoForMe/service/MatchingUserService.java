@@ -50,4 +50,8 @@ public class MatchingUserService {
         List duoList = matchingUserRepository.findAll();
         return duoList;
     }
+
+    public void deleteMatchingUser(MatchingUser matchingUser) {
+        matchingUserRepository.delete(matchingUser);
+    }
 }

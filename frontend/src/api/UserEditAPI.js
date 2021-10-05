@@ -13,5 +13,14 @@ function getLolNicknameCount(nickname) {
 return axiosService.get(`users/nicknamecount/${nickname}`)
 }
   
-
-export {lolNicknameEditAPI, getLolNicknameCount}
+function matchingCreditAdd(historyId, credit) {
+  return axiosService.put(`matchinghistory/credit/${historyId}`, credit, {headers: {
+    Authorization: "Bearer " + localStorage.getItem("token")
+  }})
+}
+function blacklistAdd(blackUserId) {
+  return axiosService.post("blacklist", blackUserId, {headers: {
+    Authorization: "Bearer " + localStorage.getItem("token")
+  }})
+}
+export {lolNicknameEditAPI, getLolNicknameCount, matchingCreditAdd, blacklistAdd}
