@@ -21,10 +21,6 @@ export const serviceEdit = ( serviceNickname ) => ({
   type: SERVICE_NICKNAME_EDIT,
   serviceNickname,
   })
-export const blackListEdit = ( blackList ) => ({
-  type: BLACKLIST_EDIT,
-  blackList
-  })
 export const logout = () => ({
   type: LOGOUT,
 })
@@ -68,11 +64,6 @@ function userInfo(state = initialState, action) {
       return {
         ...state,
         serviceNickname: action.serviceNickname,
-      }
-    case BLACKLIST_EDIT:
-      return {
-        ...state,
-        blackList: action.blackList,
       }
     case LOGOUT:
       return {
