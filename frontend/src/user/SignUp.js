@@ -3,7 +3,7 @@ import "./SignUp.css"
 import { useState } from 'react';
 import { checkEmail, checkNickname, signup } from '../api/UserAPI';
 import { receiveRiot } from '../api/RUserAPI';
-
+import NavBarContainer from "../container/NavBarContainer"
 
 function SignUp ({ history }) {
 
@@ -98,35 +98,38 @@ function SignUp ({ history }) {
   }
 
   return (
-    <div id="signup">
-      <div className="mt-30"><h1>SignUp</h1></div>
-      <div className="ta-left">
-        <div className="mt-30">
-          <div>이메일</div>
-          <input className="mt-5" type="text" placeholder="이메일을 입력하세요."  onChange={checkMyEmail}/>
-          <div className="input-msg">{error.email}</div>
+    <div>
+      <NavBarContainer history={history}/>
+      <div id="signup">
+        <div className="mt-30"><h1>SignUp</h1></div>
+        <div className="ta-left">
+          <div className="mt-30">
+            <div>이메일</div>
+            <input className="mt-5" type="text" placeholder="이메일을 입력하세요."  onChange={checkMyEmail}/>
+            <div className="input-msg">{error.email}</div>
+          </div>
+          <div className="mt-30">
+            <div>닉네임</div>
+            <input className="mt-5" type="text" placeholder="닉네임을 입력하세요"  onChange={checkMyNickname}/>
+            <div className="input-msg">{error.serviceNickname}</div>
+          </div>
+          <div className="mt-30">
+            <div>비밀번호</div>
+            <input className="mt-5" type="password" placeholder="비밀번호를 입력하세요." onChange={textChange}/>
+            <div>비밀번호 확인</div>
+            <input className="mt-5" type="password" placeholder="비밀번호를 입력하세요." onChange={checkPassword}/>
+            <div className="input-msg">{error.password}</div>
+          </div>
+          <div className="mt-30">
+            <div>소환사 이름</div>
+            <input className="mt-5" type="text" placeholder="소환사 이름을 입력하세요." onChange={checkMyGameName}/>
+          </div>
         </div>
-        <div className="mt-30">
-          <div>닉네임</div>
-          <input className="mt-5" type="text" placeholder="닉네임을 입력하세요"  onChange={checkMyNickname}/>
-          <div className="input-msg">{error.serviceNickname}</div>
-        </div>
-        <div className="mt-30">
-          <div>비밀번호</div>
-          <input className="mt-5" type="password" placeholder="비밀번호를 입력하세요." onChange={textChange}/>
-          <div>비밀번호 확인</div>
-          <input className="mt-5" type="password" placeholder="비밀번호를 입력하세요." onChange={checkPassword}/>
-          <div className="input-msg">{error.password}</div>
-        </div>
-        <div className="mt-30">
-          <div>소환사 이름</div>
-          <input className="mt-5" type="text" placeholder="소환사 이름을 입력하세요." onChange={checkMyGameName}/>
-        </div>
+        <div>
+            <button className="signup-btn" onClick={doSignup}
+            disabled={!check.email || !check.serviceNickname || !check.password }>회원 가입</button>
+          </div>
       </div>
-      <div>
-          <button className="signup-btn" onClick={doSignup}
-          disabled={!check.email || !check.serviceNickname || !check.password }>회원 가입</button>
-        </div>
     </div>
   );
 }
