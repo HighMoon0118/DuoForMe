@@ -26,9 +26,10 @@ public class MatchingUserCreateRequest {
     private String duoPosition;
 
 
-    public MatchingUser toEntity(User user) {
+    public MatchingUser toEntity(User user, String tier) {
         return MatchingUser.builder()
                 .user(user)
+                .tier(tier)
                 .myPosition(myPosition)
                 .duoPosition(duoPosition)
                 .build();
