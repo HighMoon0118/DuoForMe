@@ -7,9 +7,6 @@ import { cancelMatching } from "../api/MatchingAPI"
 function Main({history, isLogin, logout, isMatching}) {
 
   const logOut = () => {
-    if (isMatching) {
-      cancelMatching()
-    }
     localStorage.setItem("token", "")
     logout()
     
@@ -23,11 +20,13 @@ function Main({history, isLogin, logout, isMatching}) {
         { !isLogin && <Link className="mw-10" style={{ textDecoration: "none", color: "white", marginLeft:"10px"}} to="/signup">회원가입</Link> }
         
       </div>
-      <h1 className="main-font">
-        Duofor.me
-      </h1>
-      <MainSearch history={history}/>
-      <MainMatchingContainer history={history}/>
+      <div className="main-box">
+        <h1 className="main-font">
+          Duofor.me
+        </h1>
+        <MainSearch history={history}/>
+        <MainMatchingContainer history={history}/>
+        </div>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import "./Sidebar.css"
 import {HiOutlinePencilAlt} from "react-icons/hi"
 import CreditModalContainer from "../../container/CreditModalContainer"
+import {BsCheckAll} from "react-icons/bs"
 function SuccessMatchingUser(props) {
   const iscredit = props.isCredit === null ? false : true
   const [ modalOpen, setModalOpen ] = useState(false);
@@ -19,10 +20,10 @@ function SuccessMatchingUser(props) {
       <div className="user-img">
         <img src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${props.image}.png`} alt="user icon" height="40px" width="40px" />
       </div>
-      <div className="user-info padding-left-30">
+      <div className="user-info">
         <p className="margin-0">{props.userName}</p>
       </div>
-      {!iscredit && <HiOutlinePencilAlt size="20" style={{marginLeft: 10}} onClick={() => creditOpen()}/>}
+      {!iscredit ? <HiOutlinePencilAlt size="20" onClick={() => creditOpen()}/> : <BsCheckAll size="20" />}
       <CreditModalContainer open={ modalOpen } close={ closeModal } matchinghistoryId={props.matchinghistoryId} userName={props.userName} userId={props.userId} className="modal"></CreditModalContainer>
     </div>
   )
