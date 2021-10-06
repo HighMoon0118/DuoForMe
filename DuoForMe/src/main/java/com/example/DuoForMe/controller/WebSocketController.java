@@ -55,6 +55,7 @@ public class WebSocketController {
                 userAccept.remove(receiver); // 수락 여부 해쉬맵에서 삭제
 
             } else if(!userAccept.get(request.getReceiver()) && !request.isAcceptMatching()){ // 둘 다 거절을 눌렀을 경우
+                userAccept.remove(request.getReceiver());
 
             } else if(!userAccept.get(request.getReceiver())) {  // 나는 수락, 상대방이 거절을 눌렀을 경우
 
@@ -62,7 +63,7 @@ public class WebSocketController {
                 request.setStartMatching(false);
                 request.setMessage("매칭이 거절되었습니다");
                 simpMessagingTemplate.convertAndSend("/sub/" + request.getSenderId(), request);
-
+                userAccept.remove(request.getReceiver());
             } else {  // 나는 거절, 상대방은 수락을 눌렀을 경우
 
                 // 듀오 상대방한테 메세지 보내기
