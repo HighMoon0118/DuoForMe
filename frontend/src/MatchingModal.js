@@ -240,7 +240,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
                 <div className="chatting-space" style={isFolded ? {display: "none"} : {display: "block"}}>
                   {showChat()}
                 </div>
-                <input type="text" value={message} onChange={inputMessage} onKeyPress={sendMessage}/>
+                <input disabled={!canChat} type="text" value={message} onChange={inputMessage} onKeyPress={sendMessage}/>
                 <button disabled={!canChat} onClick={sendMessage}>SEND</button>
               </div>
               <div className="fold">
