@@ -2,6 +2,95 @@ body {
   background-color: #202947;
   color: white;
   padding: 0px 50px;
+  height: 100%;
+}
+/* #main .main-box {
+  margin: 3% auto 0%;
+} */
+
+@media screen and (max-height: 800px){
+  #main .main-box {
+    margin: 30px auto;
+  }
+  #main-matching .matching-box {
+    margin-top: 50px;
+    border-radius: 90px;
+    width: 700px;
+    height: 400px;
+    background-color: #FFF08B;
+    position: relative;
+    border: 8px solid #5667A0;
+  }
+  #main-matching .matching-btn {
+    display: block;
+    position: absolute;
+    top: 75%;
+    left: 43.573%;
+    background-color: #b0bce9;
+    border: none;
+    width: 90px;
+    height: 35px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  #main-search .input-box {
+    display: flex;
+    justify-content: center;
+    width: 700px;
+    height: 35px;
+    border-radius: 90px;
+    background-color: white;
+  }
+  #main-search .large-input {
+    width: 620px;
+    height: 35px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+}
+@media screen and (min-height: 800px){
+  #main .main-box {
+    margin: 100px auto;
+  }
+  #main-matching .matching-box {
+    margin-top: 80px;
+    border-radius: 90px;
+    width: 850px;
+    height: 450px;
+    background-color: #FFF08B;
+    position: relative;
+    border: 8px solid #5667A0;
+  }
+  #main-matching .matching-btn {
+    display: block;
+    position: absolute;
+    top: 75%;
+    left: 44.706%;
+    background-color: #b0bce9;
+    border: none;
+    width: 90px;
+    height: 35px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  #main-search .input-box {
+    display: flex;
+    justify-content: center;
+    width: 850px;
+    height: 35px;
+    border-radius: 90px;
+    background-color: white;
+  }
+  #main-search .large-input {
+    width: 780px;
+    height: 35px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
 }
 #main .main-font {
   text-align: center;
@@ -17,34 +106,12 @@ body {
   display: flex;
   justify-content: center;
 }
-#main-search .input-box {
-  display: flex;
-  justify-content: center;
-  width: 700px;
-  height: 35px;
-  border-radius: 90px;
-  background-color: white;
-}
-#main-search .large-input {
-  width: 620px;
-  height: 35px;
-  border: none;
-  outline: none;
-  background-color: transparent;
-}
+
 #main-matching .center {
   display: flex;
   justify-content: center;
 }
-#main-matching .matching-box {
-  margin-top: 50px;
-  border-radius: 90px;
-  width: 700px;
-  height: 400px;
-  background-color: #FFF08B;
-  position: relative;
-  border: 8px solid #5667A0;
-}
+
 #main-matching .center-group {
   display: flex;
   justify-content: center;
@@ -68,19 +135,7 @@ body {
   text-decoration: none;
 }
 
-#main-matching .matching-btn {
-  display: block;
-  position: absolute;
-  top: 75%;
-  left: 43.573%;
-  background-color: #b0bce9;
-  border: none;
-  width: 90px;
-  height: 35px;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: 15px;
-}
+
 #main-matching .timer {
   display: inline-block;
   color: black;

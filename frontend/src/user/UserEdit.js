@@ -11,6 +11,10 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
   let [password, setPassword] = useState("")
   let [passwordConfirm, setPasswordConfirm] = useState("")
   let [nicknameCount, setNicknameCount] = useState(null)
+  let isBlack = false
+  if (blackList.length > 0) {
+    isBlack = true
+  }
   useEffect(() => {
     getLolNicknameCount(lolNickname)
     .then((e) => {
@@ -127,7 +131,7 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
                 <button className="password-btn" onClick={passwordSubmit}>수정</button>
               </td>
             </tr>
-            <tr>
+            {isBlack && <tr>
               <th>블랙리스트</th>
               <td>
                 <div className="black-list-box ">
@@ -139,7 +143,7 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
                   })}
                 </div>
               </td>
-            </tr>
+            </tr>}
           </table>
         </div>
       </div>
