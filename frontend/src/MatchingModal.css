@@ -105,7 +105,7 @@
   /* 아이템 너비 고정 */
   table-layout: fixed;
   /* 아이템 간격 */
-    border-spacing: 30px 10px
+	border-spacing: 30px 10px
 }
 
 #matching-modal .user-table-info {
