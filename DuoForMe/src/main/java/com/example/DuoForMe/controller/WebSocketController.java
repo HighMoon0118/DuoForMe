@@ -52,7 +52,7 @@ public class WebSocketController {
                 request.setReceiverId(senderId);
                 simpMessagingTemplate.convertAndSend("/sub/" + senderId, request);
 
-                userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
+                userAccept.remove(receiver); // 수락 여부 해쉬맵에서 삭제
 
             } else if(!userAccept.get(request.getReceiver()) && !request.isAcceptMatching()){ // 둘 다 거절을 눌렀을 경우
 
