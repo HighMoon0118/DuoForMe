@@ -76,10 +76,10 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
     if (rUser.tier == undefined) return null
 
     if (rUser.tier!=="CHALLENGER"&&rUser.tier!=="MASTER") {
-      return <img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="120px" width="120px" />
+      return <img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
     } 
 
-    return <img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="120px" width="120px" />
+    return <img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
   }
 
   const showRUserInfo = () => {
@@ -94,7 +94,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
           <div className="ts-lr8">승률 {Math.ceil(rUser.win/(rUser.win+rUser.lose)*100)}%</div>
         </div>
         <div className="user-table-info">
-          <img className="profile-icon" src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${rUser.riotUser.profileIconId}.png`} alt="user icon"/>
+          <img className="profile-icon" src={`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${rUser.riotUser.profileIconId}.png`} alt="user icon"/>
           <div className="ts-xxl8">{ rUser.riotUser.name }</div>
           <div className="ts-l8">{linesInKorean[mainLines[0]]}({Math.round(lineCnt[mainLines[0]]/gameData.length*100)}%)</div>
           {lineCnt[mainLines[1]]>0?<div className="ts-l8">{linesInKorean[mainLines[1]]}({Math.round(lineCnt[mainLines[1]]/gameData.length*100)}%)</div>:null}
