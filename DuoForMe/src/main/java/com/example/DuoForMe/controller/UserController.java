@@ -22,6 +22,7 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<UserDetailResponse> getMyMemberInfo() {
+        System.out.println();
         UserDetailResponse response = service.findByUserId(service.getMyId().getUserId());
         return ResponseEntity.ok(response);
     }
