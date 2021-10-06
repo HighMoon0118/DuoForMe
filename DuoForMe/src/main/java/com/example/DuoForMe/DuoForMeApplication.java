@@ -28,7 +28,5 @@ public class DuoForMeApplication {
 
 		SpringApplication.run(DuoForMeApplication.class, args);
 
-//		MatchingThread matchingThread = new MatchingThread();
-//		matchingThread.start();
 	}
 }
