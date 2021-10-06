@@ -83,7 +83,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
   }
 
   const showRUserInfo = () => {
-    if (isFolded || rUser.riotUser===undefined) return null
+    if (isFolded || rUser === undefined) return null
 
     return (
       <div className="user-table">
