@@ -42,7 +42,7 @@ function Detail({match, history, rUser, gameData, setRUser, setGameData}) {
       <div id="detail">
         <div id="info">
           <SeasonInfo nickname={match.params.nickname} gameData={gameData} rUser={rUser} />
-          <button onClick={toggleRecommend}>{ btnMsg }</button>
+          <button className="detail-btn" onClick={toggleRecommend}>{ btnMsg }</button>
           {
             isRecommend
             ? <Recommend/>
