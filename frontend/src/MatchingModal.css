@@ -9,7 +9,7 @@
   flex-direction: column;
   width: 900px;
   border-radius: .3rem;
-  background-color: rgb(255, 109, 109);
+  background-color: rgb(151, 76, 76);
   border-radius: 20px;
   animation: modal-show .3s;
 }
@@ -27,6 +27,8 @@
   margin: 0 16px;
   height: 30px;
   width: 120px;
+  font-size: large;
+  font-weight: 600;
 }
 #matching-modal .chat .chatting-space{
   margin: 0 0px 16px 0px;
@@ -40,6 +42,9 @@
 #matching-modal .chat .message-line{
   display: flex;
   flex-direction: column;
+}
+#matching-modal .chat .blank{
+  height: 60px;
 }
 #matching-modal .chat .duo-name{
   display:inline-block;
@@ -94,7 +99,7 @@
 
 #matching-modal .user-table {
   display: table;
-  height: 200px;
+  height: 180px;
   width: 600px;
 
   /* 아이템 너비 고정 */
@@ -112,9 +117,9 @@
 }
 
 #matching-modal .profile-icon {
-  height: 100px;
-  width: 100px;
-  margin: 20px;
+  height: 90px;
+  width: 90px;
+  margin: 20px auto 0px auto;
   border-radius: 30px;
 }
 
@@ -191,6 +196,17 @@
 #matching-modal .ts-l4 {
   font-size: medium;
   font-weight: 400;
+}
+
+#matching-modal .progress {
+  width: 400px;
+  background-color: #ddd;
+}
+
+#matching-modal .bar {
+  width: 400px;
+  height: 30px;
+  background-color: #4CAF50;
 }
 
 @keyframes modal-show {
