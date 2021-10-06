@@ -232,7 +232,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
                 {!canChat && <button onClick={accept} disabled={choose}>수락</button>}
                 {!canChat && <button onClick={refuse} disabled={choose}>거절</button>}
                 {canChat && <button onClick={exit}>나가기</button>}
-                <MatchingTimer isFolded={isFolded} exit={exit}/>
+                <MatchingTimer canChat={canChat} isFolded={isFolded} exit={exit}/>
                 {showRUserInfo()}
                 {showSeasonInfo()}
               </div>
