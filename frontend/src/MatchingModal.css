@@ -28,10 +28,53 @@
   height: 30px;
   width: 120px;
 }
-#matching-modal .chat .message{
+#matching-modal .chat .chatting-space{
   margin: 0 0px 16px 0px;
-  border-radius: 30px;
+  border-radius: 10px;
+  width: 300px;
+  height: 500px;
+  background: rgb(151, 190, 235);
+  overflow-y: scroll;
 }
+
+#matching-modal .chat .message-line{
+  display: flex;
+  flex-direction: column;
+}
+#matching-modal .chat .duo-name{
+  display:inline-block;
+  align-self: flex-start;
+  font-size: x-small;
+  margin: 3px auto 0px 6px;
+}
+#matching-modal .chat .my-name{
+  display:inline-block;
+  align-self: flex-end;
+  font-size: x-small;
+  margin: 3px 6px 0px auto;
+}
+
+#matching-modal .chat .message1{
+  display:inline-block;
+  align-self: flex-start;
+  text-align: left;
+  vertical-align: auto;
+  max-width: 200px;
+  border-radius: 10px;
+  margin: 3px auto 0px 6px;
+  padding: 3px;
+  background: rgb(233, 233, 233);
+}
+#matching-modal .chat .message2{
+  display:inline-block;
+  text-align: left;
+  max-width: 200px;
+  border-radius: 10px;
+  margin: 3px 6px 0px auto;
+  padding: 3px;
+  background: rgb(255, 253, 151);
+}
+
 #matching-modal .chat input{
   height: 24px;
   width: 232px;
@@ -49,10 +92,105 @@
   width: 30px;
 }
 
-#matching-modal .message {
-  width: 300px;
-  height: 500px;
-  background: rgb(151, 190, 235);
+#matching-modal .user-table {
+  display: table;
+  height: 200px;
+  width: 600px;
+
+  /* 아이템 너비 고정 */
+  table-layout: fixed;
+  /* 아이템 간격 */
+	border-spacing: 30px 10px
+}
+
+#matching-modal .user-table-info {
+  display: table-cell;
+  vertical-align: middle;
+  color: black;
+  background-color: rgb(152, 167, 196);
+  border-radius: 30px;
+}
+
+#matching-modal .profile-icon {
+  height: 100px;
+  width: 100px;
+  margin: 20px;
+  border-radius: 30px;
+}
+
+#matching-modal .user-season-info {
+  margin: 20px 30px;
+  vertical-align: middle;
+  height: 250px;
+  width: 400px;
+}
+
+#matching-modal .champion-table {
+  display: table;
+  height: 40px;
+  width: 370px;
+  margin-top: 5px;
+  background-color: rgb(152, 167, 196);
+  border-radius: 10px;
+  /* border: 1px solid rgb(97, 83, 83); */
+}
+
+#matching-modal .champion-info1 {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: medium;
+  text-align: left;
+  width: 100px;
+  color: black;
+}
+
+#matching-modal .champion-info2 {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: medium;
+  text-align: left;
+  width: 80px;
+  color: black;
+}
+
+
+#matching-modal .champion-icon {
+  vertical-align: middle;
+  margin: 2px 0px;
+  height: 40px;
+  width: 40px;
+  border-radius: 30px;
+}
+
+#matching-modal .ts-xxl8 {
+  font-size: xx-large;
+  font-weight: 800;
+}
+
+#matching-modal .ts-xl8 {
+  font-size: x-large;
+  font-weight: 800;
+}
+
+#matching-modal .ts-lr8 {
+  font-size: larger;
+  font-weight: 800;
+}
+
+#matching-modal .ts-l8 {
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  font-weight: 600;
+}
+
+#matching-modal .fw8 {
+  font-weight: 800;
+}
+
+#matching-modal .ts-l4 {
+  font-size: medium;
+  font-weight: 400;
 }
 
 @keyframes modal-show {
