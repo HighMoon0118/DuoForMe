@@ -49,7 +49,7 @@ public class WebSocketController {
                 request.setSender(receiver);
                 request.setSenderId(receiverId);
                 request.setReceiver(sender);
-                request.setReceiverId(senderId;
+                request.setReceiverId(senderId);
                 simpMessagingTemplate.convertAndSend("/sub/" + senderId, request);
 
                 userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
