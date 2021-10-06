@@ -21,7 +21,7 @@ public class WebSocketController {
         if (request.isExit()) {
             request.setMessage(request.getSender() + "님이 채팅방에서 퇴장했습니다");
         }
-        simpMessagingTemplate.convertAndSend("/sub/" + userId, request);
+        simpMessagingTemplate.convertAndSend("/sub/" + request.getReceiverId(), request);
     }
 
     @MessageMapping("/accept/{userId}") // 여기서 유저 아이디는 메세지를 보낼 대상(상대방)
@@ -40,35 +40,27 @@ public class WebSocketController {
                 simpMessagingTemplate.convertAndSend("/sub/" + request.getSenderId(), request);
 
                 // 듀오 상대방한테 메세지 보내기
-                ChatRequest receiverRequest = new ChatRequest();
-                receiverRequest.setReceiver(request.getSender());
-                receiverRequest.setReceiverId(request.getSenderId());
-
-                receiverRequest.setSender(request.getReceiver());
-                receiverRequest.setSenderId(request.getReceiverId());
-
-                receiverRequest.setAcceptMatching(true);
-                receiverRequest.setStartMatching(true);
-                receiverRequest.setStartChatting(true);
-                receiverRequest.setMessage(request.getSender() + "님이 매칭을 수락하였습니다.");
-                simpMessagingTemplate.convertAndSend("/sub/" + userId, request);
+                request.setMessage(request.getSender() + "님이 매칭을 수락하였습니다.");
+                simpMessagingTemplate.convertAndSend("/sub/" + request.getReceiverId(), request);
 
                 userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
 
-            } else { // 둘중 한명이라도 거절했을때
+            } else if(!userAccept.get(request.getReceiver()) && !request.isAcceptMatching()){ // 둘 다 거절을 눌렀을 경우
+
+            } else if(!userAccept.get(request.getReceiver())) {  // 나는 수락, 상대방이 거절을 눌렀을 경우
 
                 // 나 자신한테 메시지 보내기
                 request.setStartMatching(false);
-                request.setExit(true);
                 request.setMessage("매칭이 거절되었습니다");
                 simpMessagingTemplate.convertAndSend("/sub/" + request.getSenderId(), request);
+
+            } else {  // 나는 거절, 상대방은 수락을 눌렀을 경우
 
                 // 듀오 상대방한테 메세지 보내기
                 ChatRequest receiverRequest = new ChatRequest();
                 receiverRequest.setStartMatching(false);
-                request.setExit(true);
                 receiverRequest.setMessage("매칭이 거절되었습니다.");
-                simpMessagingTemplate.convertAndSend("/sub/" + userId, request);
+                simpMessagingTemplate.convertAndSend("/sub/" + userId, receiverRequest);
 
                 userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
             }

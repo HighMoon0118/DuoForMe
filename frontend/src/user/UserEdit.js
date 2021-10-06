@@ -3,13 +3,18 @@ import "./UserEdit.css"
 import {lolNicknameEditAPI, getLolNicknameCount} from "../api/UserEditAPI"
 import { deleteBlacklist } from '../api/UserAPI';
 import { receiveRiot } from '../api/RUserAPI';
-
-function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit, userId} ) {
+import NavBarContainer from "../container/NavBarContainer"
+import { FiX } from "react-icons/fi"
+function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blacklist, userId, history} ) {
   let [lolNicknameChange, setLolNickname] = useState("")
   let [serviceNicknameChange, setServiceNickname] = useState("")
   let [password, setPassword] = useState("")
   let [passwordConfirm, setPasswordConfirm] = useState("")
   let [nicknameCount, setNicknameCount] = useState(null)
+  let isBlack = false
+  if (blackList.length > 0) {
+    isBlack = true
+  }
   useEffect(() => {
     getLolNicknameCount(lolNickname)
     .then((e) => {
@@ -61,13 +66,13 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
   function blackListSubmit(blackId) {
     const blackUserId = { "blackUserId": blackId }
     deleteBlacklist(blackUserId).then(() => {
-      let blacklist = []
+      let temp_blacklist = []
       for (let i = 0; i < blackList.length; i++) {
         if (blackList[i].blacklistId !== blackId) {
-          blacklist.push(blackList[i])
+          temp_blacklist.push(blackList[i])
         }
       }
-      blackListEdit(blacklist)
+      blacklist(temp_blacklist)
       }
     )
   }
@@ -87,54 +92,61 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
     }
   }
   return(
-    <div id="user-edit-box">
-      <h1>회원정보 수정</h1>
-      <table>
-        <tr>
-          <th>이메일</th>
-          <td>{email}</td>
-        </tr>
-        <tr>
-          <th>롤 닉네임</th>
-          <td>
-            <form> 
-              <input onChange={lolNicknameEdit} className="input-box" value={lolNicknameChange} placeholder={lolNickname}/>
-              <button onClick={lolNicknameSubmit}>수정</button>
-              { nicknameCount ? <p className="margin-0">같은 닉네임을 가진 사람이 {nicknameCount}명입니다. </p> : <span></span>}
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <th>서비스 닉네임</th>
-          <td>
-            <form>
-              <input onChange={serviceNicknameEdit} value={serviceNicknameChange} className="input-box" placeholder={serviceNickname}/>
-              <button onClick={serviceNicknameSubmit}>수정</button>
-            </form>
-          </td>
-        </tr>
-        <tr>
-          <th>비밀번호 수정</th>
-          <td>
-            <div className="inline-block">
-              <div><input type="password" onChange={passwordEdit} value={password} className="input-box" placeholder="새로운 비밀번호를 입력하세요"/></div>
-              <div><input type="password" onChange={passwordConfirmEdit} value={passwordConfirm} className="input-box" placeholder="새로운 비밀번호를 입력하세요"/></div>
-            </div>
-            <button className="password-btn" onClick={passwordSubmit}>수정</button>
-          </td>
-        </tr>
-        <tr>
-          <th>블랙리스트</th>
-          <td>
-            {blackList.map((black) => {
-            return <div id="black-list" key={black.userId}>
-              { black.lolNickname }
-              <button onClick={() => blackListSubmit(black.blacklistId)}>X</button>
-            </div>
-          })}
-          </td>
-        </tr>
-      </table>
+    <div>
+      <NavBarContainer history={history}/>
+      <div className="user-edit-flex">
+        <div id="user-edit-box">
+          <h1>회원정보 수정</h1>
+          <table>
+            <tr>
+              <th>이메일</th>
+              <td>{email}</td>
+            </tr>
+            <tr>
+              <th>롤 닉네임</th>
+              <td>
+                <form> 
+                  <input onChange={lolNicknameEdit} className="input-box" value={lolNicknameChange} placeholder={lolNickname}/>
+                  <button className="edit-btn" onClick={lolNicknameSubmit}>수정</button>
+                  { nicknameCount ? <p className="margin-0">같은 닉네임을 가진 사람이 {nicknameCount}명입니다. </p> : <span></span>}
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <th>서비스 닉네임</th>
+              <td>
+                <form>
+                  <input onChange={serviceNicknameEdit} value={serviceNicknameChange} className="input-box" placeholder={serviceNickname}/>
+                  <button className="edit-btn" onClick={serviceNicknameSubmit}>수정</button>
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <th>비밀번호 수정</th>
+              <td>
+                <div className="inline-block">
+                  <div><input type="password" onChange={passwordEdit} value={password} className="input-box" placeholder="새로운 비밀번호를 입력하세요"/></div>
+                  <div><input type="password" onChange={passwordConfirmEdit} value={passwordConfirm} className="input-box" placeholder="비밀번호 확인을 입력하세요"/></div>
+                </div>
+                <button className="password-btn" onClick={passwordSubmit}>수정</button>
+              </td>
+            </tr>
+            {isBlack && <tr>
+              <th>블랙리스트</th>
+              <td>
+                <div className="black-list-box ">
+                  {blackList.map((black) => {
+                  return <div id="black-list" key={black.userId}>
+                    { black.lolNickname }
+                    <FiX size="18" className="blacklist-btn" onClick={() => blackListSubmit(black.blacklistId)}/>
+                  </div>
+                  })}
+                </div>
+              </td>
+            </tr>}
+          </table>
+        </div>
+      </div>
     </div>
   )
 }

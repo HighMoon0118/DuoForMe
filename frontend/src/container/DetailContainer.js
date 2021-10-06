@@ -1,12 +1,13 @@
 import Detail from "../detail/Detail"
 import { connect } from "react-redux"
 import { setRUser, setGameData} from "../modules/rUserInfo"
-function DetailContainer ({ match, history, rUserInfo, setRUser, setGameData}) {
+function DetailContainer ({ match, history, rUser, gameData, setRUser, setGameData}) {
   return (
     <Detail 
     match={match}
     history={history}
-    rUserInfo={rUserInfo}
+    rUser={rUser}
+    gameData={gameData}
     setRUser={setRUser}
     setGameData={setGameData}
     />
@@ -15,10 +16,8 @@ function DetailContainer ({ match, history, rUserInfo, setRUser, setGameData}) {
 
 function mapStateToProps (state) {
   return {
-    rUserInfo: {
-      rUser: state.rUserInfo.rUser,
-      gameData: state.rUserInfo.gameData,
-    }
+    rUser: state.rUserInfo.rUser,
+    gameData: state.rUserInfo.gameData,
   }
 }
 function mapDispatchToProps(dispatch) {
