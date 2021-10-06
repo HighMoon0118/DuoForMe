@@ -57,7 +57,11 @@ public class WebSocketController {
             } else if(!userAccept.get(request.getReceiver()) && !request.isAcceptMatching()){ // 둘 다 거절을 눌렀을 경우
                 userAccept.remove(request.getReceiver());
 
-            } else if(!userAccept.get(request.getReceiver())) {  // 나는 수락, 상대방이 거절을 눌렀을 경우
+                userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
+
+            } else if(!userAccept.get(request.getReceiver())) {  // 상대방 거절후 내가 수락
+
+                userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
 
                 // 나 자신한테 메시지 보내기
                 request.setStartMatching(false);
@@ -70,7 +74,7 @@ public class WebSocketController {
                 ChatRequest receiverRequest = new ChatRequest();
                 receiverRequest.setStartMatching(false);
                 receiverRequest.setMessage("매칭이 거절되었습니다.");
-                simpMessagingTemplate.convertAndSend("/sub/" + userId, receiverRequest);
+                simpMessagingTemplate.convertAndSend("/sub/" + request.getReceiverId(), receiverRequest);
 
                 userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
             }

@@ -83,7 +83,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
   }
 
   const showRUserInfo = () => {
-    if (isFolded || rUser === undefined) return null
+    if (isFolded || rUser.riotUser===undefined) return null
 
     return (
       <div className="user-table">
@@ -231,7 +231,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
                 {!canChat && <button onClick={accept} disabled={choose}>수락</button>}
                 {!canChat && <button onClick={refuse} disabled={choose}>거절</button>}
                 {canChat && <button onClick={exit}>나가기</button>}
-                <MatchingTimer isFolded={isFolded} exit={exit}/>
+                <MatchingTimer canChat={canChat} isFolded={isFolded} exit={exit}/>
                 {showRUserInfo()}
                 {showSeasonInfo()}
               </div>
@@ -239,7 +239,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
                 <div className="chatting-space" style={isFolded ? {display: "none"} : {display: "block"}}>
                   {showChat()}
                 </div>
-                <input type="text" value={message} onChange={inputMessage} onKeyPress={sendMessage}/>
+                <input disabled={!canChat} type="text" value={message} onChange={inputMessage} onKeyPress={sendMessage}/>
                 <button disabled={!canChat} onClick={sendMessage}>SEND</button>
               </div>
               <div className="fold">
