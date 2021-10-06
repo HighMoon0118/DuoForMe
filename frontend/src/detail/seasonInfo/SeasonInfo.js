@@ -84,6 +84,31 @@ function SeasonInfo (props) {
         )
     }
 
+    const showTierRank = () => {
+      if (props.rUser === undefined) return null
+
+      return (
+        <div>
+          <div className="ts-xl8">{props.rUser.tier} {props.rUser.rank}</div>
+          <div className="ts-l4">{props.rUser.win}승 {props.rUser.lose}패</div>
+          <div className="ts-lr8">승률 {Math.ceil(props.rUser.win/(props.rUser.win+props.rUser.lose)*100)}%</div>
+        </div>
+        )
+    }
+
+    const showTableInfo = () => {
+      if (props.rUser === undefined) return null
+
+      return (
+        <div>
+        <img className="profile-icon" src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${props.rUser.riotUser.profileIconId}.png`} alt="user icon"/>
+          <div className="ts-xxl8">{ props.rUser.riotUser.name }</div>
+          <div className="ts-l8">{linesInKorean[mainLines[0]]}({Math.round(lineCnt[mainLines[0]]/props.gameData.length*100)}%)</div>
+          {lineCnt[mainLines[1]]>0?<div className="ts-l8">{linesInKorean[mainLines[1]]}({Math.round(lineCnt[mainLines[1]]/props.gameData.length*100)}%)</div>:null}
+        </div>
+        )
+    }
+
     return (
       <div>
         <div id="season-info">
@@ -91,16 +116,11 @@ function SeasonInfo (props) {
 
             <div className="user-table-info">
               {showProfile()}
-              <div className="ts-xl8">{props.rUser.tier} {props.rUser.rank}</div>
-              <div className="ts-l4">{props.rUser.win}승 {props.rUser.lose}패</div>
-              <div className="ts-lr8">승률 {Math.ceil(props.rUser.win/(props.rUser.win+props.rUser.lose)*100)}%</div>
+              {showTierRank()}
             </div>
 
             <div className="user-table-info">
-              <img className="profile-icon" src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${props.rUser.riotUser.profileIconId}.png`} alt="user icon"/>
-              <div className="ts-xxl8">{ props.rUser.riotUser.name }</div>
-              <div className="ts-l8">{linesInKorean[mainLines[0]]}({Math.round(lineCnt[mainLines[0]]/props.gameData.length*100)}%)</div>
-              {lineCnt[mainLines[1]]>0?<div className="ts-l8">{linesInKorean[mainLines[1]]}({Math.round(lineCnt[mainLines[1]]/props.gameData.length*100)}%)</div>:null}
+              {showTableInfo()}
             </div>
 
           </div>
