@@ -110,6 +110,8 @@ public class MatchingServiceScheduler {
 
     public void sendMatchingMessage(MatchingUser user1, MatchingUser user2) {
 
+        System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+
         //User1에게 보낼 메세지
         ChatRequest request1 = new ChatRequest();
         request1.setSender(user2.getUser().getLolNickname());
