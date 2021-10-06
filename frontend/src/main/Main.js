@@ -22,7 +22,7 @@ function Main({history, isLogin, logout, isMatching}) {
       </div>
       <div className="main-box">
         <h1 className="main-font">
-          Duofor.me/ 매칭로직 변경
+          Duofor.me/ 웹소켓 채팅 로직
         </h1>
         <MainSearch history={history}/>
         <MainMatchingContainer history={history}/>
