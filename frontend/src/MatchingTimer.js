@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react"
 
-function MatchingTimer({ isFolded, exit }) {
+function MatchingTimer({ canChat, isFolded, exit }) {
 
   let [ time, setTime ] = useState(400)
   const timerId = useRef(null)
@@ -9,6 +9,14 @@ function MatchingTimer({ isFolded, exit }) {
       time -= 4
       setTime(time)
     }, 1000)
+
+    if (canChat) {
+      return () => {
+        setTime(400)
+        clearTimeout(timerId.current)
+      }
+    }
+  
     return () => {
       clearTimeout(timerId.current)
     }
