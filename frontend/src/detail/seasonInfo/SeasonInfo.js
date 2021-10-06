@@ -73,7 +73,7 @@ function SeasonInfo (props) {
     }
 
     const showProfile = () => {
-      if (props.rUser === undefined) return null
+      if (props.rUser.tier === undefined) return null
 
       return (
         <div>
