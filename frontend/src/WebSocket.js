@@ -40,6 +40,7 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
 
   const accpetOrRefuse = (answer) => {
     if ($websocket.current) {
+      console.log(answer);
       const tmp = {...myMsg, acceptMatching: answer}
       $websocket.current.sendMessage(`/accept/${userId}`, JSON.stringify(tmp));
       if (!answer) {
@@ -87,10 +88,6 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
                       setChatable(true)
                     }
                     addChat(msg)
-                    if (isFolded) {
-                      console.log(msg.sender);
-                      alert(`${msg.sender} : ${msg.message}`)
-                    }
                   }
                   else {  // 성사되기전 매칭됨을 알림
                     changeMatching(isMatching, null)
