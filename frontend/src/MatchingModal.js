@@ -70,6 +70,15 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
     return  totalChamps[second].cnt - totalChamps[first].cnt;
   })
 
+  const showTier = () => {
+    if (rUser.tier == undefined) return null
+
+    if (rUser.tier!=="CHALLENGER"&&rUser.tier!=="MASTER") {
+      return <img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
+    } 
+
+    return <img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
+  }
 
   const showRUserInfo = () => {
     if (isFolded) return null
@@ -77,10 +86,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
     return (
       <div className="user-table">
         <div className="user-table-info">
-          {rUser.tier!=="CHALLENGER"&&rUser.tier!=="MASTER"
-            ?<img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
-            :<img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
-          }
+          { showTier() }
           <div className="ts-xl8">{rUser.tier} {rUser.rank}</div>
           <div className="ts-l4">{rUser.win}승 {rUser.lose}패</div>
           <div className="ts-lr8">승률 {Math.ceil(rUser.win/(rUser.win+rUser.lose)*100)}%</div>
