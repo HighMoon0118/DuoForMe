@@ -15,9 +15,6 @@ function Main({history, isLogin, logout, isMatching}) {
     setModalOpen(false);
   }
   const logOut = () => {
-    if (isMatching) {
-      cancelMatching()
-    }
     localStorage.setItem("token", "")
     logout()
     
@@ -31,13 +28,15 @@ function Main({history, isLogin, logout, isMatching}) {
         { !isLogin && <Link className="mw-10" style={{ textDecoration: "none", color: "white", marginLeft:"10px"}} to="/signup">회원가입</Link> }
         
       </div>
-      <h1 className="main-font">
-        Duofor.me
-      </h1>
-      <MainSearch history={history}/>
-      <MainMatchingContainer history={history}/>
-      <button onClick={ openModal }>모달팝업</button>
-      <Modal open={ modalOpen } close={ closeModal }>모달 내용 아아아</Modal>
+      <div className="main-box">
+        <h1 className="main-font">
+          Duofor.me
+        </h1>
+        <MainSearch history={history}/>
+        <MainMatchingContainer history={history}/>
+        <button onClick={ openModal }>모달팝업</button>
+        <Modal open={ modalOpen } close={ closeModal }>모달 내용 아아아</Modal>
+        </div>
     </div>
   )
 }
