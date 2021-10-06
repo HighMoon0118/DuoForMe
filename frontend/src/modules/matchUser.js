@@ -10,7 +10,7 @@ export const setGameData = ( gameData ) => ({
   gameData
 })
 const initialState = {
-  rUser: {},
+  rUser: undefined,
   gameData: []
 }
 function matchUser(state = initialState, action) {

@@ -40,6 +40,7 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
 
   const accpetOrRefuse = (answer) => {
     if ($websocket.current) {
+      console.log(answer);
       const tmp = {...myMsg, acceptMatching: answer}
       $websocket.current.sendMessage(`/accept/${userId}`, JSON.stringify(tmp));
       if (!answer) {

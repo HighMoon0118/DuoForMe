@@ -82,9 +82,8 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
     return <img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="120px" width="120px" />
   }
 
-
   const showRUserInfo = () => {
-    if (isFolded) return null
+    if (isFolded || rUser.riotUser===undefined) return null
 
     return (
       <div className="user-table">
