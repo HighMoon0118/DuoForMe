@@ -2,16 +2,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 900px;
-  height: 600px;
-  margin: 100px auto;
   background-color: #4e5363;
   border-radius: 60px;
+  padding: 20px 0px 40px 0px;
+}
+@media screen and (min-height: 400px) and (max-height: 800px){
+  #user-edit-box {
+    margin: 70px auto;
+  }
+}
+@media screen and (min-height: 800px){
+  #user-edit-box {
+    margin: 150px auto;
+  }
 }
 #user-edit-box .input-box {
   background-color: #4e5363;
   outline: none;
-  border: 2px solid white;
+  border: 1px solid white;
   margin: 10px 0px;
   width: 200px;
   height: 30px;
@@ -27,7 +37,11 @@
 #user-edit-box .flex-box {
   display: flex;
 }
+#user-edit-box > table > tr > th {
+  padding: 10px;
+}
 #user-edit-box > table > tr > td {
+  padding: 10px;
   width: 400px;
   display: flex;
   justify-content: center;
@@ -37,24 +51,50 @@
   display: inline-block;
 }
 #user-edit-box > table > tr > td  #black-list {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   margin: 10px 5px;
-  border: 2px solid white;
   border-radius: 5px;
   color: black;
-  background-color: white;
-}
-#user-edit-box > table > tr > td > div > button {
-  background-color: white;
+  padding: 0px 5px;
+  background-color: #a4c9f0;
   border: none;
-  margin-left: 5px;
+  height: 28px;
 }
 
 #user-edit-box > table > tr > td .password-btn {
+  margin-left: 20px;
   width: 50px;
-  height: 25px;
+  height: 28px;
+  border-radius: 5px;
+  background-color: #a9b6e0;
   margin-top: 45px;
+  border: none;
 }
 #user-edit-box .margin-0 {
   margin: 0px;
+}
+
+#user-edit-box .edit-btn {
+  margin-left: 20px;
+  width: 50px;
+  height: 28px;
+  border-radius: 5px;
+  background-color: #a9b6e0 ;
+  border: none;
+}
+#user-edit-box .blacklist-btn {
+  margin: 0px 0px 0px 5px;
+  background-color: #a4c9f0 ;
+}
+#user-edit-box .black-list-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+#user-edit-box table {
+  border-top: 1px solid white;
+  border-collapse: collapse;
+}
+#user-edit-box tr {
+  border-bottom: 1px solid white;
 }

@@ -1,5 +1,5 @@
-const SET_RUSER = "userInfo/SET_RUSER_INFO"
-const SET_GAME_DATA = "userInfo/SET_GAME_DATA"
+const SET_RUSER = "rUserInfo/SET_RUSER_INFO"
+const SET_GAME_DATA = "rUserInfo/SET_GAME_DATA"
 
 export const setRUser = ( data ) => ({
   type: SET_RUSER,

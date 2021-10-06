@@ -2,16 +2,16 @@
   display: inline;
   width: 300px;
   height: 700px;
+  position: sticky;
+  top: 0;
   }
 #sidebar .fixed {
   display: flex;
   justify-content: center;
-  position: fixed;
-  background-color: gray;
+  background-color: #5667A0;
   width: 300px;
   height: 660px;
   right: 5rem;
-  margin-top: 10px;
 }
 #sidebar .user-img {
   display: inline-block;
@@ -27,15 +27,18 @@
 }
 #sidebar .user-box {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  background-color: darkkhaki;
+  color: black;
+  background-color: #7AB3F1;
   height: 50px;
   margin: 10px 15px;
   width: 240px;
+  border-radius: 5px;
+  padding: 2px 4px;
 }
 #sidebar .fixed .select-box {
-  margin: 10px 0px;
+  padding: 13px 0px;
 }
 
 #sidebar .fixed .select-box .drop-down {
@@ -52,14 +55,13 @@
   /* overflow-y: scroll; */
 }
 #sidebar .fixed .matching-btn {
+  position: absolute;
+  top: 32%;
+  left: 33.334%;
   border: none;
   width: 100px;
   height: 30px;
   border-radius: 10px;
-  margin-top: 10px;
-}
-#sidebar .padding-left-30 {
-  padding-left: 30px;
 }
 #sidebar .fixed .success-user-scroll {
   position: absolute;
@@ -68,10 +70,10 @@
   overflow-y: scroll;
 }
 #sidebar .modal {
-  color: white;
+  color: black;
   position: absolute;
-  width: 300px;
-  background-color: #9badeb;
+  width: 260px;
+  background-color: #b0c0f8;
   border-radius: 20px;
 }
 #sidebar .star-color-yellow {
@@ -83,19 +85,26 @@
 #sidebar .close {
   color: white;
   position: absolute;
-  right: 10%;
+  right: 5%;
+  top: 14%;
   background-color: #5d7be7;
   border: none;
-  border-radius: 2px;
+  border-radius: 10px;
   height: 20px;
+  padding: 0px 3px;
 }
 #sidebar .submit-btn {
   color: white;
   margin-top: 15px;
   margin-bottom: 10px;
-  background-color: #5d7be7;
+  background-color: #7893f7;
   border: none;
   border-radius: 5px;
   height: 30px;
   width: 50px;
+}
+
+#sidebar .matching-info-font {
+  margin-top: 20px;
+  font-size: 20px;
 }
