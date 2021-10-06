@@ -1,7 +1,12 @@
 import UserEdit from "../user/UserEdit"
 import { connect } from "react-redux"
+<<<<<<< HEAD
 import { lolEdit, serviceEdit, blacklist} from "../modules/userInfo"
 function UserEditContainer ({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, userId, blacklist, history }) {
+=======
+import { lolEdit, serviceEdit, blackListEdit} from "../modules/userInfo"
+function UserEditContainer ({lolNickname, serviceNickname, blackList, email, lolEdit, serviceEdit, blackListEdit, userId }) {
+>>>>>>> d51bb06fcd95c0629ace4948656d2f6ac35393ca
   return (
     <UserEdit 
       lolNickname={lolNickname} 
