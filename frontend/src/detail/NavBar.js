@@ -29,11 +29,7 @@ function NavBar ({isLogin, logout, isMatching, history}) {
   }
   return (
     <div id="navbar">
-<<<<<<< HEAD
       <div onClick={() => {history.push('/')}} className="logo" ><h1>Duofor.me</h1></div>
-=======
-      <div onClick={goHome} className="logo"><h1>Duofor.me</h1></div>
->>>>>>> d51bb06fcd95c0629ace4948656d2f6ac35393ca
       <div className="m-30">
         <div className="input-search mw-10">
           <input onChange={onChangeInput} value={inputText} placeholder="소환사명" className="small-input" onKeyUp={enterkey} />

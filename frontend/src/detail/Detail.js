@@ -41,13 +41,8 @@ function Detail({match, history, rUser, gameData, setRUser, setGameData}) {
       <NavBarContainer history={history}/>
       <div id="detail">
         <div id="info">
-<<<<<<< HEAD
-          <SeasonInfo nickname={match.params.nickname}/>
-          <button className="detail-btn" onClick={toggleRecommend}>{ btnMsg }</button>
-=======
           <SeasonInfo nickname={match.params.nickname} gameData={gameData} rUser={rUser} />
           <button onClick={toggleRecommend}>{ btnMsg }</button>
->>>>>>> d51bb06fcd95c0629ace4948656d2f6ac35393ca
           {
             isRecommend
             ? <Recommend/>
