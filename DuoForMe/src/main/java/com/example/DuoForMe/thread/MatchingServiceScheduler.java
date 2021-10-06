@@ -32,19 +32,19 @@ public class MatchingServiceScheduler {
 
                 //User1에게 보낼 메세지
                 ChatRequest request1 = new ChatRequest();
-                request1.setSender(user1.getUser().getLolNickname());
-                request1.setSenderId(user1.getUserId());
-                request1.setReceiver(user2.getUser().getLolNickname());
-                request1.setReceiverId(user2.getUserId());
+                request1.setSender(user2.getUser().getLolNickname());
+                request1.setSenderId(user2.getUserId());
+                request1.setReceiver(user1.getUser().getLolNickname());
+                request1.setReceiverId(user1.getUserId());
                 request1.setStartMatching(true);
                 request1.setMessage(user2.getUser().getLolNickname() + "님과 매칭 되어 수락 대기중입니다...");
 
                 //User2에게 보낼 메세지
                 ChatRequest request2 = new ChatRequest();
-                request2.setSender(user2.getUser().getLolNickname());
-                request2.setSenderId(user2.getUserId());
-                request2.setReceiver(user1.getUser().getLolNickname());
-                request2.setReceiverId(user1.getUserId());
+                request2.setSender(user1.getUser().getLolNickname());
+                request2.setSenderId(user1.getUserId());
+                request2.setReceiver(user2.getUser().getLolNickname());
+                request2.setReceiverId(user2.getUserId());
                 request2.setStartMatching(true);
                 request2.setMessage(user1.getUser().getLolNickname() + "님과 매칭 되어 수락 대기중입니다...");
 
