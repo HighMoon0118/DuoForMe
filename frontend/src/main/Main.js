@@ -3,17 +3,9 @@ import "./Main.css"
 import MainSearch from "./MainSearch"
 import { Link } from "react-router-dom"
 import MainMatchingContainer from "../container/MainMatchingContainer"
-import Modal from "../MatchingModal"
 import { cancelMatching } from "../api/MatchingAPI"
 function Main({history, isLogin, logout, isMatching}) {
-  const [ modalOpen, setModalOpen ] = useState(false);
 
-  const openModal = () => {
-    setModalOpen(true);
-  }
-  const closeModal = () => {
-    setModalOpen(false);
-  }
   const logOut = () => {
     localStorage.setItem("token", "")
     logout()
@@ -34,8 +26,6 @@ function Main({history, isLogin, logout, isMatching}) {
         </h1>
         <MainSearch history={history}/>
         <MainMatchingContainer history={history}/>
-        <button onClick={ openModal }>모달팝업</button>
-        <Modal open={ modalOpen } close={ closeModal }>모달 내용 아아아</Modal>
         </div>
     </div>
   )
