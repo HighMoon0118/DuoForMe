@@ -101,7 +101,7 @@ function SeasonInfo (props) {
 
       return (
         <div>
-          <img className="profile-icon" src={`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${props.rUser.riotUser.profileIconId}.png`} alt="user icon"/>
+          <img className="profile-icon" src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/profileicon/${props.rUser.riotUser.profileIconId}.png`} alt="user icon"/>
           <div className="ts-xxl8">{ props.rUser.riotUser.name }</div>
           <div className="ts-l8">{linesInKorean[mainLines[0]]}({Math.round(lineCnt[mainLines[0]]/props.gameData.length*100)}%)</div>
           {lineCnt[mainLines[1]]>0?<div className="ts-l8">{linesInKorean[mainLines[1]]}({Math.round(lineCnt[mainLines[1]]/props.gameData.length*100)}%)</div>:null}

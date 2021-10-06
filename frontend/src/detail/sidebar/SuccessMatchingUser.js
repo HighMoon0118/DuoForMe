@@ -18,7 +18,7 @@ function SuccessMatchingUser(props) {
   return(
     <div className="user-box">
       <div className="user-img">
-        <img src={`https://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${props.image}.png`} alt="user icon" height="40px" width="40px" />
+        <img src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/profileicon/${props.image}.png`} alt="user icon" height="40px" width="40px" />
       </div>
       <div className="user-info">
         <p className="margin-0">{props.userName}</p>
