@@ -26,7 +26,7 @@ function WebSocket ({userId, isLogin}) {
       <div>
           {
             isLogin && <SockJsClient
-              url = "https://duofor.me/socket"
+              url = "https://duofor.me/api/socket"
               topics = {[`/sub/${userId}`]}
               onMessage = {msg => {
                 console.log(msg.message)
