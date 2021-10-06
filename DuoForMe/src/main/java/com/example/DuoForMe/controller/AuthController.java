@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("https://duofor.me/")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("api/auth")
 public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
     public ResponseEntity<Void> signup(@Valid @RequestBody UserCreateRequest userCreateRequest) {
+        // System.out.println("들어왔당!")
         Long id = authService.signup(userCreateRequest);
         log.info(Long.toString(id));
         System.out.println(ResponseEntity.status(HttpStatus.CREATED).build());
