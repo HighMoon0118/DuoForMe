@@ -1,20 +1,52 @@
-#play-list {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-
 #play-list .play-table {
+  margin: 0px auto;
   display: table;
   height: 100px;
   width: 800px;
+
 }
 
 #play-list .play-table-item {
   display: table-cell;
   vertical-align: middle;
 }
+
+#play-list .play-header {
+  display: table-cell;
+  vertical-align: middle;
+  width: 80px;
+}
+
+#play-list .play-champ {
+  display: table-cell;
+  vertical-align: middle;
+  width: 130px;
+}
+
+#play-list .play-spell {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100px;
+}
+
+#play-list .play-kda {
+  display: table-cell;
+  vertical-align: middle;
+  width: 120px;
+}
+
+#play-list .play-info {
+  display: table-cell;
+  vertical-align: middle;
+  width: 120px;
+}
+
+#play-list .play-items {
+  display: table-cell;
+  vertical-align: middle;
+  width: 120px;
+}
+
 
 #play-list .champion-icon {
   width: 80px;
@@ -24,16 +56,20 @@
 
 #play-list .rune-spell {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-around;
-  flex-wrap: wrap;
-  width: 100px;
-  height: 100px;
 }
 
 #play-list .rs-item {
   width: 40px;
   height: 40px;
+  border-radius: 6px;
+}
+
+#play-list .bolder {
+  font-size: larger;
+  font-weight: bolder;
 }
 
 #play-list .item-list {

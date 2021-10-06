@@ -1,17 +1,33 @@
 #info {
-  display: inline;
   width: 100%;
 }
 #detail .detail-btn {
   width: 100px;
   height: 30px;
   background-color: rgb(166, 165, 209);
+  margin: 10px 0px 20px 600px;
   border: none;
   border-radius: 10px;
   font-size: 17px;
   font-weight: bold;
-  margin-top: 10px;
+  cursor: pointer;
 }
+
+#detail .detail-btn:hover {
+  width: 100px;
+  height: 30px;
+  background-color: rgb(166, 165, 209);
+  color: white;
+  border-color: white;
+  margin: 10px 0px 20px 600px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
 @media screen and (min-height: 400px) and (max-height: 800px){
   #detail {
     display: flex;
