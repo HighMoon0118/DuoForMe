@@ -13,44 +13,101 @@
 #season-info .user-table {
   display: table;
   height: 200px;
-  width: 560px;
+  width: 600px;
+
+  /* 아이템 너비 고정 */
+  table-layout: fixed;
+  /* 아이템 간격 */
+	border-spacing: 30px 0px;
 }
 
 #season-info .user-table-info {
   display: table-cell;
   vertical-align: middle;
-  width: 100px;
   color: black;
+  background-color: rgb(152, 167, 196);
+  border-radius: 30px;
 }
 
 
 #season-info .user-season-info {
+  display: table-cell;
+  vertical-align: middle;
   height: 250px;
   width: 400px;
 }
 
 #season-info .champion-table {
   display: table;
-  height: 50px;
-  width: 400px;
+  height: 40px;
+  width: 370px;
+  margin-top: 5px;
+  background-color: rgb(152, 167, 196);
+  border-radius: 10px;
+  /* border: 1px solid rgb(97, 83, 83); */
 }
 
-#season-info .champion-info {
+#season-info .champion-info1 {
   display: table-cell;
   vertical-align: middle;
+  font-size: medium;
+  text-align: left;
+  width: 100px;
   color: black;
 }
 
+#season-info .champion-info2 {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: medium;
+  text-align: left;
+  width: 80px;
+  color: black;
+}
+
+
 #season-info .champion-icon {
-  height: 50px;
-  width: 50px;
+  vertical-align: middle;
+  margin: 2px 0px;
+  height: 40px;
+  width: 40px;
   border-radius: 30px;
 }
 
 #season-info .profile-icon {
-  height: 80px;
-  width: 80px;
+  height: 100px;
+  width: 100px;
+  margin: 20px;
   border-radius: 30px;
 }
 
+#season-info .ts-xxl8 {
+  font-size: xx-large;
+  font-weight: 800;
+}
 
+#season-info .ts-xl8 {
+  font-size: x-large;
+  font-weight: 800;
+}
+
+#season-info .ts-lr8 {
+  font-size: larger;
+  font-weight: 800;
+}
+
+#season-info .ts-l8 {
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  font-weight: 600;
+}
+
+#season-info .fw8 {
+  font-weight: 800;
+}
+
+#season-info .ts-l4 {
+  font-size: medium;
+  font-weight: 400;
+}

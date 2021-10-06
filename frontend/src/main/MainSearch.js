@@ -18,7 +18,7 @@ function MainSearch({history}) {
       <div className="input-box">
         <input onChange={onChangeInput} value={inputText} placeholder="소환사명" className="large-input" onKeyUp={enterkey} />
         {/* <button onClick={onSearch}>검색</button> */}
-        <BiSearch size="35" color="black" onClick={onSearch}/>
+        <BiSearch size="35" color="black" style={{cursor: "pointer"}} onClick={onSearch}/>
       </div>
     </div>
   )

@@ -1,37 +1,49 @@
+#recommend {
+  display: flex;
+  justify-content: center;
+  color: black;
+}
 #recommend > .recommend-first-box {
   margin-top: 20px;
-  border: 5px solid #FFF08B;
+  width: 1000px;
+
 }
-#recommend > .recommend-first-box .recommend-users {
+#recommend .recommend-users {
   display: flex;
   justify-content: space-around;
 }
-#recommend > .recommend-first-box .recommend-users .recommend-info {
+#recommend .recommend-info {
   display: inline-block;
-  width: 300px;
+  width: 320px;
+  height: 200px;
+  background-color: #FFF08B;
+  border-radius: 30px;
 }
-
-#recommend > .recommend-first-box .recommend-users .user-image {
+#recommend .top-box {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+#recommend .bottom-box {
+  margin-top: 20px;
+}
+#recommend .user-image {
   width: 100px;
   height: 100px;
 }
-#recommend > .recommend-first-box .recommend-users .user-info {
+#recommend .user-info {
   display: inline-block;
+  margin-top: 15px;
 }
-#recommend > .recommend-first-box .recommend-users .champion-img {
+#recommend .champion-img {
   width: 30px;
   height: 30px;
 }
-#recommend > .recommend-first-box .recommend-users .champion-info {
-  display: inline-block;
+#recommend .champion-info {
+  display: inline-flex;
 }
-#synergy-search .input-position {
-  text-align: left;
-  padding: 20px;
+#recommend .champion-name {
+  line-height: 30px;
+  padding: 0px 8px 0px 2px;
 }
-#synergy-search .input-position .middle-input {
-  width: 400px;
-  height: 25px;
-  border-radius: 90px;
-  outline: none;
-}
+
