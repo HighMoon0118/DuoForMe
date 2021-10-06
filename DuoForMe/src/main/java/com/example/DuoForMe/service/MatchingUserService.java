@@ -1,10 +1,8 @@
 package com.example.DuoForMe.service;
 
 import com.example.DuoForMe.dto.MatchingUserCreateRequest;
-import com.example.DuoForMe.entity.MatchingUser;
-import com.example.DuoForMe.entity.User;
-import com.example.DuoForMe.repository.MatchingUserRepository;
-import com.example.DuoForMe.repository.UserRepository;
+import com.example.DuoForMe.entity.*;
+import com.example.DuoForMe.repository.*;
 import com.example.DuoForMe.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,10 @@ import java.util.List;
 public class MatchingUserService {
     private final UserRepository userRepository;
     private final MatchingUserRepository matchingUserRepository;
+    private final RiotUserRepository riotUserRepository;
+    private final RiotUserTierRepository riotUserTierRepository;
+    private final MatchesUsersRepository matchesUsersRepository;
+    private final MatchingUserDetailRepository matchingUserDetailRepository;
 
     public Long findDuo(MatchingUserCreateRequest request) {
         User user = userRepository.findByEmail(SecurityUtil.getCurrentUserId())
@@ -28,11 +30,40 @@ public class MatchingUserService {
         if (matchingUserRepository.existsMatchingUserByUserId(user.getUserId())) {
             throw new EntityExistsException("이미 듀오매칭 대기열에 있습니다.");
         }
+        RiotUser riotUser = riotUserRepository.findByName(user.getLolNickname());
+        String tier = riotUserTierRepository.findByRiotUser(riotUser).get().getTier();
 
-        MatchingUser matchingUser = request.toEntity(user);
-        MatchingUser saved = matchingUserRepository.save(matchingUser);
+        MatchingUser matchUser = request.toEntity(user, tier);
+        MatchingUser matchingUser = matchingUserRepository.save(matchUser);
 
-        return saved.getUserId();
+        System.out.println(matchingUser);
+
+
+
+        List<String> matchUserDetail = matchesUsersRepository.findMostChampions(riotUser);
+        System.out.println(matchUserDetail.getClass());
+//        System.out.println(matchUserDetail.toString());
+//        System.out.println(matchUserDetail.get(0).toString());
+        System.out.println(matchUserDetail);
+        System.out.println(matchUserDetail.get(0));
+        for (int i=0; i<5; i++) {
+            String[] mostChampInfo = matchUserDetail.get(i).split(",");
+            String champ = mostChampInfo[0];
+            int count = Integer.parseInt(mostChampInfo[1]);
+            String position = mostChampInfo[2];
+
+
+            MatchingUserDetail buildMatchingUserDetail = MatchingUserDetail.builder()
+                    .championName(champ)
+                    .count(count)
+                    .position(position)
+                    .matchingUser(matchingUser)
+                    .build();
+            matchingUserDetailRepository.save(buildMatchingUserDetail);
+        }
+
+
+        return matchingUser.getUserId();
     }
 
     public void cancelDuo() {
@@ -44,6 +75,7 @@ public class MatchingUserService {
             }
             MatchingUser matchingUser = matchingUserRepository.findMatchingUserByUserId(user.getUserId());
             matchingUserRepository.delete(matchingUser);
+            matchingUserDetailRepository.deleteAllByMatchingUser(matchingUser);
     }
 
     public List getDuoList() {
@@ -53,5 +85,7 @@ public class MatchingUserService {
 
     public void deleteMatchingUser(MatchingUser matchingUser) {
         matchingUserRepository.delete(matchingUser);
+        matchingUserDetailRepository.deleteAllByMatchingUser(matchingUser);
     }
+
 }

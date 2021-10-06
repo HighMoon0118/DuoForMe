@@ -16,4 +16,6 @@ public interface RiotUserRepository extends JpaRepository<RiotUser, String> {
     public Boolean existsByName(String Name);
 
     public Boolean existsByPuuid(String Puuid);
+
+    RiotUser findByName(String name);
 }
