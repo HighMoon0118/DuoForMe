@@ -12,13 +12,16 @@
   justify-content: space-around;
 }
 #recommend .recommend-info {
-  display: flex;
-  width: 320px;
-  height: 200px;
-  background-color: #FFF08B;
-  border-radius: 20px;
+  display: flex; 
   align-items: center;
   justify-content: space-around;
+}
+#recommend .user-box{
+  display: block;
+  width: 320px;
+  height: 220px;
+  background-color: #FFF08B;
+  border-radius: 20px;
 }
 #recommend .top-box {
   display: inline-block;
@@ -34,7 +37,7 @@
 #recommend .user-info {
   display: block;
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 18px;
 }
 #recommend .champion-img {
   width: 40px;

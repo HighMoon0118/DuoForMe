@@ -2,6 +2,7 @@ import WebSocket from "../WebSocket"
 import { connect } from "react-redux"
 import { changeMatching, matched, chatting, setDuo, setFolded, setChatable } from "../modules/matching"
 import { getMatching } from "../modules/userInfo"
+import { myLine, yourLine } from "../modules/selectLine"
 function WebSocketContainer ({ isLogin, userId, lolNickname, isMatching, isMatched, canChat, chat, duoName, duoId, isFolded,
                               changeMatching, matched, chatting, setDuo, setFolded, setChatable, getMatching }) {
   return (
@@ -44,6 +45,10 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
   return {
     changeMatching: (isMatching, time) => {
+      if (isMatching) {
+        dispatch(myLine("default"))
+        dispatch(yourLine("default"))
+      }
       dispatch(changeMatching(isMatching, time))
     },
     matched: (isMatched) => {
