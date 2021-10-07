@@ -72,7 +72,7 @@ function SeasonInfo (props) {
     }
 
     const showProfile = () => {
-      if (props.rUser === undefined) return null
+      if (props.rUser === undefined || props.rUser.tier === undefined) return null
 
       return (
         <div>
@@ -96,7 +96,7 @@ function SeasonInfo (props) {
     }
 
     const showTableInfo = () => {
-      if (props.rUser === undefined) return null
+      if (props.rUser === undefined || props.rUser.riotUser === undefined || props.rUser.riotUser.profileIconId === undefined) return null
 
       return (
         <div>

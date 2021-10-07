@@ -21,6 +21,8 @@ function Detail({match, history, rUser, gameData, setRUser, setGameData}) {
           setRUser(res.data)
         })
       })
+    }).catch((e) => {
+      alert("등록되지 않은 소환사입니다")
     })
     getRecommend(match.params.nickname).then((res) => {
       setRecommend(res.data)
