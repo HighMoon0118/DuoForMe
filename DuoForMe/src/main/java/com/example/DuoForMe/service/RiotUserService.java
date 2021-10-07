@@ -1,5 +1,6 @@
 package com.example.DuoForMe.service;
 
+import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -13,4 +14,5 @@ public interface RiotUserService {
 
     List<String> recommandChampions(String summonerName, List<String> duoTop5Champion) throws HttpClientErrorException;
 
+    JSONArray recommandDuoChampions(String summonerName);
 }
