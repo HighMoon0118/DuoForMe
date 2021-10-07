@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap');
 body {
   background-color: #202947;
   color: white;
@@ -22,6 +23,7 @@ body {
     border: 8px solid #5667A0;
   }
   #main-matching .matching-btn {
+    font-family: "Do Hyeon";
     display: block;
     position: absolute;
     top: 75%;
@@ -31,8 +33,7 @@ body {
     width: 90px;
     height: 35px;
     border-radius: 10px;
-    font-weight: bold;
-    font-size: 15px;
+    font-size: 20px;
     cursor: pointer;
   }
 

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap');
 #user-edit-box {
   display: flex;
   flex-direction: column;
@@ -63,6 +64,11 @@
 }
 
 #user-edit-box > table > tr > td .password-btn {
+  font-family: "Do Hyeon";
+  font-weight: bold;
+  padding-top: 4px;
+  font-size: 15px;
+  font-family: "Do Hyeon";
   margin-left: 20px;
   width: 50px;
   height: 28px;
@@ -76,6 +82,10 @@
 }
 
 #user-edit-box .edit-btn {
+  font-family: "Do Hyeon";
+  font-weight: bold;
+  padding-top: 4px;
+  font-size: 15px;
   margin-left: 20px;
   width: 50px;
   height: 28px;

@@ -1,19 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap');
 #info {
   width: 100%;
 }
 #detail .detail-btn {
+  font-family: "Do Hyeon";
   width: 100px;
   height: 30px;
   background-color: rgb(166, 165, 209);
   margin: 10px 0px 20px 600px;
   border: none;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
+  
 }
 
 #detail .detail-btn:hover {
+  font-family: "Do Hyeon";
   width: 100px;
   height: 30px;
   background-color: rgb(166, 165, 209);
@@ -21,7 +25,7 @@
   border-color: white;
   margin: 10px 0px 20px 600px;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
 }

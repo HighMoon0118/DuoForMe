@@ -9,7 +9,9 @@ function NavBar ({isLogin, logout, isMatching, history}) {
     setInputText(e.target.value)
   }
   function onSearch() {
-    history.push(`/detail/${inputText}`)
+    if (inputText !== "") {
+      history.push(`/detail/${inputText}`)
+    }
   }
   const logOut = () => {
     if (isMatching) {
@@ -20,7 +22,7 @@ function NavBar ({isLogin, logout, isMatching, history}) {
     history.push("/")
   }
   function enterkey() {
-    if (window.event.keyCode === 13) {
+    if (window.event.keyCode === 13 && inputText !== "") {
       history.push(`/detail/${inputText}`)
     }
   }
