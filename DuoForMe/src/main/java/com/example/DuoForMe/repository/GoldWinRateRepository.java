@@ -15,10 +15,10 @@ public interface GoldWinRateRepository extends JpaRepository<GoldWinRate, Long> 
     @Query(value = "select w.champA from GoldWinRate as w where w.champB = :champName and w.winRate >= 50 order by w.winRate desc")
     List<String> findBestChampAbyChampName(@Param("champName")String champName);
 
-    @Query(value = "select w.champB from GoldWinRate as w where w.champA = :champName order by w.winRate desc")
+    @Query(value = "select w.champB, w.winRate from GoldWinRate as w where w.champA = :champName order by w.winRate desc")
     List<String> findBestAllChampBbyChampName(@Param("champName")String champName);
 
-    @Query(value = "select w.champA from GoldWinRate as w where w.champB = :champName order by w.winRate desc")
+    @Query(value = "select w.champA, w.winRate from GoldWinRate as w where w.champB = :champName order by w.winRate desc")
     List<String> findBestAllChampAbyChampName(@Param("champName")String champName);
 
 
