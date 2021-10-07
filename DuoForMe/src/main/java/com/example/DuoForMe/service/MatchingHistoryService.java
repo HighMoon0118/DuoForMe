@@ -33,8 +33,8 @@ public class MatchingHistoryService {
     }
 
     public User createHistory(MatchingHistoryRequest request){
-        User ownerUser = userRepository.findByEmail(SecurityUtil.getCurrentUserId())
-                .orElseThrow(() -> new EntityNotFoundException("해당 아이디가 존재하지 않습니다."));
+        User ownerUser = userRepository.findByUserId(request.getOwnerUserId())
+                .orElseThrow(() -> new EntityNotFoundException("매치 유저 정보가 존재하지 않습니다."));
 
         User matchedUser = userRepository.findByUserId(request.getMatchedUserId())
                 .orElseThrow(() -> new EntityNotFoundException("매치 유저 정보가 존재하지 않습니다."));
@@ -44,6 +44,7 @@ public class MatchingHistoryService {
 
         return saved.getMatchedUser();
     }
+
 
 
 
