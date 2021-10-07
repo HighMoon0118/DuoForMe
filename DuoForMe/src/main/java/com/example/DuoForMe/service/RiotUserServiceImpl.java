@@ -664,6 +664,8 @@ public class RiotUserServiceImpl implements RiotUserService {
                     // null
 //                    String nullList = String[];
                     String[] nullList = new String[2];
+                    nullList[0] = "null";
+                    nullList[1] = "null";
                     recommandedChampion.add(nullList);
                 }
             }
