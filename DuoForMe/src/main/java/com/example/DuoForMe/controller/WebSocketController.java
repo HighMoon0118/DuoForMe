@@ -74,7 +74,6 @@ public class WebSocketController {
 
             } else if(!userAccept.get(request.getReceiver())) {  // 상대방 거절후 내가 수락
 
-
                 // 나 자신한테 메시지 보내기
                 request.setStartMatching(false);
                 request.setMessage("매칭이 거절되었습니다");
