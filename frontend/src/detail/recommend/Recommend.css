@@ -4,7 +4,6 @@
   color: black;
 }
 #recommend > .recommend-first-box {
-  margin-top: 20px;
   width: 1000px;
 
 }
@@ -13,37 +12,56 @@
   justify-content: space-around;
 }
 #recommend .recommend-info {
-  display: inline-block;
+  display: flex;
   width: 320px;
   height: 200px;
   background-color: #FFF08B;
-  border-radius: 30px;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: space-around;
 }
 #recommend .top-box {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-evenly;
+  display: inline-block;
 }
 #recommend .bottom-box {
-  margin-top: 20px;
+  display: inline-block;
 }
 #recommend .user-image {
   width: 100px;
   height: 100px;
+  border-radius: 10px;
 }
 #recommend .user-info {
-  display: inline-block;
-  margin-top: 15px;
+  display: block;
+  margin-top: 10px;
+  font-size: 20px;
 }
 #recommend .champion-img {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
 }
 #recommend .champion-info {
-  display: inline-flex;
+  display: flex;
+  width: 180px;
+  height: 45px;
+  background-color: rgb(189, 189, 189);
+  border-radius: 5px;
+  justify-content: space-around;
+  align-items: center;
 }
 #recommend .champion-name {
   line-height: 30px;
   padding: 0px 8px 0px 2px;
 }
 
+#recommend .null {
+  width: 180px;
+  height: 45px;
+  background-color: rgb(189, 189, 189);
+  border-radius: 5px;
+}
+
+#recommend .champion-box {
+  margin: 10px 0px;
+}
