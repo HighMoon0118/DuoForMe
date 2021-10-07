@@ -21,7 +21,7 @@ function Timer(props) {
   }
   let second = (time % 60).toString().length < 2 ? "0" + (time % 60).toString() : (time % 60).toString()
   return (
-    <div>
+    <div style={{fontSize: "20px"}}>
       {Math.floor((new Date().getTime() - new Date(props.time))/ 1000) ? <div>{hour} : { min } : {second}</div> : <div></div>}
     </div>
   )
