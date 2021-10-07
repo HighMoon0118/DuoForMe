@@ -22,10 +22,7 @@ function Recommend({recommend}) {
     console.log(RecommendUserInfo, 'RecommendUserInfo@@@@@@@@@@')
     for (const user in RecommendUserInfo) {
       console.log(user, 'if문 위의 user@@@@@@@@@@@@')
-      console.log(user.recomCham, 'if문 위의 recomcham')
-      console.log(user.recomCham[0])
-      console.log(user.recomCham[0][0])
-      console.log(user.recomCham[0][0][0])
+      console.log(user["recomCham"], 'if문 위의 recomcham')
       if (user === undefined || user.recomCham === undefined || user.recomCham[0] === undefined || user.recomCham[0][0] === undefined || user.recomCham[0][0][0] === undefined) return null
       result.push(
         <div className="user-box">
