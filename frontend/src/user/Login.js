@@ -67,10 +67,10 @@ function Login ({history, getUserInfo, blacklist, getMatching}) {
         for (let i = res.data.length - 1; i > -1; i--) {
           data.push(res.data[i])
         }
-        console.log(res.data)
-        console.log(data)
         getMatching(data)
       })
+    }).catch(() => {
+      alert("이메일과 비밀번호를 확인해주세요")
     })
   }
 

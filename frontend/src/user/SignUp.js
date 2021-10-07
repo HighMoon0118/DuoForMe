@@ -38,7 +38,6 @@ function SignUp ({ history }) {
     await checkEmail(data.email).then(res => {
     }).catch(error => {
       possible = false
-      console.log(error);
       return 
     })
     
@@ -47,7 +46,6 @@ function SignUp ({ history }) {
         history.goBack()
         receiveRiot(data.lolNickname)
       }).catch(error => {
-        console.log(error);
       })
     } else {
       alert("이미 가입된 이메일 주소입니다.")

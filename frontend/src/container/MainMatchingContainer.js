@@ -21,6 +21,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     changeMatching: (isMatching, time) => {
+      if (isMatching) {
+        dispatch(myLine("default"))
+        dispatch(yourLine("default"))
+      }
       dispatch(changeMatching(isMatching, time))
     },
     myLine: (me) => {

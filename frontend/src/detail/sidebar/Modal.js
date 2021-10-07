@@ -28,7 +28,6 @@ const Modal = ({open, close, matchinghistoryId, userName, userId, getMatching, b
       const creditObj = {"credit": credit}
       matchingCreditAdd(matchinghistoryId, creditObj).then(() => {
         getMatchinghistory().then(res => {
-          console.log(res.data)
           getMatching(res.data)
         })
       })
