@@ -10,7 +10,7 @@ body {
 
 @media screen and (max-height: 800px){
   #main .main-box {
-    margin: 30px auto;
+    margin: 3vh auto;
   }
   #main-matching .matching-box {
     margin-top: 50px;
@@ -33,7 +33,25 @@ body {
     border-radius: 10px;
     font-weight: bold;
     font-size: 15px;
+    cursor: pointer;
   }
+
+  #main-matching .matching-btn:hover {
+    display: block;
+    position: absolute;
+    top: 75%;
+    left: 43.573%;
+    background-color: #b0bce9;
+    color: white;
+    border: none;
+    width: 90px;
+    height: 35px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
   #main-search .input-box {
     display: flex;
     justify-content: center;
@@ -49,13 +67,17 @@ body {
     outline: none;
     background-color: transparent;
   }
+  #main .main-font {
+    text-align: center;
+    font-size: 42px;
+  }
 }
 @media screen and (min-height: 800px){
   #main .main-box {
-    margin: 100px auto;
+    margin: 10vh auto;
   }
   #main-matching .matching-box {
-    margin-top: 80px;
+    margin-top: 30px;
     border-radius: 90px;
     width: 850px;
     height: 450px;
@@ -75,6 +97,22 @@ body {
     border-radius: 10px;
     font-weight: bold;
     font-size: 15px;
+    cursor: pointer;
+  }
+  #main-matching .matching-btn:hover {
+    display: block;
+    position: absolute;
+    top: 75%;
+    left: 44.706%;
+    background-color: #b0bce9;
+    color: white;
+    border: none;
+    width: 90px;
+    height: 35px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
   }
   #main-search .input-box {
     display: flex;
@@ -91,11 +129,13 @@ body {
     outline: none;
     background-color: transparent;
   }
+  #main .main-font {
+    text-align: center;
+    font-size: 52px;
+    padding-bottom: 20px;
+  }
 }
-#main .main-font {
-  text-align: center;
-  font-size: 42px;
-}
+
 #main .text-left {
   text-align: right;
 }

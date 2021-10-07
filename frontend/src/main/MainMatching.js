@@ -20,6 +20,10 @@ function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLi
             changeMatching(isMatching, new Date().getTime())
           }
         })
+        .catch(() => {
+          alert("로그인이 필요합니다!")
+          history.push("/login")
+        })
       }
       else {
         cancelMatching()

@@ -13,6 +13,12 @@ function getGameData(lolNickname) {
 function getRUserInfo(lolNickname) {
   return axiosService.get(`riotuser/riotuserinfo/${lolNickname}`)
 }
+function getRecommend(lolNickname) {
+  return axiosService.get(`riotuser/recommand/duoChampion/${lolNickname}`)
+}
+function getRecommended(lolNickname, params) {
+  return axiosService.get(`riotuser/recommand/champion/${lolNickname}`, params)
+}
 
 export {
-  receiveRiot, getGameData, getRUserInfo}
+  receiveRiot, getGameData, getRUserInfo, getRecommend, getRecommended}

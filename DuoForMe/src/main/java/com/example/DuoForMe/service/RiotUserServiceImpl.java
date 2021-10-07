@@ -20,6 +20,8 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import static org.aspectj.util.LangUtil.split;
+
 @Service
 @Transactional
 public class RiotUserServiceImpl implements RiotUserService {
@@ -48,11 +50,11 @@ public class RiotUserServiceImpl implements RiotUserService {
     @Autowired
     private UserRepository userRepository;
 
-//    @Override
-//    public Optional<RiotUser> selectOneUser(String name) { return riotUserRepository.findByPuuid(name); }
-
     @Autowired
     private RestTemplateBuilder restTemplateBuilder;
+
+    @Autowired
+    private  GoldWinRateRepository goldWinRateRepository;
 
     public static <T> HttpEntity<T> setHeaders() {
         HttpHeaders headers = new HttpHeaders();
@@ -69,7 +71,6 @@ public class RiotUserServiceImpl implements RiotUserService {
 
         HttpEntity<RiotUser> httpEntity = setHeaders();
         ResponseEntity<RiotUser> responseEntity = restTemplate.exchange(SEARCH_BY_NAME_URL + name + "?api_key=" + API_KEY, HttpMethod.GET, httpEntity, RiotUser.class);
-//        System.out.println(responseEntity.getBody());
 
         RiotUser riotUser = responseEntity.getBody();
         String summonerId = riotUser.getId();
@@ -82,16 +83,10 @@ public class RiotUserServiceImpl implements RiotUserService {
             riotUserRepository.save(riotUser);
 
             // 소환사 티어정보 가져오기
-//            HttpEntity<RiotUserTier> tierEntity = setHeaders();
-//            ResponseEntity<RiotUserTier> responseTierEntity = restTemplate.exchange(SEARCH_BY_TIER + summonerId + "?api_key=" + API_KEY, HttpMethod.GET, tierEntity, RiotUserTier.class);
-
             List<RiotUserTier> responseTierList = restTemplate.getForObject(SEARCH_BY_TIER + summonerId + "?api_key=" + API_KEY, List.class);
-            System.out.println(responseTierList.get(0));
 
 
             for (int i = 0; i < responseTierList.size(); i++) {
-//                RiotUserTier riotUserTier = responseTierList.get(i);
-
                 Gson gson = new Gson();
                 JSONParser jparser = new JSONParser();
 
@@ -100,10 +95,6 @@ public class RiotUserServiceImpl implements RiotUserService {
                 Object riotUserTierobj = jparser.parse(string_to_riotUserTier);
                 JSONObject riotUserTier = (JSONObject) riotUserTierobj;
                 String queueType = riotUserTier.get("queueType").toString();
-                System.out.println(queueType);
-                System.out.println(queueType.getClass());
-//                System.out.println(responseTierList.get(0).getTier());
-//                System.out.println(responseTierList.size());
 
                 if (queueType.equals("RANKED_SOLO_5x5")) {
                     String tier = riotUserTier.get("tier").toString();
@@ -130,20 +121,14 @@ public class RiotUserServiceImpl implements RiotUserService {
 
         // 매치 리스트 받아서 저장
         String[] responseString = restTemplate.getForObject(SEARCH_BY_ID_RECENT_20_GAMES + riotUser.getPuuid() + "/ids" + "?start=0&count=5&api_key=" + API_KEY, String[].class);
-        System.out.println(responseString);
         List<String> matchlist = Arrays.asList(responseString);
-        System.out.println(matchlist);
 
 //         해당 유저의 Match 정보 n개 가져오기
         for(String match : matchlist) {
             // 등록돼있지 않은 게임이라면
             boolean checkMatch = matchesRepository.existsByMatchId(match);
             if (!checkMatch){
-
-                System.out.println(match);
-
                 HttpEntity httpEntity3 = setHeaders();
-                System.out.println(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY);
                 ResponseEntity<JSONObject> responseEntity3 = restTemplate.exchange(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY, HttpMethod.GET, httpEntity3,
                         JSONObject.class);
                 // 이중 json 형태 접근
@@ -156,9 +141,6 @@ public class RiotUserServiceImpl implements RiotUserService {
                 Object infoobj = jparser.parse(info_to_json);
                 JSONObject info = (JSONObject) infoobj;
                 String gameMode = info.get("gameMode").toString();
-
-                System.out.println(gameMode);
-                System.out.println(gameMode.getClass());
 
 //             소환사협곡 게임만 가져옴
                 if (gameMode.equals("CLASSIC")){
@@ -295,7 +277,6 @@ public class RiotUserServiceImpl implements RiotUserService {
 
         HttpEntity<RiotUser> httpEntity = setHeaders();
         ResponseEntity<RiotUser> responseEntity = restTemplate.exchange(SEARCH_BY_NAME_URL + name + "?api_key=" + API_KEY, HttpMethod.GET, httpEntity, RiotUser.class);
-//        System.out.println(responseEntity.getBody());
 
         RiotUser riotUser = responseEntity.getBody();
         String summonerId = riotUser.getId();
@@ -315,18 +296,10 @@ public class RiotUserServiceImpl implements RiotUserService {
             System.out.println("새로운 소환사 등록");
 
             riotUserRepository.save(riotUser);
-
-            // 소환사 티어정보 가져오기
-//            HttpEntity<RiotUserTier> tierEntity = setHeaders();
-//            ResponseEntity<RiotUserTier> responseTierEntity = restTemplate.exchange(SEARCH_BY_TIER + summonerId + "?api_key=" + API_KEY, HttpMethod.GET, tierEntity, RiotUserTier.class);
-
             List<RiotUserTier> responseTierList = restTemplate.getForObject(SEARCH_BY_TIER + summonerId + "?api_key=" + API_KEY, List.class);
-            System.out.println(responseTierList.get(0));
 
 
             for (int i = 0; i < responseTierList.size(); i++) {
-//                RiotUserTier riotUserTier = responseTierList.get(i);
-
                 Gson gson = new Gson();
                 JSONParser jparser = new JSONParser();
 
@@ -335,10 +308,6 @@ public class RiotUserServiceImpl implements RiotUserService {
                 Object riotUserTierobj = jparser.parse(string_to_riotUserTier);
                 JSONObject riotUserTier = (JSONObject) riotUserTierobj;
                 String queueType = riotUserTier.get("queueType").toString();
-                System.out.println(queueType);
-                System.out.println(queueType.getClass());
-//                System.out.println(responseTierList.get(0).getTier());
-//                System.out.println(responseTierList.size());
 
                 if (queueType.equals("RANKED_SOLO_5x5")) {
                     String tier = riotUserTier.get("tier").toString();
@@ -365,20 +334,14 @@ public class RiotUserServiceImpl implements RiotUserService {
 
         // 매치 리스트 받아서 저장
         String[] responseString = restTemplate.getForObject(SEARCH_BY_ID_RECENT_20_GAMES + riotUser.getPuuid() + "/ids?type=ranked&start=0&count=50&api_key=" + API_KEY, String[].class);
-        System.out.println(responseString);
         List<String> matchlist = Arrays.asList(responseString);
-        System.out.println(matchlist);
 
 //         해당 유저의 Match 정보 n개 가져오기
         for(String match : matchlist) {
             // 등록돼있지 않은 게임이라면
             boolean checkMatch = matchesRepository.existsByMatchId(match);
             if (!checkMatch){
-
-                System.out.println(match);
-
                 HttpEntity httpEntity3 = setHeaders();
-                System.out.println(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY);
                 ResponseEntity<JSONObject> responseEntity3 = restTemplate.exchange(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY, HttpMethod.GET, httpEntity3,
                         JSONObject.class);
                 // 이중 json 형태 접근
@@ -391,9 +354,6 @@ public class RiotUserServiceImpl implements RiotUserService {
                 Object infoobj = jparser.parse(info_to_json);
                 JSONObject info = (JSONObject) infoobj;
                 String gameMode = info.get("gameMode").toString();
-
-                System.out.println(gameMode);
-                System.out.println(gameMode.getClass());
 
 //             소환사협곡 게임만 가져옴
                 if (gameMode.equals("CLASSIC")){
@@ -413,14 +373,11 @@ public class RiotUserServiceImpl implements RiotUserService {
 //              match 저장
                     matchesRepository.save(buildMatch);
 
-// 완료
                     // metadata 정의
                     String metadata_to_json = gson.toJson(responseEntity3.getBody().get("metadata"), LinkedHashMap.class);
                     Object metaobj = jparser.parse(metadata_to_json);
 
                     JSONObject metadata = (JSONObject) metaobj;
-                    System.out.println(metadata);
-                    System.out.println(metadata.get("matchId"));
 
                     // metadata participants
                     ArrayList meta_part_arraylist = new ArrayList();
@@ -441,12 +398,10 @@ public class RiotUserServiceImpl implements RiotUserService {
                             if (infoParticipants.get("gameEndedInEarlySurrender").toString().equals("false")) {
                                 // DB에 있는 해당 이름의 riot user 가져옴
                                 Optional<RiotUser> summoner = riotUserRepository.findByPuuid(puuid);
-                                System.out.println(summoner);
 
                                 //DB에 있는 해당 게임의 match 가져옴
                                 String matchid = metadata.get("matchId").toString();
                                 Optional<Matches> matches = matchesRepository.findByMatchId(matchid);
-
 
                                 int assists = Integer.parseInt(infoParticipants.get("assists").toString());
                                 int champLevel = Integer.parseInt(infoParticipants.get("champLevel").toString());
@@ -521,7 +476,6 @@ public class RiotUserServiceImpl implements RiotUserService {
                 boolean checkMatchAndRiotUser = matchesUsersRepository.existsByMatchesAndRiotUser(matches.get(), summoner.get());
                 if (!checkMatchAndRiotUser) {
                     HttpEntity httpEntity3 = setHeaders();
-                    System.out.println(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY);
                     ResponseEntity<JSONObject> responseEntity3 = restTemplate.exchange(SEARCH_BY_MATCH + match + "?api_key=" + API_KEY, HttpMethod.GET, httpEntity3,
                             JSONObject.class);
                     // 이중 json 형태 접근
@@ -535,35 +489,14 @@ public class RiotUserServiceImpl implements RiotUserService {
                     JSONObject info = (JSONObject) infoobj;
                     String gameMode = info.get("gameMode").toString();
 
-                    System.out.println(gameMode);
-                    System.out.println(gameMode.getClass());
-
     //             소환사협곡 게임만 가져옴
                     if (gameMode.equals("CLASSIC")){
 
-    //                        Long gameCreation = Long.parseLong(info.get("gameCreation").toString());
-    //                        Long gameDuration = Long.parseLong(info.get("gameDuration").toString());
-    //                        Long gameStartTimestamp = Long.parseLong(info.get("gameStartTimestamp").toString());
-    //
-    //                        Matches buildMatch = Matches.builder()
-    //                                .matchId(match)
-    //                                .gameCreation(gameCreation)
-    //                                .gameDuration(gameDuration)
-    //                                .gameMode(gameMode)
-    //                                .gameStartTimestamp(gameStartTimestamp)
-    //                                .build();
-    //
-    ////              match 저장
-    //                        matchesRepository.save(buildMatch);
-
-    // 완료
                         // metadata 정의
                         String metadata_to_json = gson.toJson(responseEntity3.getBody().get("metadata"), LinkedHashMap.class);
                         Object metaobj = jparser.parse(metadata_to_json);
 
                         JSONObject metadata = (JSONObject) metaobj;
-                        System.out.println(metadata);
-                        System.out.println(metadata.get("matchId"));
 
                         // metadata participants
                         ArrayList meta_part_arraylist = new ArrayList();
@@ -651,6 +584,97 @@ public class RiotUserServiceImpl implements RiotUserService {
         }
     }
 
+    @Override
+    public List<String> recommandChampions(String summonerName, List<String> duoTop5Champion) throws HttpClientErrorException {
+        List<String> myTop5ByDuoTop5Champion = new ArrayList<>();
+
+        RiotUser riotUser = riotUserRepository.findByName(summonerName);
+        List<String> myMostChampionList = matchesUsersRepository.findMostChampions(riotUser);
+        System.out.println("myMostChampionList :" + myMostChampionList);
+
+        for (int i = 0; i < duoTop5Champion.size(); i++) {
+            boolean check = false;
+            for (String myMostChampion : myMostChampionList){
+                String myMost = myMostChampion.split(",")[0];
+                String duoChampion = duoTop5Champion.get(i);
+                System.out.println("duoChampion" + duoChampion);
+
+                List<String> myTopChampionA = goldWinRateRepository.findBestChampAbyChampName(duoChampion);
+                System.out.println("myTopChampionA" + myTopChampionA);
+
+                List<String> myTop5ChampionB = goldWinRateRepository.findBestChampBbyChampName(duoChampion);
+                System.out.println("myTop5ChampionB" + myTop5ChampionB);
+
+                if (myTopChampionA == null || myTopChampionA.isEmpty()) {
+                    if (myTop5ChampionB.contains(myMost)) {
+                        myTop5ByDuoTop5Champion.add(myMost);
+                        check = true;
+                        break;
+                    }
+                } else {
+                    if (myTopChampionA.contains(myMost)) {
+                        myTop5ByDuoTop5Champion.add(myMost);
+                        check = true;
+                        break;
+                    }
+                }
+            }
+            if (!check) {
+                myTop5ByDuoTop5Champion.add("null");
+            }
+        }
+        return myTop5ByDuoTop5Champion;
+    }
+
+    @Override
+    public JSONArray recommandDuoChampions(String summonerName) {
+        JSONArray recommandDuoChampionsList = new JSONArray();
+
+        RiotUser riotUser = riotUserRepository.findByName(summonerName);
+        List<String> myMostChampionList = matchesUsersRepository.findMostChampions(riotUser);
+
+        for (int i = 0; i < 3; i++) {
+            String myChampion = myMostChampionList.get(i).split(",")[0];
+            List<String> duoTopChampionA = goldWinRateRepository.findBestAllChampAbyChampName(myChampion);
+            List<String> duoTopChampionB = goldWinRateRepository.findBestAllChampBbyChampName(myChampion);
+
+            while (duoTopChampionA.size() <= 3) {
+                duoTopChampionA.add("");
+            }
+            while (duoTopChampionB.size() <= 3) {
+                duoTopChampionB.add("");
+            }
 
 
+            // [mostB, mostB, mostB]
+            List<String[]> recommandedChampion = new ArrayList<>();
+
+            for (int j = 0; j < 3; j++) {
+                String[] mostA =  duoTopChampionA.get(j).split(",");
+                String[] mostB =  duoTopChampionB.get(j).split(",");
+                if (mostA[0] != "") {
+                    //리턴 B
+                    recommandedChampion.add(mostA);
+                }
+                else if (mostB[0] != ""){
+                    // 리턴 A
+                    recommandedChampion.add(mostB);
+                }
+                else {
+                    // null
+//                    String nullList = String[];
+                    String[] nullList = new String[2];
+                    nullList[0] = "null";
+                    nullList[1] = "null";
+                    recommandedChampion.add(nullList);
+                }
+            }
+
+            // myChampion : [mostB, mostB, mostB]
+            JSONObject recommandDuoChampions =  new JSONObject();
+            recommandDuoChampions.put(myChampion,recommandedChampion);
+            recommandDuoChampionsList.add(recommandDuoChampions);
+        }
+        return recommandDuoChampionsList;
+    }
 }

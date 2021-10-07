@@ -1,10 +1,9 @@
-import React, {useState} from "react"
+import React from "react"
 import "./Main.css"
 import MainSearch from "./MainSearch"
 import { Link } from "react-router-dom"
 import MainMatchingContainer from "../container/MainMatchingContainer"
-import { cancelMatching } from "../api/MatchingAPI"
-function Main({history, isLogin, logout, isMatching}) {
+function Main({history, isLogin, logout}) {
 
   const logOut = () => {
     localStorage.setItem("token", "")
@@ -14,15 +13,15 @@ function Main({history, isLogin, logout, isMatching}) {
   return (
     <div id="main">
       <div className="text-left nav-padding">
-        { isLogin && <span className="mw-10 log-out" onClick={logOut}>로그아웃</span> }
-        { isLogin && <Link to="/useredit" style={{ textDecoration: "none", color: "white", marginLeft:"10px"}}>회원정보</Link> }
-        { !isLogin && <Link className="mw-10" style={{ textDecoration: "none", color: "white"}} to="/login">로그인</Link> }
-        { !isLogin && <Link className="mw-10" style={{ textDecoration: "none", color: "white", marginLeft:"10px"}} to="/signup">회원가입</Link> }
+        { isLogin && <span className="mw-10 log-out" style={{fontSize: "20px"}} onClick={logOut}>로그아웃</span> }
+        { isLogin && <Link to="/useredit" style={{ textDecoration: "none", color: "white", marginLeft:"10px", fontSize: "20px"}}>회원정보</Link> }
+        { !isLogin && <Link className="mw-10" style={{ textDecoration: "none", color: "white", fontSize: "20px"}} to="/login">로그인</Link> }
+        { !isLogin && <Link className="mw-10" style={{ textDecoration: "none", color: "white", marginLeft:"10px", fontSize: "20px"}} to="/signup">회원가입</Link> }
         
       </div>
       <div className="main-box">
         <h1 className="main-font">
-          Duofor.me/ 웹소켓 오류수정
+          Duofor.me/ 챔피언 알고리즘 추가
         </h1>
         <MainSearch history={history}/>
         <MainMatchingContainer history={history}/>
