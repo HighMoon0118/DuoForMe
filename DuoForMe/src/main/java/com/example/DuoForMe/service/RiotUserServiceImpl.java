@@ -647,22 +647,24 @@ public class RiotUserServiceImpl implements RiotUserService {
 
 
             // [mostB, mostB, mostB]
-            List<String> recommandedChampion = new ArrayList<>();
+            List<String[]> recommandedChampion = new ArrayList<>();
 
             for (int j = 0; j < 3; j++) {
-                String mostA =  duoTopChampionA.get(j);
-                String mostB =  duoTopChampionB.get(j);
-                if (mostA != "") {
+                String[] mostA =  duoTopChampionA.get(j).split(",");
+                String[] mostB =  duoTopChampionB.get(j).split(",");
+                if (mostA[0] != "") {
                     //리턴 B
                     recommandedChampion.add(mostA);
                 }
-                else if (mostB != ""){
+                else if (mostB[0] != ""){
                     // 리턴 A
                     recommandedChampion.add(mostB);
                 }
                 else {
                     // null
-                    recommandedChampion.add("null");
+//                    String nullList = String[];
+                    String[] nullList = new String[2];
+                    recommandedChampion.add(nullList);
                 }
             }
 
