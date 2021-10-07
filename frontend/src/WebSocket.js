@@ -40,6 +40,7 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
 
   const accpetOrRefuse = (answer) => {
     if ($websocket.current) {
+      console.log(answer);
       const tmp = {...myMsg, acceptMatching: answer}
       $websocket.current.sendMessage(`/accept/${userId}`, JSON.stringify(tmp));
       if (!answer) {
@@ -61,7 +62,7 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
     if ($websocket.current) {
       const tmp = {...myMsg, exit: true}
       $websocket.current.sendMessage(`/pub/${userId}`, JSON.stringify(tmp));
-      alert("매칭을 종료했습니다.")
+      alert("매칭이 종료되었습니다.")
       reset()
     }
   }
@@ -71,7 +72,7 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
       <div>
           {
             isLogin && <SockJsClient
-              url = "http://localhost:8080/socket"
+              url = "http://localhost:8080/api/socket"
               topics = {[`/sub/${userId}`]}
               onMessage = {msg => {
                 
@@ -79,7 +80,7 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
                 console.log(msg)
                 
                 if (msg.exit) {  // 상대방이 종료했을 경우
-                  alert("상대방이 채팅방을 나갔습니다.")
+                  alert("상대방이 매칭을 나갔습니다.")
                   reset()
                 } else if (msg.startMatching) {  // 매칭이 시작됐을 경우
                   if (msg.startChatting) {  // 채팅이 시작됐을 경우(매칭이 성사됨)
@@ -87,10 +88,6 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
                       setChatable(true)
                     }
                     addChat(msg)
-                    if (isFolded) {
-                      console.log(msg.sender);
-                      alert(`${msg.sender} : ${msg.message}`)
-                    }
                   }
                   else {  // 성사되기전 매칭됨을 알림
                     changeMatching(isMatching, null)

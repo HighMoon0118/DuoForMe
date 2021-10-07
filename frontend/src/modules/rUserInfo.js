@@ -10,7 +10,7 @@ export const setGameData = ( data ) => ({
   data
 })
 const initialState = {
-  rUser: {},
+  rUser: undefined,
   gameData: []
 }
 function rUserInfo(state = initialState, action) {

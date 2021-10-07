@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from "react"
 import "./MatchingModal.css";
 import { getGameData, getRUserInfo } from './api/RUserAPI';
+import MatchingTimer from "./MatchingTimer"
 
 const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatching, isFolded, setFolded, canChat, chat, rUser, gameData, setRUser, setGameData} ) => {
 
@@ -11,16 +12,17 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
   const [choose, setChoice] = useState(false)
   const [message, setMessage] = useState("")
   
-  // const messageEnd = useRef()
-  // const scrollToBottom = () => {
-  //   messageEnd.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // };
-
+  const chatting = useRef()
+  const scrollToBottom = () => {
+    if (chatting.current !== null && chatting.current !== undefined){
+      chatting.current.scrollIntoView({ behavior: 'auto', block: 'end' });
+    }
+  }; 
+  
   useEffect(() => {
-    // console.log(messageEnd);
-    // scrollToBottom()
     if (isMatched) {
       setLocation({x:495, y:50})
+      setSize({w: 1000, h:600})
       setChoice(false)
       setMessage("")
 
@@ -70,23 +72,29 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
     return  totalChamps[second].cnt - totalChamps[first].cnt;
   })
 
+  const showTier = () => {
+    if (rUser.tier == undefined) return null
+
+    if (rUser.tier!=="CHALLENGER"&&rUser.tier!=="MASTER") {
+      return <img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
+    } 
+
+    return <img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
+  }
 
   const showRUserInfo = () => {
-    if (isFolded) return null
+    if (isFolded || rUser===undefined) return null
 
     return (
       <div className="user-table">
         <div className="user-table-info">
-          {rUser.tier!=="CHALLENGER"&&rUser.tier!=="MASTER"
-            ?<img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
-            :<img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
-          }
+          { showTier() }
           <div className="ts-xl8">{rUser.tier} {rUser.rank}</div>
           <div className="ts-l4">{rUser.win}승 {rUser.lose}패</div>
           <div className="ts-lr8">승률 {Math.ceil(rUser.win/(rUser.win+rUser.lose)*100)}%</div>
         </div>
         <div className="user-table-info">
-          <img className="profile-icon" src={`http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/${rUser.riotUser.profileIconId}.png`} alt="user icon"/>
+          <img className="profile-icon" src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/profileicon/${rUser.riotUser.profileIconId}.png`} alt="user icon"/>
           <div className="ts-xxl8">{ rUser.riotUser.name }</div>
           <div className="ts-l8">{linesInKorean[mainLines[0]]}({Math.round(lineCnt[mainLines[0]]/gameData.length*100)}%)</div>
           {lineCnt[mainLines[1]]>0?<div className="ts-l8">{linesInKorean[mainLines[1]]}({Math.round(lineCnt[mainLines[1]]/gameData.length*100)}%)</div>:null}
@@ -132,6 +140,8 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
 
   const showChat = () => {
     if (isFolded) return null 
+
+    scrollToBottom()
     
     const list = []
     for (let i=0; i<chat.length; i++) {
@@ -148,9 +158,10 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
         </div>
       )
     }
+    list.push(<div className="blank" key={chat.length}></div>)
 
     return (
-      <div>
+      <div ref={chatting}>
         {list}
       </div>
     )
@@ -220,6 +231,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
                 {!canChat && <button onClick={accept} disabled={choose}>수락</button>}
                 {!canChat && <button onClick={refuse} disabled={choose}>거절</button>}
                 {canChat && <button onClick={exit}>나가기</button>}
+                <MatchingTimer canChat={canChat} isFolded={isFolded} exit={exit}/>
                 {showRUserInfo()}
                 {showSeasonInfo()}
               </div>
@@ -227,7 +239,7 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
                 <div className="chatting-space" style={isFolded ? {display: "none"} : {display: "block"}}>
                   {showChat()}
                 </div>
-                <input type="text" value={message} onChange={inputMessage} onKeyPress={sendMessage}/>
+                <input disabled={!canChat} type="text" value={message} onChange={inputMessage} onKeyPress={sendMessage}/>
                 <button disabled={!canChat} onClick={sendMessage}>SEND</button>
               </div>
               <div className="fold">
