@@ -20,6 +20,8 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import static org.aspectj.util.LangUtil.split;
+
 @Service
 @Transactional
 public class RiotUserServiceImpl implements RiotUserService {
@@ -583,26 +585,42 @@ public class RiotUserServiceImpl implements RiotUserService {
     }
 
     @Override
-    public List<String> recommandChampions(String name, List<String> duoTop5Champion) throws HttpClientErrorException {
+    public List<String> recommandChampions(String summonerName, List<String> duoTop5Champion) throws HttpClientErrorException {
         List<String> myTop5ByDuoTop5Champion = new ArrayList<>();
+
+        RiotUser riotUser = riotUserRepository.findByName(summonerName);
+        List<String> myMostChampionList = matchesUsersRepository.findMostChampions(riotUser);
+        System.out.println("myMostChampionList :" + myMostChampionList);
+
         for (int i = 0; i < duoTop5Champion.size(); i++) {
-            String duoChampion = duoTop5Champion.get(i);
-            List<String> myTopChampionA = goldWinRateRepository.findBestChampAbyChampName(name);
-            if (myTopChampionA == null) {
-                List<String> myTop5ChampionB = goldWinRateRepository.findBestChampBbyChampName(name);
-                if (myTop5ChampionB.contains(duoChampion)) {
-                    myTop5ByDuoTop5Champion.add(duoChampion);
-                    break;
+            boolean check = false;
+            for (String myMostChampion : myMostChampionList){
+                String myMost = myMostChampion.split(",")[0];
+                String duoChampion = duoTop5Champion.get(i);
+                System.out.println("duoChampion" + duoChampion);
+
+                List<String> myTopChampionA = goldWinRateRepository.findBestChampAbyChampName(duoChampion);
+                System.out.println("myTopChampionA" + myTopChampionA);
+
+                List<String> myTop5ChampionB = goldWinRateRepository.findBestChampBbyChampName(duoChampion);
+                System.out.println("myTop5ChampionB" + myTop5ChampionB);
+
+                if (myTopChampionA == null || myTopChampionA.isEmpty()) {
+                    if (myTop5ChampionB.contains(myMost)) {
+                        myTop5ByDuoTop5Champion.add(myMost);
+                        check = true;
+                        break;
+                    }
+                } else {
+                    if (myTopChampionA.contains(myMost)) {
+                        myTop5ByDuoTop5Champion.add(myMost);
+                        check = true;
+                        break;
+                    }
                 }
             }
-            else {
-                if (myTopChampionA.contains(duoChampion)) {
-                    myTop5ByDuoTop5Champion.add(duoChampion);
-                    break;
-                }
-            }
-            if (myTop5ByDuoTop5Champion.size() != i+1) {
-                myTop5ByDuoTop5Champion.add("");
+            if (!check) {
+                myTop5ByDuoTop5Champion.add("null");
             }
         }
         return myTop5ByDuoTop5Champion;
