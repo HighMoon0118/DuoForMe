@@ -37,7 +37,7 @@ function Recommend({recommend}) {
               <div className="champion-box">
                 {user.recomCham[0][0][0] === "null" ? <div className="null"></div> : 
                   <div className="champion-info">
-                    <img src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/${user.recomCham[0][0][0]}.png`} className="champion-img" alt="챔피언 이미지"/>
+                    <img src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/${user.recomCham[0][0][0]}.png`} className="champion-img" alt=""/>
                     <div className="champion-name">{user.recomCham[0][0][0]}</div>  
                     <div className="champion-name">{user.recomCham[0][0][1]}점</div>  
                   </div>
@@ -46,7 +46,7 @@ function Recommend({recommend}) {
               <div className="champion-box">
                 {user.recomCham[0][1][0] === "null" ? <div className="null"></div> : 
                   <div className="champion-info">
-                    <img src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/${user.recomCham[0][1][0]}.png`} className="champion-img" alt="챔피언 이미지"/>
+                    <img src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/${user.recomCham[0][1][0]}.png`} className="champion-img" alt=""/>
                     <div className="champion-name">{user.recomCham[0][1][0]}</div>  
                     <div className="champion-name">{user.recomCham[0][1][1]}점</div>  
                   </div>
@@ -55,7 +55,7 @@ function Recommend({recommend}) {
               <div className="champion-box">
                 {user.recomCham[0][2][0] === "null" ? <div className="null"></div> : 
                   <div className="champion-info">
-                    <img src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/${user.recomCham[0][2][0]}.png`} className="champion-img" alt="챔피언 이미지"/>
+                    <img src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/${user.recomCham[0][2][0]}.png`} className="champion-img" alt=""/>
                     <div className="champion-name">{user.recomCham[0][2][0]}</div>  
                     <div className="champion-name">{user.recomCham[0][2][1]}점</div>  
                   </div>
