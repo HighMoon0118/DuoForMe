@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
-@CrossOrigin("https://duofor.me/")
+@CrossOrigin("http://localhost:3000/")
 @RequiredArgsConstructor
 @RequestMapping("api/users")
 @RestController
@@ -76,6 +76,17 @@ public class UserController {
         service.updateNicknameById(id, request);
 
         SimpleSuccessResponse response = new SimpleSuccessResponse("User LolNickname 정보 수정 성공");
+        log.info(response.toString());
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/password/{id}")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<SimpleSuccessResponse> updateNicknameById(@PathVariable Long id,
+                                                            @RequestBody @Valid UserUpdateRequest request) {
+
+        service.updatePasswordById(id, request);
+        SimpleSuccessResponse response = new SimpleSuccessResponse("User Password 수정 성공");
         log.info(response.toString());
         return ResponseEntity.ok(response);
     }

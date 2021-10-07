@@ -1,16 +1,18 @@
 import React, {useState, useEffect, useRef} from "react"
 import "./MatchingModal.css";
-import { getGameData, getRUserInfo } from './api/RUserAPI';
+import { getGameData, getRUserInfo, getRecommended } from './api/RUserAPI';
 import MatchingTimer from "./MatchingTimer"
 
-const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatching, isFolded, setFolded, canChat, chat, rUser, gameData, setRUser, setGameData} ) => {
+const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, lolNickname,
+                          exitMatching, isFolded, setFolded, canChat, chat, rUser, gameData, setRUser, setGameData} ) => {
 
-  const [location, setLocation] = useState({ x: 495, y: 50 })
+  const [location, setLocation] = useState({ x: 280, y: 80 })
   const [startLocation, setStartLocation] = useState({ x: 0, y: 0 })
   const [mouseLocation, setMouseLocation] = useState({ x: 0,  y: 0 }) 
   const [size, setSize] = useState({w: 1000, h:600})
   const [choose, setChoice] = useState(false)
   const [message, setMessage] = useState("")
+  const [recommend, setRecommend] = useState([])
   
   const chatting = useRef()
   const scrollToBottom = () => {
@@ -19,9 +21,11 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
     }
   }; 
   
+  let recommended = []
+  
   useEffect(() => {
     if (isMatched) {
-      setLocation({x:495, y:50})
+      setLocation({x:280, y:80})
       setSize({w: 1000, h:600})
       setChoice(false)
       setMessage("")
@@ -31,6 +35,10 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
         getRUserInfo(duoName).then(res => {
           setRUser(res.data)
         })
+      })
+
+      getRecommended(lolNickname, { params: params}).then(res => {
+        setRecommend(res.data)
       })
     }
   }, [isMatched])
@@ -72,18 +80,26 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
     return  totalChamps[second].cnt - totalChamps[first].cnt;
   })
 
+
+  const params = new URLSearchParams()
+  for (let i = 0; i<5; i++) {
+    if (i==mainChamps.length) break
+    params.append("championName", mainChamps[i])
+  }
+
+
   const showTier = () => {
     if (rUser.tier == undefined) return null
 
     if (rUser.tier!=="CHALLENGER"&&rUser.tier!=="MASTER") {
-      return <img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
+      return <img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="110px" width="110px" />
     } 
 
-    return <img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
+    return <img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="110px" width="110px" />
   }
 
   const showRUserInfo = () => {
-    if (isFolded || rUser === undefined) return null
+    if (isFolded || rUser===undefined) return null
 
     return (
       <div className="user-table">
@@ -106,27 +122,52 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
   const showSeasonInfo = () => {
     if (isFolded) return null
 
+    // if (recommended.length == 0) return null
+
     const list = []
     for (let i=0; i<5; i++) {
       list.push(
-      <div key={i}>
+      <div className="recommend" key={i}>
         {mainChamps.length>i
-          ?<div className="champion-table">
+          ?
+          <div className="duo-champs">
             <img className="champion-icon" src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/${mainChamps[i]}.png`} alt="champion"/>
             <div className="champion-info1">
               <div className="fw8">{mainChamps[i]}</div>
-              <div>CS {parseInt(totalChamps[mainChamps[i]].cs/totalChamps[mainChamps[i]].cnt)}({parseInt(totalChamps[mainChamps[i]].cs/totalChamps[mainChamps[i]].play*10)/10})</div>
-            </div>
-            <div className="champion-info1">
-              <div>{Math.round(totalChamps[mainChamps[i]].kills/totalChamps[mainChamps[i]].cnt)}/{Math.round(totalChamps[mainChamps[i]].deaths/totalChamps[mainChamps[i]].cnt)}/{Math.round(totalChamps[mainChamps[i]].assists/totalChamps[mainChamps[i]].cnt)}</div>
-              <div>{Math.round(totalChamps[mainChamps[i]].kills+totalChamps[mainChamps[i]].assists/totalChamps[mainChamps[i]].deaths*100)/100}:1 평점</div>
             </div>
             <div className="champion-info2">
+              <div>{Math.round(totalChamps[mainChamps[i]].kills/totalChamps[mainChamps[i]].cnt)}/{Math.round(totalChamps[mainChamps[i]].deaths/totalChamps[mainChamps[i]].cnt)}/{Math.round(totalChamps[mainChamps[i]].assists/totalChamps[mainChamps[i]].cnt)}</div>
+              <div>{Math.round(totalChamps[mainChamps[i]].kills+totalChamps[mainChamps[i]].assists/totalChamps[mainChamps[i]].deaths*100)/100}:1</div>
+            </div>
+            <div className="champion-info3">
               <div className="fw8">{Math.round(totalChamps[mainChamps[i]].win/totalChamps[mainChamps[i]].cnt*100)}%</div>
               <div >{totalChamps[mainChamps[i]].cnt}게임</div>
             </div>
           </div>
-          :<div className="champion-table"/>
+          :null
+        }
+        {mainChamps.length>i
+          ?<div className="space">
+            <img src="./img/handshake.png" alt="champion" height="40" width="40"/>
+          </div>
+          :null
+        }
+        {mainChamps.length>i
+          ?
+          <div className="my-champs">
+            {recommend[i]!=="null"
+            ?<img className="champion-icon" src={`https://ddragon.leagueoflegends.com/cdn/11.19.1/img/champion/${recommend[i]}.png`} alt="champion"/>
+            :<img className="champion-icon" src="./img/anonymous.png" alt="champion"/>
+            }
+            <div className="champion-info1">
+              {recommend[i]!=="null"
+              ?<div className="fw8">{recommend[i]}</div>
+              :<div className="fw8">???</div>
+              }
+              
+            </div>
+          </div>
+          :null
         }
       </div>
       )
