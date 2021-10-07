@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("https://duofor.me/")
 @RequiredArgsConstructor
 @RequestMapping("/api/matching")
 @RestController
