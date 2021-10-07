@@ -55,20 +55,19 @@ public class WebSocketController {
                 userAccept.remove(receiver); // 수락 여부 해쉬맵에서 삭제
 
             } else if(!userAccept.get(request.getReceiver()) && !request.isAcceptMatching()){ // 둘 다 거절을 눌렀을 경우
-                userAccept.remove(request.getReceiver());
 
                 userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
 
             } else if(!userAccept.get(request.getReceiver())) {  // 상대방 거절후 내가 수락
 
-                userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
 
                 // 나 자신한테 메시지 보내기
                 request.setStartMatching(false);
                 request.setMessage("매칭이 거절되었습니다");
                 simpMessagingTemplate.convertAndSend("/sub/" + request.getSenderId(), request);
-                userAccept.remove(request.getReceiver());
-            } else {  // 나는 거절, 상대방은 수락을 눌렀을 경우
+
+                userAccept.remove(request.getReceiver()); // 수락 여부 해쉬맵에서 삭제
+            } else {  // 상대방 수락후 내가 거절
 
                 // 듀오 상대방한테 메세지 보내기
                 ChatRequest receiverRequest = new ChatRequest();
