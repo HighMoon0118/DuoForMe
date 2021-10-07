@@ -23,4 +23,9 @@ function blacklistAdd(blackUserId) {
     Authorization: "Bearer " + localStorage.getItem("token")
   }})
 }
-export {lolNicknameEditAPI, getLolNicknameCount, matchingCreditAdd, blacklistAdd}
+function passwordChange(userId, data) {
+  return axiosService.put(`users/password/${userId}`, data, {headers: {
+    Authorization: "Bearer " + localStorage.getItem("token")
+  }})
+}
+export {lolNicknameEditAPI, getLolNicknameCount, matchingCreditAdd, blacklistAdd, passwordChange}
