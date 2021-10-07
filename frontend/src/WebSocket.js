@@ -36,11 +36,9 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
     })
     chatting(tmp)
   }
-  console.log(chat);
 
   const accpetOrRefuse = (answer) => {
     if ($websocket.current) {
-      console.log(answer);
       const tmp = {...myMsg, acceptMatching: answer}
       $websocket.current.sendMessage(`/accept/${userId}`, JSON.stringify(tmp));
       if (!answer) {
@@ -82,9 +80,6 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
               url = "http://localhost:8080/api/socket"
               topics = {[`/sub/${userId}`]}
               onMessage = {msg => {
-                
-
-                console.log(msg)
                 
                 if (msg.exit) {  // 상대방이 종료했을 경우
                   alert("상대방이 매칭을 나갔습니다.")

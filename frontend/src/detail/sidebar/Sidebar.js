@@ -7,7 +7,6 @@ import { cancelMatching, requestMatching } from "../../api/MatchingAPI";
 function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine, isLogin, history, successMatchingUser}) {
   let isHistory = false
   let scroll = false
-  console.log(successMatchingUser);
   if (successMatchingUser !== undefined) {
     isHistory = true
     let matchingLength = Object.keys(successMatchingUser).length

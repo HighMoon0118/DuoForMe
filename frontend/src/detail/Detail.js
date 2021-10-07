@@ -16,10 +16,8 @@ function Detail({match, history, rUser, gameData, setRUser, setGameData}) {
   useEffect(() => {
     receiveRiot(match.params.nickname).then(() => {
       getGameData(match.params.nickname).then(res => {
-        console.log(res.data);
         setGameData(res.data)
         getRUserInfo(match.params.nickname).then(res => {
-          console.log(res.data);
           setRUser(res.data)
         })
       })

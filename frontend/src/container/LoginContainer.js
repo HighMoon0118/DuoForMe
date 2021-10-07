@@ -9,7 +9,6 @@ function LoginContainer ({getUserInfo, blacklist, history, getMatching}) {
 function mapDispatchToProps(dispatch) {
   return {
     getUserInfo: (data) => {
-      console.log("login")
       dispatch(getUserInfo(data))
     },
     blacklist: (blackList) => {
