@@ -21,7 +21,7 @@ function Main({history, isLogin, logout}) {
       </div>
       <div className="main-box">
         <h1 className="main-font">
-          Duofor.me/ develop전 최종확인3333
+          Duofor.me
         </h1>
         <MainSearch history={history}/>
         <MainMatchingContainer history={history}/>
