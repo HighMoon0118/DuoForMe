@@ -6,10 +6,12 @@ function MainSearch({history}) {
     setInputText(e.target.value)
   }
   function onSearch() {
-    history.push(`/detail/${inputText}`)
+    if (inputText !== "") {
+      history.push(`/detail/${inputText}`)
+    }
   }
   function enterkey() {
-    if (window.event.keyCode === 13) {
+    if (window.event.keyCode === 13 && inputText !== "") {
       history.push(`/detail/${inputText}`)
     }
   }
