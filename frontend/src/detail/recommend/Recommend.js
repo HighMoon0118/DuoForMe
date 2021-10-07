@@ -21,6 +21,10 @@ function Recommend({recommend}) {
     const result = []
     console.log(RecommendUserInfo, 'RecommendUserInfo@@@@@@@@@@')
     console.log(typeof(RecommendUserInfo), 'recommenduser타입~!!')
+    for (const user of RecommendUserInfo) {
+      console.log(user, 'of@@@@@user@@@@@@@@@@@@@')
+      console.log(typeof(user), 'of@@@@의 타입!!!!!!!!')
+    }
     for (const user in RecommendUserInfo) {
       console.log(user, 'user@@@@@@@@@@@@@')
       console.log(typeof(user), '의 타입!!!!!!!!')
