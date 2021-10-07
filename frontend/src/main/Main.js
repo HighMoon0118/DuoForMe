@@ -21,7 +21,7 @@ function Main({history, isLogin, logout}) {
       </div>
       <div className="main-box">
         <h1 className="main-font">
-          Duofor.me
+          Duofor.me/jenkins-develop
         </h1>
         <MainSearch history={history}/>
         <MainMatchingContainer history={history}/>
