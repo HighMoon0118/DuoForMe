@@ -14,5 +14,9 @@ function getRUserInfo(lolNickname) {
   return axiosService.get(`riotuser/riotuserinfo/${lolNickname}`)
 }
 
+function getRecommended(lolNickname, params) {
+  return axiosService.get(`riotuser/recommand/champion/${lolNickname}`, params)
+}
+
 export {
-  receiveRiot, getGameData, getRUserInfo}
+  receiveRiot, getGameData, getRUserInfo, getRecommended}

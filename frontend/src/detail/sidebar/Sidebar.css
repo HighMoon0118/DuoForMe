@@ -12,6 +12,7 @@
   width: 300px;
   height: 660px;
   right: 5rem;
+  border-radius: 10px;
 }
 #sidebar .user-img {
   display: inline-block;
@@ -62,6 +63,7 @@
   width: 100px;
   height: 30px;
   border-radius: 10px;
+  cursor: pointer;
 }
 #sidebar .fixed .success-user-scroll {
   position: absolute;
