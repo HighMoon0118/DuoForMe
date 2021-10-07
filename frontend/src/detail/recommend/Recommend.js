@@ -19,9 +19,9 @@ function Recommend({recommend}) {
   const RecommendUsers = () => {
 
     const result = []
-
+    console.log(RecommendUserInfo, 'RecommendUserInfo@@@@@@@@@@')
     for (const user in RecommendUserInfo) {
-      
+      console.log(user, 'if문 위의 user@@@@@@@@@@@@')
       if (user === undefined || user.recomCham === undefined || user.recomCham[0] === undefined || user.recomCham[0][0] === undefined || user.recomCham[0][0][0] === undefined) return null
       console.log(user.searchCham)
       result.push(
