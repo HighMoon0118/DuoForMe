@@ -11,6 +11,6 @@ public interface RiotUserService {
 
     void summonerInsert(String name) throws HttpClientErrorException, ParseException;
 
-    List<String> recommandChampions(String name, List<String> duoTop5Champion) throws HttpClientErrorException;
+    List<String> recommandChampions(String summonerName, List<String> duoTop5Champion) throws HttpClientErrorException;
 
 }
