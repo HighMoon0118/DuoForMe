@@ -29,7 +29,6 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
   return {
     lolEdit: (lolNickname) => {
-      // console.log(lolNickname)
       dispatch(lolEdit(lolNickname))
     },
     serviceEdit: (serviceNickname) => {

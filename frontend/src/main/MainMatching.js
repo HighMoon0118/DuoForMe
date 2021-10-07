@@ -57,7 +57,7 @@ function MainMatching({isMatching, changeMatching, time, me, you, myLine, yourLi
             <div className="select-box">
               <img className="line-image" alt="라인 이미지" src={"img/" + you + ".png"} />
               <select value={ you } onChange={(e) => yourLine(e.target.value)} name="you" className="drop-down">
-                <option value="default">상대방 라인 선택</option>
+                <option value="default">듀오 라인 선택</option>
                 <option value="top">Top</option>
                 <option value="middle">Middle</option>
                 <option value="bottom">Bottom</option>

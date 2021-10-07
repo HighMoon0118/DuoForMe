@@ -6,7 +6,6 @@ function SeasonInfo (props) {
     const linesInKorean = {"TOP":"탑","JUNGLE":"정글","MIDDLE":"미드","BOTTOM":"원딜","UTILITY":"서포터",}
     const lineCnt = {"TOP":0,"JUNGLE":0,"MIDDLE":0,"BOTTOM":0,"UTILITY":0,}
     const totalChamps = {}
-    console.log(props.rUser);
     for (const game of props.gameData) {
       lineCnt[game.individualPosition] += 1
       if (game.championName in totalChamps) {
@@ -73,7 +72,7 @@ function SeasonInfo (props) {
     }
 
     const showProfile = () => {
-      if (props.rUser === undefined) return null
+      if (props.rUser === undefined || props.rUser.tier === undefined) return null
 
       return (
         <div>
@@ -97,7 +96,7 @@ function SeasonInfo (props) {
     }
 
     const showTableInfo = () => {
-      if (props.rUser === undefined) return null
+      if (props.rUser === undefined || props.rUser.riotUser === undefined || props.rUser.riotUser.profileIconId === undefined) return null
 
       return (
         <div>

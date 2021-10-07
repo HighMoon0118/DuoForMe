@@ -3,7 +3,7 @@
   display: table;
   height: 100px;
   width: 800px;
-
+  border-radius: 5px;
 }
 
 #play-list .play-table-item {
