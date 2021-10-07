@@ -7,6 +7,7 @@ import com.example.DuoForMe.repository.MatchesUsersRepository;
 import com.example.DuoForMe.repository.RiotUserRepository;
 import com.example.DuoForMe.repository.RiotUserTierRepository;
 import com.example.DuoForMe.service.RiotUserService;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,6 +86,12 @@ public class RiotUserController {
     public List<String> recommandChampions(@PathVariable String name, @RequestParam(value="championName") List<String> duoTop5Champion) {
         List<String> recommandChampions = riotUserService.recommandChampions(name, duoTop5Champion);
         return recommandChampions;
+    }
+
+    @GetMapping("/recommand/duoChampion/{summonerName}")
+    public JSONArray recommandDuoChampions(@PathVariable String summonerName) {
+        JSONArray recommandDuoChampions = riotUserService.recommandDuoChampions(summonerName);
+        return recommandDuoChampions;
     }
 
 }
