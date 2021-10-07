@@ -77,7 +77,7 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
       <div>
           {
             isLogin && <SockJsClient
-              url = "http://localhost:8080/api/socket"
+              url = "https://duofor.me/api/socket"
               topics = {[`/sub/${userId}`]}
               onMessage = {msg => {
                 
