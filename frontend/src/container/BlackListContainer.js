@@ -15,7 +15,6 @@ function mapStateToProps (state) {
 function mapDispatchToProps(dispatch) {
   return {
     blackListEdit: (blackList) => {
-      console.log(blackList)
       dispatch(blackListEdit(blackList))
     }
   }

@@ -14,7 +14,6 @@ function Recommend({recommend}) {
     let info = {"id": i, "searchCham": SearchChampions[i], "recomCham": RecommendChampions[i] }
     RecommendUserInfo.push(info)
   }
-  console.log(RecommendUserInfo[0].recomCham)
   const RecommendUsers = RecommendUserInfo.map((user) =>
     <div className="user-box">
       <div className="user-info">
