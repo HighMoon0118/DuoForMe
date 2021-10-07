@@ -68,7 +68,7 @@ function Sidebar ({time, me, you, isMatching, changeMatching, myLine, yourLine, 
                 </select>
               </div>
               <div className="select-box">
-                <span>상대방 라인: </span>
+                <span>듀오 라인: </span>
                 <select value={ you } onChange={(e) => yourLine(e.target.value)} name="you" className="drop-down">
                   <option value="default">듀오 라인 선택</option>
                   <option value="top">Top</option>
