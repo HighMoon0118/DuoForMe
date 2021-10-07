@@ -20,6 +20,8 @@
   }
 }
 #user-edit-box .input-box {
+  font-family: "Do Hyeon";
+  font-size: 15px;
   background-color: #4e5363;
   outline: none;
   border: 1px solid white;

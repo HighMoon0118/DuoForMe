@@ -53,6 +53,8 @@
   height: 20px;
   border-radius: 5px;
   text-decoration: none;
+  font-family: "Do Hyeon";
+  font-size: 15px;
 }
 #sidebar .success-user {
   position: absolute;
