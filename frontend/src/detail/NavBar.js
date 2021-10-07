@@ -24,9 +24,6 @@ function NavBar ({isLogin, logout, isMatching, history}) {
       history.push(`/detail/${inputText}`)
     }
   }
-  const goHome = () => {
-    history.push('/')
-  }
   return (
     <div id="navbar">
       <div onClick={() => {history.push('/')}} className="logo" ><h1>Duofor.me</h1></div>
