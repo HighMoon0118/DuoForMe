@@ -633,15 +633,15 @@ public class RiotUserServiceImpl implements RiotUserService {
         RiotUser riotUser = riotUserRepository.findByName(summonerName);
         List<String> myMostChampionList = matchesUsersRepository.findMostChampions(riotUser);
 
-        for (int i = 0; i < 3; i++) {
-            String myChampion = myMostChampionList.get(i).split(",")[0];
+        for (int k = 0; k < 3; k++) {
+            String myChampion = myMostChampionList.get(k).split(",")[0];
             List<String> duoTopChampionA = goldWinRateRepository.findBestAllChampAbyChampName(myChampion);
             List<String> duoTopChampionB = goldWinRateRepository.findBestAllChampBbyChampName(myChampion);
 
-            while (duoTopChampionA.size() <= 3) {
+            while (duoTopChampionA.size() < 3) {
                 duoTopChampionA.add("");
             }
-            while (duoTopChampionB.size() <= 3) {
+            while (duoTopChampionB.size() < 3) {
                 duoTopChampionB.add("");
             }
 
@@ -649,26 +649,71 @@ public class RiotUserServiceImpl implements RiotUserService {
             // [mostB, mostB, mostB]
             List<String[]> recommandedChampion = new ArrayList<>();
 
-            for (int j = 0; j < 3; j++) {
-                String[] mostA =  duoTopChampionA.get(j).split(",");
+            int i = 0;
+            int j = 0;
+
+            while(recommandedChampion.size()<3) {
+
+                String[] mostA =  duoTopChampionA.get(i).split(",");
                 String[] mostB =  duoTopChampionB.get(j).split(",");
-                if (mostA[0] != "") {
-                    //리턴 B
+
+                if (mostA[0] != "" && mostB[0] != ""){
+
+                    int intMostA = Integer.parseInt(mostA[1]);
+                    int intMostB = Integer.parseInt(mostB[1]);
+
+                    if (intMostA > intMostB) {
+                        recommandedChampion.add(mostA);
+                        i++;
+                    } else {
+                        recommandedChampion.add(mostB);
+                        j++;
+                    }
+                } else if (mostA[0] != "") {
                     recommandedChampion.add(mostA);
-                }
-                else if (mostB[0] != ""){
-                    // 리턴 A
+                    i++;
+                } else if (mostB[0] != "") {
                     recommandedChampion.add(mostB);
-                }
-                else {
-                    // null
-//                    String nullList = String[];
+                    j++;
+                } else {
                     String[] nullList = new String[2];
                     nullList[0] = "null";
                     nullList[1] = "null";
                     recommandedChampion.add(nullList);
+                    i++;
                 }
             }
+//            for (int j = 0; j < 3; j++) {
+//                String[] mostA =  duoTopChampionA.get(j).split(",");
+//                String[] mostB =  duoTopChampionB.get(j).split(",");
+//                if (mostA[0] != "" && mostB[0] != "") {
+//                    int intMostA = Integer.parseInt(mostA[1]);
+//                    int intMostB = Integer.parseInt(mostB[1]);
+//                    if (intMostA > intMostB) {
+//                        recommandedChampion.add(mostA);
+//                        // A: [1, 2, 4] B: [1, 1, 3]
+//                    }
+//                    else {
+//                        recommandedChampion.add(mostB);
+//                    }
+//                }
+//                else if (mostA[0] != "") {
+//                    //리턴 B
+//                    recommandedChampion.add(mostA);
+//                }
+//                else if (mostB[0] != ""){
+//                    // 리턴 A
+//                    recommandedChampion.add(mostB);
+//                }
+//                else {
+//                    // null
+////                    String nullList = String[];
+//                    String[] nullList = new String[2];
+//                    nullList[0] = "null";
+//                    nullList[1] = "null";
+//                    recommandedChampion.add(nullList);
+//                }
+//            }
 
             // myChampion : [mostB, mostB, mostB]
             JSONObject recommandDuoChampions =  new JSONObject();
