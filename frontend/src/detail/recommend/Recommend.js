@@ -22,7 +22,7 @@ function Recommend({recommend}) {
 
     for (user in RecommendUserInfo) {
       
-      if (user.recomCham === undefined || user.recomCham[0] === undefined || user.recomCham[0][0] === undefined || user.recomCham[0][0][0] === undefined) return null
+      if (user === undefined || user.recomCham === undefined || user.recomCham[0] === undefined || user.recomCham[0][0] === undefined || user.recomCham[0][0][0] === undefined) return null
 
       result.push(
         <div className="user-box">
