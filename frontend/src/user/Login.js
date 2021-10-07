@@ -71,6 +71,8 @@ function Login ({history, getUserInfo, blacklist, getMatching}) {
         console.log(data)
         getMatching(data)
       })
+    }).catch(() => {
+      alert("이메일과 비밀번호를 확인해주세요")
     })
   }
 
