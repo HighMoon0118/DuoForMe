@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import "./UserEdit.css"
-import {lolNicknameEditAPI, getLolNicknameCount} from "../api/UserEditAPI"
+import {lolNicknameEditAPI, getLolNicknameCount, passwordChange} from "../api/UserEditAPI"
 import { deleteBlacklist } from '../api/UserAPI';
 import { receiveRiot } from '../api/RUserAPI';
 import NavBarContainer from "../container/NavBarContainer"
@@ -90,6 +90,16 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
     if (password !== passwordConfirm) {
       alert("비밀번호가 일치하지 않습니다")
     }
+    else {
+      const data = {"password": password, "passwordConfirm": passwordConfirm}
+      passwordChange(userId, data).then((res) => {
+        if (res.status === 200) {
+          alert("비밀번호 수정이 완료되었습니다!")
+        }
+      })
+      setPassword("")
+      setPasswordConfirm("")
+    }
   }
   return(
     <div>
@@ -103,21 +113,16 @@ function UserEdit({lolNickname, serviceNickname, blackList, email, lolEdit, serv
               <td>{email}</td>
             </tr>
             <tr>
+              <th>서비스 닉네임</th>
+              <td>{serviceNickname}</td>
+            </tr>
+            <tr>
               <th>롤 닉네임</th>
               <td>
                 <form> 
                   <input onChange={lolNicknameEdit} className="input-box" value={lolNicknameChange} placeholder={lolNickname}/>
                   <button className="edit-btn" onClick={lolNicknameSubmit}>수정</button>
                   { nicknameCount ? <p className="margin-0">같은 닉네임을 가진 사람이 {nicknameCount}명입니다. </p> : <span></span>}
-                </form>
-              </td>
-            </tr>
-            <tr>
-              <th>서비스 닉네임</th>
-              <td>
-                <form>
-                  <input onChange={serviceNicknameEdit} value={serviceNicknameChange} className="input-box" placeholder={serviceNickname}/>
-                  <button className="edit-btn" onClick={serviceNicknameSubmit}>수정</button>
                 </form>
               </td>
             </tr>
