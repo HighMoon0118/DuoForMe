@@ -7,10 +7,14 @@ import com.example.DuoForMe.repository.NicknameCountRepository;
 import com.example.DuoForMe.repository.UserRepository;
 import com.example.DuoForMe.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
+import java.security.AccessControlException;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
@@ -19,6 +23,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final NicknameCountRepository nicknameCountRepository;
     private static final String NO_USER_EXCEPTION_MESSAGE = "해당되는 User가 없습니다.";
+    private final PasswordEncoder passwordEncoder;
 
     public UserResponse getMyId() {
         return userRepository.findByEmail(SecurityUtil.getCurrentUserId())
@@ -93,6 +98,34 @@ public class UserService {
         }
 
         userRepository.updateNickname(newNickname, user.getUserId());
+    }
+
+    public void updatePasswordById(Long id, UserUpdateRequest request) {
+
+        // 현재 로그인한 유저 찾기
+        UserResponse userResponse = userRepository.findByEmail(SecurityUtil.getCurrentUserId())
+                .map(UserResponse::of)
+                .orElseThrow(() -> new EntityNotFoundException(NO_USER_EXCEPTION_MESSAGE));
+        Long loginUserId = userResponse.getUserId();
+
+        // 현재 로그인한 유저와 다르면 권한 없음
+        if (!loginUserId.equals(id)) {
+            throw new AccessControlException("해당 유저에 대한 정보 수정 권한이 없습니다.");
+        }
+
+        // 전달받은 id로 로그인한 유저 찾기
+        User loginUser = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(NO_USER_EXCEPTION_MESSAGE));
+
+        Optional<String> optPassword = Optional.ofNullable(request.getPassword());
+        String password = optPassword.isEmpty() ? loginUser.getPassword() :
+                optPassword.filter(p -> p.equals(request.getPasswordConfirm()))
+                        .map(passwordEncoder::encode)
+                        .orElseThrow(() -> new AccessControlException("새롭게 입력된 비밀번호가 일치하지 않습니다."));
+
+
+        User newUser = request.toEntity(loginUser, password);
+        userRepository.updatePassword(password, id);
     }
 
 }
