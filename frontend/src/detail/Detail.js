@@ -6,13 +6,13 @@ import PlayList from "./playlist/PlayList.js"
 import SeasonInfo from "./seasonInfo/SeasonInfo.js"
 import SidebarContainer from "../container/SidebarContainer";
 import NavBarContainer from "../container/NavBarContainer";
-import { receiveRiot, getGameData, getRUserInfo } from '../api/RUserAPI';
+import { receiveRiot, getGameData, getRUserInfo, getRecommend } from '../api/RUserAPI';
 
 function Detail({match, history, rUser, gameData, setRUser, setGameData}) {
   //match.params.nickname에 소환사 이름 담겨져있음 이걸로 데이터 얻는 api 보내기
   const [isRecommend, setIsRecommend] = useState(false);
   const [btnMsg, setBtmMsg] = useState("유저 추천")
-  
+  const [recommend, setRecommend] = useState([])
   useEffect(() => {
     receiveRiot(match.params.nickname).then(() => {
       getGameData(match.params.nickname).then(res => {
@@ -23,6 +23,9 @@ function Detail({match, history, rUser, gameData, setRUser, setGameData}) {
           setRUser(res.data)
         })
       })
+    })
+    getRecommend(match.params.nickname).then((res) => {
+      setRecommend(res.data)
     })
   }, [match.params.nickname])
 
@@ -45,7 +48,7 @@ function Detail({match, history, rUser, gameData, setRUser, setGameData}) {
           <button className="detail-btn" onClick={toggleRecommend}>{ btnMsg }</button>
           {
             isRecommend
-            ? <Recommend/>
+            ? <Recommend recommend={recommend}/>
             : <PlayList gameData={gameData}/>
           }
         </div>
