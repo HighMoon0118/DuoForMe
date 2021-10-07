@@ -1,6 +1,8 @@
 package com.example.DuoForMe.controller;
 
 import com.example.DuoForMe.dto.ChatRequest;
+import com.example.DuoForMe.dto.MatchingHistoryRequest;
+import com.example.DuoForMe.service.MatchingHistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -12,7 +14,7 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 @Controller
 public class WebSocketController {
-
+    private final MatchingHistoryService matchingHistoryService;
     private final SimpMessageSendingOperations simpMessagingTemplate;
     public HashMap<String, Boolean> userAccept = new HashMap<>();
 
@@ -51,6 +53,18 @@ public class WebSocketController {
                 request.setReceiver(sender);
                 request.setReceiverId(senderId);
                 simpMessagingTemplate.convertAndSend("/sub/" + senderId, request);
+
+                // 매칭히스토리 입력
+                MatchingHistoryRequest matchingHistoryRequestLoginUser1 = new MatchingHistoryRequest();
+                matchingHistoryRequestLoginUser1.setMatchedUserId(senderId);
+                matchingHistoryRequestLoginUser1.setOwnerUserId(receiverId);
+
+                MatchingHistoryRequest matchingHistoryRequestLoginUser2 = new MatchingHistoryRequest();
+                matchingHistoryRequestLoginUser2.setMatchedUserId(receiverId);
+                matchingHistoryRequestLoginUser2.setOwnerUserId(senderId);
+
+                matchingHistoryService.createHistory(matchingHistoryRequestLoginUser1);
+                matchingHistoryService.createHistory(matchingHistoryRequestLoginUser2);
 
                 userAccept.remove(receiver); // 수락 여부 해쉬맵에서 삭제
 
