@@ -20,7 +20,7 @@ function Recommend({recommend}) {
 
     const result = []
 
-    for (user in RecommendUserInfo) {
+    for (const user of RecommendUserInfo) {
       
       if (user.recomCham === undefined || user.recomCham[0] === undefined || user.recomCham[0][0] === undefined || user.recomCham[0][0][0] === undefined) return null
 
