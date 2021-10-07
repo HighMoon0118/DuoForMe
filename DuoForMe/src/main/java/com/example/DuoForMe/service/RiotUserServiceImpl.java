@@ -626,4 +626,51 @@ public class RiotUserServiceImpl implements RiotUserService {
         return myTop5ByDuoTop5Champion;
     }
 
+    @Override
+    public JSONArray recommandDuoChampions(String summonerName) {
+        JSONArray recommandDuoChampionsList = new JSONArray();
+
+        RiotUser riotUser = riotUserRepository.findByName(summonerName);
+        List<String> myMostChampionList = matchesUsersRepository.findMostChampions(riotUser);
+
+        for (int i = 0; i < 3; i++) {
+            String myChampion = myMostChampionList.get(i).split(",")[0];
+            List<String> duoTopChampionA = goldWinRateRepository.findBestAllChampAbyChampName(myChampion);
+            List<String> duoTopChampionB = goldWinRateRepository.findBestAllChampBbyChampName(myChampion);
+
+            while (duoTopChampionA.size() <= 3) {
+                duoTopChampionA.add("");
+            }
+            while (duoTopChampionB.size() <= 3) {
+                duoTopChampionB.add("");
+            }
+
+
+            // [mostB, mostB, mostB]
+            List<String> recommandedChampion = new ArrayList<>();
+
+            for (int j = 0; j < 3; j++) {
+                String mostA =  duoTopChampionA.get(j);
+                String mostB =  duoTopChampionB.get(j);
+                if (mostA != "") {
+                    //리턴 B
+                    recommandedChampion.add(mostA);
+                }
+                else if (mostB != ""){
+                    // 리턴 A
+                    recommandedChampion.add(mostB);
+                }
+                else {
+                    // null
+                    recommandedChampion.add("null");
+                }
+            }
+
+            // myChampion : [mostB, mostB, mostB]
+            JSONObject recommandDuoChampions =  new JSONObject();
+            recommandDuoChampions.put(myChampion,recommandedChampion);
+            recommandDuoChampionsList.add(recommandDuoChampions);
+        }
+        return recommandDuoChampionsList;
+    }
 }
