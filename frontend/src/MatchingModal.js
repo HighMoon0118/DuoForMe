@@ -76,10 +76,10 @@ const MatchingModal = ( {isMatched, duoName, sendMsg, accpetOrRefuse, exitMatchi
     if (rUser.tier == undefined) return null
 
     if (rUser.tier!=="CHALLENGER"&&rUser.tier!=="MASTER") {
-      return <img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
+      return <img src={`detail/img/${(rUser.tier).toLowerCase()}_${(rUser.rank).toLowerCase()}.png`} alt="tier"  height="110px" width="110px" />
     } 
 
-    return <img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="150px" width="150px" />
+    return <img src={`detail/img/${(rUser.tier).toLowerCase()}.png`} alt="tier"  height="110px" width="110px" />
   }
 
   const showRUserInfo = () => {
