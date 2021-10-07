@@ -73,7 +73,7 @@ function Recommend({recommend}) {
     <div id="recommend">
       <div className="recommend-first-box">
         <div className="recommend-users">
-          { RecommendUsers }
+          { RecommendUsers() }
         </div>
       </div>
     </div>
