@@ -1,9 +1,9 @@
 import React, {useRef, useState} from 'react';
 import SockJsClient from 'react-stomp'
 import MatchUserContainer from "./container/MatchUserContainer"
-
+import {getMatchinghistory} from "../src/api/UserAPI"
 function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canChat, chat,  duoName, duoId, isFolded,
-                      changeMatching, matched, chatting, setDuo, setFolded, setChatable }) {
+                      changeMatching, matched, chatting, setDuo, setFolded, setChatable, getMatching }) {
 
   const $websocket = useRef(null)
   
@@ -64,6 +64,13 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
       $websocket.current.sendMessage(`/pub/${userId}`, JSON.stringify(tmp));
       alert("매칭이 종료되었습니다.")
       reset()
+      getMatchinghistory().then(res => {
+        let data = []
+        for (let i = res.data.length - 1; i > -1; i--) {
+          data.push(res.data[i])
+        }
+        getMatching(data)
+      })
     }
   }
   
@@ -82,6 +89,13 @@ function WebSocket ({ isLogin, userId, lolNickname, isMatching, isMatched, canCh
                 if (msg.exit) {  // 상대방이 종료했을 경우
                   alert("상대방이 매칭을 나갔습니다.")
                   reset()
+                  getMatchinghistory().then(res => {
+                    let data = []
+                    for (let i = res.data.length - 1; i > -1; i--) {
+                      data.push(res.data[i])
+                    }
+                    getMatching(data)
+                  })
                 } else if (msg.startMatching) {  // 매칭이 시작됐을 경우
                   if (msg.startChatting) {  // 채팅이 시작됐을 경우(매칭이 성사됨)
                     if (!canChat) {
