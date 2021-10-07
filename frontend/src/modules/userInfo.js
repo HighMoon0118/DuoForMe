@@ -2,7 +2,6 @@ const USER_INFO = "userInfo/USER_INFO"
 const GET_BLACKLIST = "userInfo/GET_BLACKLIST"
 const LOL_NICKNAME_EDIT = "userInfo/LOL_NICKNAME_EDIT"
 const SERVICE_NICKNAME_EDIT = "userInfo/SERVICE_NICKNAME_EDIT"
-const BLACKLIST_EDIT = "userInfo/BLACKLIST_EDIT"
 const LOGOUT ="userInfo/LOGOUT"
 const GET_MATHCING_HISTORY = "userInfo/GET_MATHCING_HISTORY"
 export const getUserInfo = ( data ) => ({

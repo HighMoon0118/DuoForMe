@@ -1,12 +1,26 @@
-#login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 500px;
-  height: 500px;
-  margin: 70px auto;
-  background-color: #4e5363;
-  border-radius: 60px;
+@media screen and (max-height: 800px) {
+  #login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    margin: 4% auto;
+    background-color: #4e5363;
+    border-radius: 60px;
+  }
+}
+@media screen and (min-height: 800px) {
+  #login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    margin: 8% auto;
+    background-color: #4e5363;
+    border-radius: 60px;
+  }
 }
 
 #login .ta-left {
