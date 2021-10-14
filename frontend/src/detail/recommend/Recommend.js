@@ -21,11 +21,8 @@ function Recommend({recommend}) {
     const result = []
 
     for (const user of RecommendUserInfo) {
-<<<<<<< HEAD
-=======
       
       if (user === undefined || user.recomCham === undefined || user.recomCham[0] === undefined || user.recomCham[0][0] === undefined || user.recomCham[0][0][0] === undefined) return null
->>>>>>> dee63cbf3c3a9e43104c6da51c111172d5a74cd9
       
       result.push(
         <div className="user-box">
